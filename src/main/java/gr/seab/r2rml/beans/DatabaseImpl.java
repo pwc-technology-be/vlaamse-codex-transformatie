@@ -105,7 +105,7 @@ public class DatabaseImpl implements Database {
 			
 			preparedStatement.close();
 		} catch (SQLException e) {
-			log.error("Error testing query! Query was: " + query);
+			log.error("Error testing query! Query was: " + query + e);
 			System.exit(1);
 		}
 	}
