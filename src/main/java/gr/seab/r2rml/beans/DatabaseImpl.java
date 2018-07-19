@@ -17,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.SQLTimeoutException;
 import java.sql.Statement;
 import java.util.Properties;
 
@@ -53,7 +54,14 @@ public class DatabaseImpl implements Database {
                     log.error("The property db.url cannot be empty! It must contain a valid database connection string.");
                     System.exit(1);
 				}
-				connection = DriverManager.getConnection(dbConnectionString, properties.getProperty("db.login"), properties.getProperty("db.password"));
+				try {
+					connection = DriverManager.getConnection(dbConnectionString, properties.getProperty("db.login"), properties.getProperty("db.password"));
+				} catch (SQLTimeoutException e) {
+					log.error(e.toString());
+				}catch (SQLException e) {
+					log.error(e.toString());
+				} 
+				
 			
 				log.info("Established source (relational) connection.");
 				return connection;

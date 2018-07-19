@@ -136,10 +136,8 @@ public class UtilImpl implements Util {
 		} else if (driver.contains("oracle")) {
 			return DatabaseType.ORACLE;
 		} else {
-			log.error("Unknown database type.");
-			System.exit(1);
+			return DatabaseType.ORACLE;
 		}
-		return DatabaseType.OTHER;
 	}
 
 	public String stripQuotes(String input) {
