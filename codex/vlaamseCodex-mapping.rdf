@@ -8,18 +8,18 @@
 @prefix eli: <http://data.europa.eu/eli/ontology#> .
 @prefix codex: <https://data.vlaanderen.be/ns/wetgeving#> .
 
-map:Rechtsgrond
+map:RechtsgrondDocument
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	id AS VlacoID			
-		FROM WetgevingArtikelVersie
+		SELECT	id AS VlacoID
+		FROM WetgevingDocument
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/doc/artikel/{"VlacoID"}';
-		rr:class eli:LegalExpression; 
+		rr:template 'http://www.ejustice.just.fgov.be/eli/DT/JJJJ/MM/DD/{"VlacoID"}/versie van de tekst';
+		rr:class eli:LegalResource; 
 	].
 
-map:Verschijningsvorm
+map:VerschijningsvormDocument
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	id AS VlacoID,
 				ISNULL(Commentaar, '') AS beschrijving,
@@ -30,7 +30,7 @@ map:Verschijningsvorm
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/doc/document/{"ID"}';
+		rr:template 'https://codex.vlaanderen.be/doc/document/{"VlacoID"}';
 		rr:class eli:LegalExpression; 
 	];
 	rr:predicateObjectMap [ 
@@ -44,11 +44,21 @@ map:Verschijningsvorm
 	rr:predicateObjectMap [ 
 		rr:predicate eli:id_local; 
 		rr:objectMap [
-			rr:column '"VlacoID"';
+			rr:column '"ID"';
 			rr:termType rr:Literal; 
 		];
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate eli:title; 
 		rr:objectMap [rr:column '"citeeropschrift"'];
+	];
+	rr:predicateObjectMap [
+		rr:predicate codex:realiseert; 
+		rr:objectMap [
+			rr:parentTriplesMap map:RechtsgrondDocument; 
+			rr:joinCondition [
+				rr:child 'VlacoID';
+				rr:parent 'id'; 
+			]
+		]
 	].
