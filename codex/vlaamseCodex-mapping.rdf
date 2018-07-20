@@ -8,20 +8,47 @@
 @prefix eli: <http://data.europa.eu/eli/ontology#> .
 @prefix codex: <https://data.vlaanderen.be/ns/wetgeving#> .
 
+map:Rechtsgrond
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT	id AS VlacoID			
+		FROM WetgevingArtikelVersie
+	""" 
+	];
+	rr:subjectMap [
+		rr:template 'https://codex.vlaanderen.be/doc/artikel/{"VlacoID"}';
+		rr:class eli:LegalExpression; 
+	].
+
 map:Verschijningsvorm
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT Numac AS ID, Commentaar AS beschrijving
+		SELECT	id AS VlacoID,
+				ISNULL(Commentaar, '') AS beschrijving,
+				CONVERT(date, BSDatum) AS publicatiedatum,
+				Numac AS ID,
+				ISNULL(Opschrift, '') AS citeeropschrift			
 		FROM WetgevingDocument
-	""" ];
-
+	""" 
+	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/doc/Document/{"ID"}';
+		rr:template 'https://codex.vlaanderen.be/doc/document/{"ID"}';
 		rr:class eli:LegalExpression; 
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate dcterms:description; 
+		rr:objectMap [rr:column '"beschrijving"'];
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:date_publication; 
+		rr:objectMap [rr:column '"publicatiedatum"'];
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:id_local; 
 		rr:objectMap [
-			rr:template '{"beschrijving"}';
+			rr:column '"VlacoID"';
 			rr:termType rr:Literal; 
-		]
+		];
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:title; 
+		rr:objectMap [rr:column '"citeeropschrift"'];
 	].

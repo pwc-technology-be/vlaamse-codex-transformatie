@@ -350,6 +350,7 @@ public class UtilImpl implements Util {
     			|| sqlDataType.equals("timetz")) {
         	return XSDDatatype.XSDtime;
     	} else if (sqlDataType.equals("timestamp")
+    			|| sqlDataType.equals("datetime")
     			|| sqlDataType.equals("timestamptz")) {
         	return XSDDatatype.XSDdateTime;
         } else {
