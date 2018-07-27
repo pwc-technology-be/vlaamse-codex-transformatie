@@ -3,6 +3,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> . 
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> . 
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix w3ns: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> . 
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix eli: <http://data.europa.eu/eli/ontology#> .
@@ -10,24 +11,33 @@
 
 map:RechtsgrondDocument
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	id AS VlacoID
+		SELECT	id AS Numac
+
 		FROM WetgevingDocument
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/DT/JJJJ/MM/DD/{"VlacoID"}/versie van de tekst';
+		rr:template 'http://www.ejustice.just.fgov.be/eli/DT/JJJJ/MM/DD/{"Numac"}'; #Numac ipv VlacoID #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) (Eventueel pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
-	].
+	];
+#	rr:predicateObjectMap [ 
+#		rr:predicate dcterms:AardWetgeving; 
+#		rr:objectMap [rr:column '"Omschrijving"'];
+#	];
+	.
+
 
 map:VerschijningsvormDocument
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	id AS VlacoID,
-				ISNULL(Commentaar, '') AS beschrijving,
-				CONVERT(date, BSDatum) AS publicatiedatum,
-				Numac AS ID,
-				ISNULL(Opschrift, '') AS citeeropschrift			
-		FROM WetgevingDocument
-	""" 
+		SELECT	document.id AS VlacoID,
+				ISNULL(document.Commentaar, '') AS beschrijving,
+				CONVERT(date, document.BSDatum) AS publicatiedatum,
+				document.Numac AS ID,
+				ISNULL(document.Opschrift, '') AS citeeropschrift,
+				ISNULL(artikelversie.Tekst, '') AS inhoud
+		FROM WetgevingDocument document
+		INNER JOIN WetgevingArtikelVersie artikelversie ON document.id=artikelversie.WetgevingDocumentId; 
+	"""
 	];
 	rr:subjectMap [
 		rr:template 'https://codex.vlaanderen.be/doc/document/{"VlacoID"}';
@@ -58,7 +68,31 @@ map:VerschijningsvormDocument
 			rr:parentTriplesMap map:RechtsgrondDocument; 
 			rr:joinCondition [
 				rr:child 'VlacoID';
-				rr:parent 'id'; 
-			]
-		]
-	].
+				rr:parent 'id';]; 
+			];
+		];
+	rr:predicateObjectMap [ 
+		rr:predicate w3ns:value; 
+		rr:objectMap [rr:column '"inhoud"'];
+		].
+
+map:AardWetgeving
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT	documenttype.id AS DocumentTypeID,
+				documenttype.Omschrijving AS TypeDocument,
+				document.id AS VlacoID
+		FROM WetgevingDocumentType documenttype
+		INNER JOIN WetgevingDocument document ON documenttype.id=document.WetgevingDocumentTypeId;
+	""" 
+		];
+     rr:subjectMap [
+        rr:template 'https://codex.vlaanderen.be/doc/document/{"VlacoID"}';
+    ];	
+	 rr:predicateObjectMap [
+        rr:predicate dcterms:TypeDocument;
+        rr:objectMap [ rr:template "https://data.vlaanderen.be/id/conceptscheme/AardWetgeving/{TypeDocument}" ];
+    ].
+    #	rr:predicateObjectMap [ 
+	#	rr:predicate dcterms:AardWetgeving; 
+	#	rr:objectMap [rr:column '"Omschrijving"'];
+	#];
