@@ -3,7 +3,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> . 
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> . 
 @prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix w3ns: <http://www.w3.org/ns/prov#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> . 
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix eli: <http://data.europa.eu/eli/ontology#> .
@@ -16,19 +16,19 @@ map:RechtsgrondDocument
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/DT/JJJJ/MM/DD/{"Numac"}'; 
+		rr:template 'http://www.ejustice.just.fgov.be/eli/DT/JJJJ/MM/DD/{"Numac"}'; #Numac ipv VlacoID #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) (Eventueel pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	].
 
 
 map:VerschijningsvormDocument
 	rr:logicalTable [rr:sqlQuery """
-		SELECT	Document.id AS VlacoID,
-				ISNULL(Document.Commentaar, '') AS beschrijving,
-				CONVERT(date, Document.BSDatum) AS publicatiedatum,
-				Document.Numac AS ID,
-				ISNULL(Document.Opschrift, '') AS citeeropschrift
-		FROM WetgevingDocument AS Document
+		SELECT	id AS VlacoID,
+				ISNULL(Commentaar, '') AS beschrijving,
+				CONVERT(date, BSDatum) AS publicatiedatum,
+				Numac AS ID,
+				ISNULL(Opschrift, '') AS citeeropschrift
+		FROM WetgevingDocument
 	"""];
 	rr:subjectMap [
 		rr:template 'https://codex.vlaanderen.be/doc/document/{"VlacoID"}';
