@@ -12,33 +12,24 @@
 map:RechtsgrondDocument
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	id AS Numac
-
 		FROM WetgevingDocument
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/DT/JJJJ/MM/DD/{"Numac"}'; #Numac ipv VlacoID #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) (Eventueel pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'http://www.ejustice.just.fgov.be/eli/DT/JJJJ/MM/DD/{"Numac"}'; 
 		rr:class eli:LegalResource; 
-	];
-#	rr:predicateObjectMap [ 
-#		rr:predicate dcterms:AardWetgeving; 
-#		rr:objectMap [rr:column '"Omschrijving"'];
-#	];
-	.
+	].
 
 
 map:VerschijningsvormDocument
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT	document.id AS VlacoID,
-				ISNULL(document.Commentaar, '') AS beschrijving,
-				CONVERT(date, document.BSDatum) AS publicatiedatum,
-				document.Numac AS ID,
-				ISNULL(document.Opschrift, '') AS citeeropschrift,
-				ISNULL(artikelversie.Tekst, '') AS inhoud
-		FROM WetgevingDocument document
-		INNER JOIN WetgevingArtikelVersie artikelversie ON document.id=artikelversie.WetgevingDocumentId; 
-	"""
-	];
+	rr:logicalTable [rr:sqlQuery """
+		SELECT	Document.id AS VlacoID,
+				ISNULL(Document.Commentaar, '') AS beschrijving,
+				CONVERT(date, Document.BSDatum) AS publicatiedatum,
+				Document.Numac AS ID,
+				ISNULL(Document.Opschrift, '') AS citeeropschrift
+		FROM WetgevingDocument AS Document
+	"""];
 	rr:subjectMap [
 		rr:template 'https://codex.vlaanderen.be/doc/document/{"VlacoID"}';
 		rr:class eli:LegalExpression; 
@@ -68,31 +59,7 @@ map:VerschijningsvormDocument
 			rr:parentTriplesMap map:RechtsgrondDocument; 
 			rr:joinCondition [
 				rr:child 'VlacoID';
-				rr:parent 'id';]; 
-			];
-		];
-	rr:predicateObjectMap [ 
-		rr:predicate w3ns:value; 
-		rr:objectMap [rr:column '"inhoud"'];
-		].
-
-map:AardWetgeving
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT	documenttype.id AS DocumentTypeID,
-				documenttype.Omschrijving AS TypeDocument,
-				document.id AS VlacoID
-		FROM WetgevingDocumentType documenttype
-		INNER JOIN WetgevingDocument document ON documenttype.id=document.WetgevingDocumentTypeId;
-	""" 
-		];
-     rr:subjectMap [
-        rr:template 'https://codex.vlaanderen.be/doc/document/{"VlacoID"}';
-    ];	
-	 rr:predicateObjectMap [
-        rr:predicate dcterms:TypeDocument;
-        rr:objectMap [ rr:template "https://data.vlaanderen.be/id/conceptscheme/AardWetgeving/{TypeDocument}" ];
-    ].
-    #	rr:predicateObjectMap [ 
-	#	rr:predicate dcterms:AardWetgeving; 
-	#	rr:objectMap [rr:column '"Omschrijving"'];
-	#];
+				rr:parent 'id';
+			]
+		]
+	].
