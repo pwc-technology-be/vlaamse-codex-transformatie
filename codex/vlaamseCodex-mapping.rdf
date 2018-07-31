@@ -63,3 +63,14 @@ map:VerschijningsvormDocument
 			]
 		]
 	].
+
+map:VerschijningsvormArtikel
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT	id AS VlacoID
+		FROM WetgevingArtikelVersie
+	""" 
+	];
+	rr:subjectMap [
+		rr:template 'https://codex.vlaanderen.be/doc/artikel/{"VlacoID"}';
+		rr:class eli:LegalExpression; 
+	].
