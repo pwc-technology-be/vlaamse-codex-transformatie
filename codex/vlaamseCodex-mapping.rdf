@@ -66,11 +66,16 @@ map:VerschijningsvormDocument
 
 map:VerschijningsvormArtikel
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	id AS VlacoID
+		SELECT	id AS VlacoID,
+				Tekst AS inhoud
 		FROM WetgevingArtikelVersie
 	""" 
 	];
 	rr:subjectMap [
 		rr:template 'https://codex.vlaanderen.be/doc/artikel/{"VlacoID"}';
 		rr:class eli:LegalExpression; 
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate prov:value; 
+		rr:objectMap [rr:column '"inhoud"'];
 	].
