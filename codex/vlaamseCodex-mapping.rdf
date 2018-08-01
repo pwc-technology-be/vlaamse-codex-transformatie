@@ -11,12 +11,12 @@
 
 map:RechtsgrondDocument
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	id AS Numac
+		SELECT	Numac AS Numac
 		FROM WetgevingDocument
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/DT/JJJJ/MM/DD/{"Numac"}'; #Numac ipv VlacoID #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) (Eventueel pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'http://www.ejustice.just.fgov.be/eli/DT/JJJJ/MM/DD/{"Numac"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) (Eventueel pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	].
 
