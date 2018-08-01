@@ -12,7 +12,7 @@
 map:RechtsgrondDocument
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	(CASE Numac WHEN 0 THEN BSPagina ELSE Numac END) AS ID,
-				CONVERT(date, BSDatum) AS datumDocument
+				CONVERT(date, Datum) AS datumDocumentdatum
 		FROM WetgevingDocument
 	""" 
 	];
