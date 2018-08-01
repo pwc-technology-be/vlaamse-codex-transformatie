@@ -20,6 +20,60 @@ map:RechtsgrondDocument
 		rr:class eli:LegalResource; 
 	].
 
+map:RechtsgrondDocumentType
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
+				(CASE  
+					WHEN 
+					DocumentType.Omschrijving in (
+						'Besluit van de secretaris-generaal' , 
+						'Besluit van de administrateur-generaal' ,
+						'Besluit van de voorzitter van het Eigen Vermogen' ,
+						'Besluit van het afdelingshoofd',
+						'Besluit van de algemeen directeur' ,
+						'Besluit van de hoofddirecteur-hoofdconservator' ,
+						'Besluit van de inspecteur-generaal' ,
+						'Besluit van het diensthoofd',
+						'Besluit van de directeur')
+					THEN 'Besluit_van_een_ambtenaar'
+					WHEN DocumentType.Omschrijving in (
+						'’s Konings Verklaring' ,
+						'Edict' ,
+						'Keizerlijk Decreet' ,
+						'Besluitwet',
+						'Bijzondere Ordonnantie' ,
+						'Besluit van de Regent' ,
+						'Overeenkomst' ,
+						'Besluit van de Raad van Bestuur' ,
+						'Besluit van de gedelegeerd bestuurder' ,
+						'Gezamenlijke bekendmaking van de gemeenschappelijke nautische autoriteit' ,
+						'Gemeenschappelijke verklaring' ,
+						'Huishoudelijk Reglement' ,
+						'Besluit van het Politiek College van de Vlaamse-Nederlandse Scheldecommissie')
+					THEN 'Andere'
+					WHEN DocumentType.Omschrijving = 'Besluit van de Vlaamse Regering' THEN 'Besluit_van_de_Vlaamse_Regering'
+					WHEN DocumentType.Omschrijving = 'Bijzonder Decreet' THEN 'Besluit_van_de_Vlaamse_Regering'
+					WHEN DocumentType.Omschrijving = 'Bijzondere Wet' THEN 'Bijzondere_Wet'
+					WHEN DocumentType.Omschrijving = 'Gecodificeerde decreten' THEN 'Gecodificeerde_decreten'
+					WHEN DocumentType.Omschrijving = 'Gecoördineerde wetten' THEN 'Gecoördineerde_wetten'
+					WHEN DocumentType.Omschrijving = 'Genummerd koninklijk besluit' THEN 'Genummerd_koninklijk_besluit'
+					WHEN DocumentType.Omschrijving = 'Koninklijk Besluit' THEN 'Koninklijk_Besluit'
+					WHEN DocumentType.Omschrijving = 'Ministerieel besluit' THEN 'Ministerieel_besluit'
+					ELSE DocumentType.Omschrijving
+				END) AS typeDocument
+		FROM WetgevingDocument AS Document, WetgevingDocumentType AS DocumentType
+		WHERE Document.WetgevingDocumentTypeId = DocumentType.id
+	""" 
+	];
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/DT/JJJJ/MM/DD/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResource; 
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:type_document; 
+		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/AardWetgeving/{"typeDocument"}';
+						rr:termType rr:IRI ];
+	].
 
 map:VerschijningsvormDocument
 	rr:logicalTable [rr:sqlQuery """
