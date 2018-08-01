@@ -72,6 +72,9 @@ map:RechtsgrondDocumentType
 				YEAR(CONVERT(date, Datum)) AS datumDocumentJaar,
 				MONTH(CONVERT(date, Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Datum)) AS datumDocumentDag
+				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
+				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
+				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 		FROM WetgevingDocument AS Document, WetgevingDocumentType AS DocumentType
 		WHERE Document.WetgevingDocumentTypeId = DocumentType.id
 	""" 
