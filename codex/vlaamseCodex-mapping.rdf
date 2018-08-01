@@ -26,7 +26,7 @@ map:VerschijningsvormDocument
 		SELECT	id AS VlacoID,
 				ISNULL(Commentaar, '') AS beschrijving,
 				CONVERT(date, BSDatum) AS publicatiedatum,
-				Numac AS ID,
+				Numac AS lokaleID,
 				ISNULL(Opschrift, '') AS citeeropschrift
 		FROM WetgevingDocument
 	"""];
@@ -45,7 +45,7 @@ map:VerschijningsvormDocument
 	rr:predicateObjectMap [ 
 		rr:predicate eli:id_local; 
 		rr:objectMap [
-			rr:column '"ID"';
+			rr:column '"lokaleID"';
 			rr:termType rr:Literal; 
 		];
 	];
