@@ -102,13 +102,14 @@ map:RechtsgrondDocumentType
 						rr:termType rr:IRI ];
 	].
 
+
 map:VerschijningsvormDocument
 	rr:logicalTable [rr:sqlQuery """
 		SELECT	id AS VlacoID,
 				ISNULL(Commentaar, '') AS beschrijving,
 				CONVERT(date, BSDatum) AS publicatiedatum,
 				Numac AS lokaleID,
-				ISNULL(Opschrift, '') AS citeeropschrift
+				ISNULL(Opschrift, '') AS opschrift
 		FROM WetgevingDocument
 	"""];
 	rr:subjectMap [
@@ -132,7 +133,7 @@ map:VerschijningsvormDocument
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate eli:title; 
-		rr:objectMap [rr:column '"citeeropschrift"'];
+		rr:objectMap [rr:column '"opschrift"'];
 	];
 	rr:predicateObjectMap [
 		rr:predicate codex:realiseert; 
