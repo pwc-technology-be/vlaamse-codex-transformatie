@@ -109,7 +109,15 @@ map:VerschijningsvormDocument
 				ISNULL(Commentaar, '') AS beschrijving,
 				CONVERT(date, BSDatum) AS publicatiedatum,
 				Numac AS lokaleID,
-				ISNULL(Opschrift, '') AS opschrift
+				ISNULL(Opschrift, '') AS opschrift,
+				(CASE 
+					WHEN CONVERT(date, StartDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2100')) THEN  null
+					ELSE CONVERT(date, StartDatum) 
+				END) AS inwerkingtreding,
+				(CASE 
+					WHEN CONVERT(date, EindDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2100')) THEN  null
+					ELSE CONVERT(date, EindDatum) 
+				END) AS buitenwerkingtreding
 		FROM WetgevingDocument
 	"""];
 	rr:subjectMap [
@@ -123,6 +131,14 @@ map:VerschijningsvormDocument
 	rr:predicateObjectMap [ 
 		rr:predicate eli:date_publication; 
 		rr:objectMap [rr:column '"publicatiedatum"'];
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:first_date_entry_in_force; 
+		rr:objectMap [rr:column '"inwerkingtreding"'];
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:date_no_longer_in_force; 
+		rr:objectMap [rr:column '"buitenwerkingtreding"'];
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate eli:id_local; 
