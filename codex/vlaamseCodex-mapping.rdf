@@ -116,7 +116,7 @@ map:RechtsgrondDocumentThema
 					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
 					ELSE 'AFTESTEMMEN'
 				END) AS typeDocumentURI,
-				Thema.omschrijving AS thema
+				Thema.Omschrijving AS thema
 		FROM WetgevingDocument AS Document, WetgevingDocument_Thema AS DocumentThema, Thema
 		WHERE Document.Id = DocumentThema.WetgevingDocumentId AND DocumentThema.ThemaId = Thema.Id
 	""" 
