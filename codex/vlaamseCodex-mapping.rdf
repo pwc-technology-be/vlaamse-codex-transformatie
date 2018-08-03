@@ -190,6 +190,23 @@ map:VerschijningsvormDocument
 		]
 	].
 
+map:VerschijningsvormDocumentTrefwoord
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT	Document.id AS VlacoID,
+				Trefwoord.Naam AS trefwoord
+		FROM WetgevingDocument AS Document, WetgevingDocument_Trefwoord AS DocumentTrefwoord, Trefwoord
+		WHERE Document.Id = DocumentTrefwoord.WetgevingDocumentId AND DocumentTrefwoord.TrefwoordId = Trefwoord.Id
+	""" 
+	];
+	rr:subjectMap [
+		rr:template 'https://codex.vlaanderen.be/doc/document/{"VlacoID"}';
+		rr:class eli:LegalExpression; 
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate dcterms:subject; 
+		rr:objectMap [rr:column '"trefwoord"']; # synoniemen ook toevoegen?
+	].
+
 map:VerschijningsvormArtikel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	id AS VlacoID,
