@@ -139,11 +139,11 @@ map:VerschijningsvormDocument
 				Numac AS lokaleID,
 				ISNULL(Opschrift, '') AS opschrift,
 				(CASE 
-					WHEN CONVERT(date, StartDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2100')) THEN  null
+					WHEN CONVERT(date, StartDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2900'), CONVERT(date, '01/01/3000')) THEN  null
 					ELSE CONVERT(date, StartDatum) 
 				END) AS inwerkingtreding,
 				(CASE 
-					WHEN CONVERT(date, EindDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2100')) THEN  null
+					WHEN CONVERT(date, EindDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2900'), CONVERT(date, '01/01/3000')) THEN  null
 					ELSE CONVERT(date, EindDatum) 
 				END) AS buitenwerkingtreding
 		FROM WetgevingDocument
