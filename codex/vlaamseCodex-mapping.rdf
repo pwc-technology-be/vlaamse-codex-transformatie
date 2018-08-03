@@ -145,7 +145,8 @@ map:VerschijningsvormDocument
 				(CASE 
 					WHEN CONVERT(date, EindDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2900'), CONVERT(date, '01/01/3000')) THEN  null
 					ELSE CONVERT(date, EindDatum) 
-				END) AS buitenwerkingtreding
+				END) AS buitenwerkingtreding,
+				'nl' AS taal
 		FROM WetgevingDocument
 	"""];
 	rr:subjectMap [
@@ -179,6 +180,10 @@ map:VerschijningsvormDocument
 		rr:predicate eli:title; 
 		rr:objectMap [rr:column '"opschrift"'];
 	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:language; 
+		rr:objectMap [rr:column '"taal"'];
+	];	
 	rr:predicateObjectMap [
 		rr:predicate codex:realiseert; 
 		rr:objectMap [
