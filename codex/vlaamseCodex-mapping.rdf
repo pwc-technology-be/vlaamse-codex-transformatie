@@ -76,7 +76,7 @@ map:RechtsgrondDocumentType
 						'Gezamenlijke bekendmaking van de gemeenschappelijke nautische autoriteit' ,
 						'Gemeenschappelijke verklaring' ,
 						'Huishoudelijk Reglement' ,
-						'Besluit van het Politiek College van de Vlaamse-Nederlandse Scheldecommissie')
+						'Besluit van het Politiek College van de Vlaams-Nederlandse Scheldecommissie')
 					THEN 'Andere'
 					WHEN DocumentType.Omschrijving = 'Besluit van de Vlaamse Regering' THEN 'Besluit_van_de_Vlaamse_Regering'
 					WHEN DocumentType.Omschrijving = 'Bijzonder Decreet' THEN 'Besluit_van_de_Vlaamse_Regering'
