@@ -64,7 +64,7 @@ map:RechtsgrondDocumentType
 						'Besluit van de directeur')
 					THEN 'Besluit_van_een_ambtenaar'
 					WHEN DocumentType.Omschrijving in (
-						'’s Konings Verklaring' ,
+						'''s Konings Verklaring' ,
 						'Edict' ,
 						'Keizerlijk Decreet' ,
 						'Besluitwet',
