@@ -548,7 +548,7 @@ map:VerschijningsvormDocument
 				ISNULL(Commentaar, '') AS beschrijving,
 				CONVERT(date, BSDatum) AS publicatiedatum,
 				Numac AS lokaleID,
-				ISNULL(Opschrift, '') AS opschrift,
+				REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(ISNULL(Opschrift, ''), '"', '&quot;'), '>', '&gt;'), '<', '&lt;'), '°', '&deg;'), '²', '&sup2;'), 'à', '&agrave;'), 'è', '&egrave;'), 'é', '&eacute;'), 'ê', '&ecirc;'), 'ë', '&euml;'), 'ï', '&iuml;'), 'î', '&icirc;'), 'ó', '&oacute;'), 'ö', '&ouml;'), 'ô', '&ocirc;'), 'ü', '&uuml;'), 'ç', '&ccedil;'), 'ù', '&ugrave; '), '©', '&copy;'), '®', '&reg;'), '«', '&laquo;'), '»', '&raquo;'), '–', '&ndash;'), '¤', '&#164;'), '§', '&#167;')  AS opschrift,
 				(CASE 
 					WHEN CONVERT(date, StartDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2900'), CONVERT(date, '01/01/3000')) THEN  null
 					ELSE CONVERT(date, StartDatum) 
@@ -608,8 +608,8 @@ map:VerschijningsvormDocument
 
 map:VerschijningsvormDocumentTrefwoord
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	Document.id AS VlacoID,
-				Trefwoord.Naam AS trefwoord
+		SELECT Document.id AS VlacoID,
+				REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(Trefwoord.Naam, '"', '&quot;'), 'à', '&agrave;'), 'è', '&egrave;'), 'é', '&eacute;'), 'ê', '&ecirc;'), 'ë', '&euml;') AS trefwoord
 		FROM WetgevingDocument AS Document, WetgevingDocument_Trefwoord AS DocumentTrefwoord, Trefwoord
 		WHERE Document.Id = DocumentTrefwoord.WetgevingDocumentId AND DocumentTrefwoord.TrefwoordId = Trefwoord.Id
 	""" 
@@ -625,8 +625,8 @@ map:VerschijningsvormDocumentTrefwoord
 
 map:VerschijningsvormArtikel
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	id AS VlacoID,
-				Tekst AS inhoud
+		SELECT id AS VlacoID,
+				REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(Tekst, '"', '&quot;'), '>', '&gt;'), '<', '&lt;'), '°', '&deg;'), '²', '&sup2;'), 'à', '&agrave;'), 'è', '&egrave;'), 'é', '&eacute;'), 'ê', '&ecirc;'), 'ë', '&euml;'), 'ï', '&iuml;'), 'î', '&icirc;'), 'ó', '&oacute;'), 'ö', '&ouml;'), 'ô', '&ocirc;'), 'ü', '&uuml;'), 'ç', '&ccedil;'), 'ù', '&ugrave; '), '©', '&copy;'), '®', '&reg;'), '«', '&laquo;'), '»', '&raquo;'), '–', '&ndash;'), '¤', '&#164;'), '§', '&#167;')  AS inhoud
 		FROM WetgevingArtikelVersie
 	""" 
 	];
