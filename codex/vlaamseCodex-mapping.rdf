@@ -194,8 +194,7 @@ map:RechtsgrondDocumentRelatieVerandert
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.WetgevingDocumentId AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatie.WetgevingDocumentId = DocumentArtikelRelatie.WetgevingDocumentID
-		AND DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
+		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
 		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
 		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 1
@@ -232,8 +231,7 @@ map:RechtsgrondDocumentRelatieHeftOp
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.WetgevingDocumentId AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatie.WetgevingDocumentId = DocumentArtikelRelatie.WetgevingDocumentID
-		AND DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
+		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
 		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
 		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 2
@@ -270,8 +268,7 @@ map:RechtsgrondDocumentRelatieBekrachtigt
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.WetgevingDocumentId AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatie.WetgevingDocumentId = DocumentArtikelRelatie.WetgevingDocumentID
-		AND DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
+		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
 		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
 		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 3
@@ -308,8 +305,7 @@ map:RechtsgrondDocumentRelatieTrektIn
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.WetgevingDocumentId AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatie.WetgevingDocumentId = DocumentArtikelRelatie.WetgevingDocumentID
-		AND DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
+		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
 		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
 		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 4
@@ -346,8 +342,7 @@ map:RechtsgrondDocumentRelatieZieOok
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.WetgevingDocumentId AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatie.WetgevingDocumentId = DocumentArtikelRelatie.WetgevingDocumentID
-		AND DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
+		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
 		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
 		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 5
@@ -384,8 +379,7 @@ map:RechtsgrondDocumentRelatieVeranderdDoor
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.WetgevingDocumentId AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatie.WetgevingDocumentId = DocumentArtikelRelatie.WetgevingDocumentID
-		AND DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
+		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
 		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
 		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 6
@@ -422,8 +416,7 @@ map:RechtsgrondDocumentRelatieOpgehevenBij
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.WetgevingDocumentId AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatie.WetgevingDocumentId = DocumentArtikelRelatie.WetgevingDocumentID
-		AND DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
+		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
 		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
 		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 7
@@ -460,8 +453,7 @@ map:RechtsgrondDocumentRelatieBekrachtigdBij
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.WetgevingDocumentId AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatie.WetgevingDocumentId = DocumentArtikelRelatie.WetgevingDocumentID
-		AND DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
+		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
 		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
 		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 8
@@ -498,8 +490,7 @@ map:RechtsgrondDocumentRelatieIngetrokkenBij
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.WetgevingDocumentId AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatie.WetgevingDocumentId = DocumentArtikelRelatie.WetgevingDocumentID
-		AND DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
+		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
 		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
 		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 9
