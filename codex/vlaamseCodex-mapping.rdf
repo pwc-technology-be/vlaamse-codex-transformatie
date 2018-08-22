@@ -23,6 +23,7 @@ map:RechtsgrondDocument
 					WHEN WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
 					ELSE 'AFTESTEMMEN'
 				END) AS typeDocumentURI,
+				ID as RGDID,
 			CONVERT(date, Datum) AS datumDocumentdatum
 		FROM WetgevingDocument
 	""" 
@@ -34,6 +35,16 @@ map:RechtsgrondDocument
 	rr:predicateObjectMap [ 
 		rr:predicate eli:date_document; 
 		rr:objectMap [rr:column '"datumDocumentdatum"'];
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:is_realized_by; #is gerealiseerd door
+		rr:objectMap [
+			rr:parentTriplesMap map:VerschijningsvormDocument; 
+			rr:joinCondition [
+				rr:child 'RGDID';
+				rr:parent 'ID';
+			]
+		]
 	].
 
 map:RechtsgrondDocumentType
@@ -130,55 +141,7 @@ map:RechtsgrondDocumentThema
 		rr:objectMap [rr:column '"thema"'];
 	].
 
-#map:RechtsgrondDocumentArtikelRelatie
-#	rr:logicalTable [ rr:sqlQuery """
-#		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
-#				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-#				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-#				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
-#				(CASE  
-#					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-#					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-#					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-#					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-#					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-#					ELSE 'AFTESTEMMEN'
-#				END) AS typeDocumentURI,
-#				(CASE 
-#					WHEN DocumentArtikelRelatieType.Naam = 'Wijzigt' THEN 'verandert'
-#					WHEN DocumentArtikelRelatieType.Naam = 'Heft op' THEN 'heft op'
-#					WHEN DocumentArtikelRelatieType.Naam = 'Bekrachtigt' THEN 'bekrachtigt'
-#					WHEN DocumentArtikelRelatieType.Naam = 'Trekt in' THEN 'trekt in'
-#					WHEN DocumentArtikelRelatieType.Naam = 'Zie ook' THEN 'zie ook'
-#					WHEN DocumentArtikelRelatieType.Naam = 'Gewijzigd bij' THEN 'veranderd door'
-#					WHEN DocumentArtikelRelatieType.Naam = 'Opgeheven bij' THEN 'opgeheven bij'
-#					WHEN DocumentArtikelRelatieType.Naam = 'Bekrachtigd bij' THEN 'bekrachtigd bij'
-#					WHEN DocumentArtikelRelatieType.Naam = 'Ingetrokken bij' THEN 'ingetrokken bij'
-#				END) AS RelatieType,
-#				WetgevingArtikelVersie.Id AS ArtikelRelatie
-#		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-#		WHERE DocumentArtikelRelatie.WetgevingDocumentId = DocumentArtikelRelatie.WetgevingDocumentID
-#		AND DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-#		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-#		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
-#	"""
-#	];
-#	rr:subjectMap [
-#		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
-#		rr:class eli:LegalResource; 
-#	];
-#	rr:predicateObjectMap [
-#		rr:predicate codex:RelatieType;
-#		rr:objectMap [
-#			rr:parentTriplesMap map:RechtsgrondArtikel; 
-#			rr:joinCondition [
-#				rr:child 'ArtikelRelatie';
-#				rr:parent 'ID';
-#			]
-#		]
-#	].
-
-map:RechtsgrondDocumentRelatieVerandert
+map:RechtsgrondArtikelDocumentRelatieVerandert
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -215,7 +178,7 @@ map:RechtsgrondDocumentRelatieVerandert
 		]
 	].
 
-map:RechtsgrondDocumentRelatieHeftOp
+map:RechtsgrondArtikelDocumentRelatieHeftOp
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -252,7 +215,7 @@ map:RechtsgrondDocumentRelatieHeftOp
 		]
 	].
 
-map:RechtsgrondDocumentRelatieBekrachtigt
+map:RechtsgrondArtikelDocumentRelatieBekrachtigt
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -289,7 +252,7 @@ map:RechtsgrondDocumentRelatieBekrachtigt
 		]
 	].
 
-map:RechtsgrondDocumentRelatieTrektIn
+map:RechtsgrondArtikelDocumentRelatieTrektIn
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -326,7 +289,7 @@ map:RechtsgrondDocumentRelatieTrektIn
 		]
 	].
 
-map:RechtsgrondDocumentRelatieZieOok
+map:RechtsgrondArtikelDocumentRelatieZieOok
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -363,7 +326,7 @@ map:RechtsgrondDocumentRelatieZieOok
 		]
 	].
 
-map:RechtsgrondDocumentRelatieVeranderdDoor
+map:RechtsgrondArtikelDocumentRelatieVeranderdDoor
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -400,7 +363,7 @@ map:RechtsgrondDocumentRelatieVeranderdDoor
 		]
 	].
 
-map:RechtsgrondDocumentRelatieOpgehevenBij
+map:RechtsgrondArtikelDocumentRelatieOpgehevenBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -437,7 +400,7 @@ map:RechtsgrondDocumentRelatieOpgehevenBij
 		]
 	].
 
-map:RechtsgrondDocumentRelatieBekrachtigdBij
+map:RechtsgrondArtikelDocumentRelatieBekrachtigdBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -474,7 +437,7 @@ map:RechtsgrondDocumentRelatieBekrachtigdBij
 		]
 	].
 
-map:RechtsgrondDocumentRelatieIngetrokkenBij
+map:RechtsgrondArtikelDocumentRelatieIngetrokkenBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
