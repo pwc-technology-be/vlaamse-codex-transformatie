@@ -116,4 +116,9 @@ public class MappingDocument {
     public void setDatabaseType(DatabaseType databaseType) {
         this.databaseType = databaseType;
     }
+
+	public void setLogicalTableMappings(boolean addAll) {
+		// TODO Auto-generated method stub
+		
+	}
 }
