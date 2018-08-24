@@ -27,7 +27,7 @@ map:RechtsgrondDocument
 					ELSE 'AFTESTEMMEN'
 				END) AS typeDocumentURI,
 				ID as RGDID,
-			CONVERT(date, Datum) AS datumDocumentdatum
+				CONVERT(date, Datum) AS datumDocumentdatum
 		FROM WetgevingDocument
 	""" 
 	];
@@ -145,6 +145,41 @@ map:RechtsgrondDocumentThema
 	].
 
 #Onderdeel 1.2: Mappings van de Document -> Artikel relaties van Rechtsgrond(subdivisie)
+map:RechtsgrondDocumentArtikelRelatie
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
+				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
+				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
+				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				(CASE  
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
+					ELSE 'AFTESTEMMEN'
+				END) AS typeDocumentURI,
+				ArtikelVersie.ID as ArtikelID,
+				CONVERT(date, Document.Datum) AS datumDocumentdatum
+		FROM WetgevingDocument as Document, WetgevingArtikelVersie as ArtikelVersie
+		WHERE Document.ID = ArtikelVersie.WetgevingDocumentId
+	""" 
+	];
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResource; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:has_part; #heeft onderdeel
+		rr:objectMap [
+			rr:parentTriplesMap map:RechtsgrondArtikel; 
+			rr:joinCondition [
+				rr:child 'ArtikelID';
+				rr:parent 'ID';
+			]
+		]
+	].
+
 #Uit text file RechtsgrondDocumentArtikelRelaties.txt
 
 #Onderdeel 1.3: Mappings van de Artikel -> Document relaties van Rechtsgrond(subdivisie)
@@ -152,13 +187,71 @@ map:RechtsgrondDocumentThema
 #tip to self: adhv van reverseid
 
 #Onderdeel 1.4: Mappings van de Document -> Hoofdstuk relaties van Rechtsgrond(subdivisies)
-#TODO
+map:RechtsgrondDocumentHoofdstukRelatie
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
+				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
+				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
+				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				(CASE  
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
+					ELSE 'AFTESTEMMEN'
+				END) AS typeDocumentURI,
+				Hoofdstuk.ID as HoofdstukID,
+				CONVERT(date, Document.Datum) AS datumDocumentdatum
+		FROM WetgevingDocument as Document, WetgevingHoofdstuk as Hoofdstuk
+		WHERE Document.ID = Hoofdstuk.WetgevingDocumentId
+	""" 
+	];
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResource; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:has_part; #heeft onderdeel
+		rr:objectMap [
+			rr:parentTriplesMap map:RechtsgrondHoofdstuk; 
+			rr:joinCondition [
+				rr:child 'HoofdstukID';
+				rr:parent 'ID';
+			]
+		]
+	].
 
 #Onderdeel 1.5: Mappings van de Hoofdstuk -> Document relaties van Rechtsgrond(subdivisies)
 #TODO
 
 #Onderdeel 1.6: Mapping van RechtsgrondHoofdstuk
-#Uit text file RechtsgrondHoofdstuk.txt
+map:RechtsgrondHoofdstuk
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT	Hoofdstuk.ID AS HoofdstukID,
+				Hoofdstuk.WetgevingDocumentId AS VerbondenDocument
+		FROM WetgevingHoofdstuk as Hoofdstuk
+	""" 
+	];
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Hoofdstuk/{"HoofdstukID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:Legalresourcesubdivision;
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate codex:TypeRechtsgrondSubdivisie; 
+		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRechtsgrondSubdivisie/Hoofdstuk';
+						rr:termType rr:IRI ];
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:is_part_of; #is deel van
+		rr:objectMap [
+			rr:parentTriplesMap map:RechtsgrondDocument; 
+			rr:joinCondition [
+				rr:child 'VerbondenDocument';
+				rr:parent 'ID';
+			]
+		]
+	].
 
 #Onderdeel 1.7: Mappings van de Hoofdstuk -> Artikel relaties van Rechtsgrondsubdivisies
 #TODO
@@ -182,7 +275,7 @@ map:RechtsgrondArtikel
 						rr:termType rr:IRI ];
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:is_part_of; #Heeft onderdeel
+		rr:predicate eli:is_part_of; #is deel van
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsgrondDocument; 
 			rr:joinCondition [
