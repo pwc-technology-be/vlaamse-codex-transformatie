@@ -27,7 +27,7 @@ map:RechtsgrondDocument
 					ELSE 'AFTESTEMMEN'
 				END) AS typeDocumentURI,
 				ID as RGDID,
-			CONVERT(date, Datum) AS datumDocumentdatum
+				CONVERT(date, Datum) AS datumDocumentdatum
 		FROM WetgevingDocument
 	""" 
 	];
@@ -146,6 +146,42 @@ map:RechtsgrondDocumentThema
 
 #Onderdeel 1.2: Mappings van de Document -> Artikel relaties van Rechtsgrond(subdivisie)
 
+map:RechtsgrondDocumentArtikelRelatieHeeftOnderdeel
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
+				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
+				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
+				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				(CASE  
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
+					ELSE 'AFTESTEMMEN'
+				END) AS typeDocumentURI,
+				ArtikelVersie.ID as ArtikelID,
+				CONVERT(date, Document.Datum) AS datumDocumentdatum
+		FROM WetgevingDocument as Document, WetgevingArtikelVersie as ArtikelVersie
+		WHERE Document.ID = ArtikelVersie.WetgevingDocumentId
+	""" 
+	];
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResource; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:has_part; #heeft onderdeel
+		rr:objectMap [
+			rr:parentTriplesMap map:RechtsgrondArtikel; 
+			rr:joinCondition [
+				rr:child 'ArtikelID';
+				rr:parent 'ID';
+			]
+		]
+	].
+
+
 map:RechtsgrondDocumentArtikelRelatieVerandert
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
@@ -160,7 +196,7 @@ map:RechtsgrondDocumentArtikelRelatieVerandert
 					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
 					ELSE 'AFTESTEMMEN'
 				END) AS typeDocumentURI,
-				WetgevingArtikelVersie.WetgevingDocumentId AS ArtikelRelatie
+				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
 		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
@@ -178,7 +214,7 @@ map:RechtsgrondDocumentArtikelRelatieVerandert
 			rr:parentTriplesMap map:RechtsgrondArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'VlacoId';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -197,7 +233,7 @@ map:RechtsgrondDocumentArtikelRelatieHeftOp
 					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
 					ELSE 'AFTESTEMMEN'
 				END) AS typeDocumentURI,
-				WetgevingArtikelVersie.WetgevingDocumentId AS ArtikelRelatie
+				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
 		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
@@ -215,47 +251,47 @@ map:RechtsgrondDocumentArtikelRelatieHeftOp
 			rr:parentTriplesMap map:RechtsgrondArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'VlacoId';
+				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsgrondDocumentArtikelRelatieBekrachtigt
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
-				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
-				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
-				END) AS typeDocumentURI,
-				WetgevingArtikelVersie.WetgevingDocumentId AS ArtikelRelatie
-		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 3
-	"""
-	];
-	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
-		rr:class eli:LegalResource; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigt; #Bekrachtigt
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsgrondArtikel; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'VlacoId';
-			]
-		]
-	].
+#map:RechtsgrondDocumentArtikelRelatieBekrachtigt
+#	rr:logicalTable [ rr:sqlQuery """
+#		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
+#				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
+#				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
+#				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+#				(CASE  
+#					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
+#					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
+#					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
+#					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
+#					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
+#					ELSE 'AFTESTEMMEN'
+#				END) AS typeDocumentURI,
+#				WetgevingArtikelVersie.ID AS ArtikelRelatie
+#		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
+#		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
+#		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
+#		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
+#		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 3
+#	"""
+#	];
+#	rr:subjectMap [
+#		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+#		rr:class eli:LegalResource; 
+#	];
+#	rr:predicateObjectMap [
+#		rr:predicate codex:bekrachtigt; #Bekrachtigt
+#		rr:objectMap [
+#			rr:parentTriplesMap map:RechtsgrondArtikel; 
+#			rr:joinCondition [
+#				rr:child 'ArtikelRelatie';
+#				rr:parent 'ID';
+#			]
+#		]
+#	].
 
 map:RechtsgrondDocumentArtikelRelatieTrektIn
 	rr:logicalTable [ rr:sqlQuery """
@@ -271,7 +307,7 @@ map:RechtsgrondDocumentArtikelRelatieTrektIn
 					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
 					ELSE 'AFTESTEMMEN'
 				END) AS typeDocumentURI,
-				WetgevingArtikelVersie.WetgevingDocumentId AS ArtikelRelatie
+				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
 		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
@@ -289,7 +325,7 @@ map:RechtsgrondDocumentArtikelRelatieTrektIn
 			rr:parentTriplesMap map:RechtsgrondArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'VlacoId';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -308,7 +344,7 @@ map:RechtsgrondDocumentArtikelRelatieZieOok
 					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
 					ELSE 'AFTESTEMMEN'
 				END) AS typeDocumentURI,
-				WetgevingArtikelVersie.WetgevingDocumentId AS ArtikelRelatie
+				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
 		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
@@ -326,7 +362,7 @@ map:RechtsgrondDocumentArtikelRelatieZieOok
 			rr:parentTriplesMap map:RechtsgrondArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'VlacoId';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -345,7 +381,7 @@ map:RechtsgrondDocumentArtikelRelatieVeranderdDoor
 					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
 					ELSE 'AFTESTEMMEN'
 				END) AS typeDocumentURI,
-				WetgevingArtikelVersie.WetgevingDocumentId AS ArtikelRelatie
+				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
 		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
@@ -363,7 +399,7 @@ map:RechtsgrondDocumentArtikelRelatieVeranderdDoor
 			rr:parentTriplesMap map:RechtsgrondArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'VlacoId';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -382,7 +418,7 @@ map:RechtsgrondDocumentArtikelRelatieOpgehevenBij
 					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
 					ELSE 'AFTESTEMMEN'
 				END) AS typeDocumentURI,
-				WetgevingArtikelVersie.WetgevingDocumentId AS ArtikelRelatie
+				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
 		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
@@ -400,7 +436,7 @@ map:RechtsgrondDocumentArtikelRelatieOpgehevenBij
 			rr:parentTriplesMap map:RechtsgrondArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'VlacoId';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -419,7 +455,7 @@ map:RechtsgrondDocumentArtikelRelatieBekrachtigdBij
 					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
 					ELSE 'AFTESTEMMEN'
 				END) AS typeDocumentURI,
-				WetgevingArtikelVersie.WetgevingDocumentId AS ArtikelRelatie
+				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
 		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
@@ -437,7 +473,7 @@ map:RechtsgrondDocumentArtikelRelatieBekrachtigdBij
 			rr:parentTriplesMap map:RechtsgrondArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'VlacoId';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -456,7 +492,7 @@ map:RechtsgrondDocumentArtikelRelatieIngetrokkenBij
 					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
 					ELSE 'AFTESTEMMEN'
 				END) AS typeDocumentURI,
-				WetgevingArtikelVersie.WetgevingDocumentId AS ArtikelRelatie
+				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
 		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
@@ -474,7 +510,7 @@ map:RechtsgrondDocumentArtikelRelatieIngetrokkenBij
 			rr:parentTriplesMap map:RechtsgrondArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'VlacoId';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -484,13 +520,8 @@ map:RechtsgrondDocumentArtikelRelatieIngetrokkenBij
 #tip to self: adhv van reverseid
 
 #Onderdeel 1.4: Mappings van de Document -> Hoofdstuk relaties van Rechtsgrond(subdivisies)
-#TODO
 
-#Onderdeel 1.5: Mappings van de Hoofdstuk -> Document relaties van Rechtsgrond(subdivisies)
-#TODO
-
-#Onderdeel 1.6: Mapping van RechtsgrondHoofdstuk
-map:RechtsgrondHoofdstuk
+map:RechtsgrondDocumentHoofdstukRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -504,25 +535,20 @@ map:RechtsgrondHoofdstuk
 					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
 					ELSE 'AFTESTEMMEN'
 				END) AS typeDocumentURI,
-				Hoofdstuk.ID AS HoofdstukID,
-				Hoofdstuk.WetgevingDocumentId AS VerbondenDocument
+				Hoofdstuk.ID as HoofdstukID,
+				CONVERT(date, Document.Datum) AS datumDocumentdatum
 		FROM WetgevingDocument as Document, WetgevingHoofdstuk as Hoofdstuk
-		WHERE Document.ID = Hoofdstuk.WetgevingDocumentId 
+		WHERE Document.ID = Hoofdstuk.WetgevingDocumentId
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}/Hoofdstuk/{HoofdstukID}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
-		rr:class eli:Legalresourcesubdivision;
-	];
-	rr:predicateObjectMap [ 
-		rr:predicate codex:TypeRechtsgrondSubdivisie; 
-		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRechtsgrondSubdivisie/Hoofdstuk';
-						rr:termType rr:IRI ];
+		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:is_part_of; #Heeft onderdeel
+		rr:predicate eli:has_part; #heeft onderdeel
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsgrondDocument; 
+			rr:parentTriplesMap map:RechtsgrondHoofdstuk; 
 			rr:joinCondition [
 				rr:child 'HoofdstukID';
 				rr:parent 'ID';
@@ -530,34 +556,76 @@ map:RechtsgrondHoofdstuk
 		]
 	].
 
-#Onderdeel 1.7: Mappings van de Hoofdstuk -> Artikel relaties van Rechtsgrondsubdivisies
-#TODO
 
-#Onderdeel 1.8: Mapping van RechtsgrondArtikel
+#Onderdeel 1.5: Mapping van RechtsgrondHoofdstuk
 
-map:RechtsgrondArtikel
+map:RechtsgrondHoofdstuk
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
-				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
-				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
-				END) AS typeDocumentURI,
-				ArtikelVersie.ID AS VlacoID,
-				ArtikelVersie.WetgevingDocumentId AS VerbondenDocument
-		FROM WetgevingDocument as Document, WetgevingArtikelVersie as ArtikelVersie
-		WHERE Document.ID = Artikelversie.WetgevingDocumentId 
+		SELECT	Hoofdstuk.ID AS HoofdstukID,
+				Hoofdstuk.WetgevingDocumentId AS VerbondenDocument
+		FROM WetgevingHoofdstuk as Hoofdstuk
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}/Artikel/{VlacoID}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
-		rr:class eli:Legalresourcesubdivision;
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Hoofdstuk/{"HoofdstukID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision;
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate codex:TypeRechtsgrondSubdivisie; 
+		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRechtsgrondSubdivisie/Hoofdstuk';
+						rr:termType rr:IRI ];
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:is_part_of; #is deel van
+		rr:objectMap [
+			rr:parentTriplesMap map:RechtsgrondDocument; 
+			rr:joinCondition [
+				rr:child 'VerbondenDocument';
+				rr:parent 'ID';
+			]
+		]
+	].
+
+#Onderdeel 1.6: Mappings van de Hoofdstuk -> Artikel relaties van Rechtsgrondsubdivisies
+
+map:RechtsgrondHoofdstukArtikelRelatieHeeftOnderdeel
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT	Hoofdstuk.ID AS HoofdstukID,
+				Artikel.ID AS ArtikelID,
+				Artikel.WetgevingHoofdstukID AS HoofdstukArtikelID,
+				ArtikelVersie.ID AS ArtikelVersieID
+		FROM WetgevingHoofdstuk AS Hoofdstuk, WetgevingArtikel AS Artikel, WetgevingArtikelVersie AS ArtikelVersie
+		WHERE Artikel.ID = ArtikelVersie.ID
+		AND	Hoofdstuk.ID = Artikel.WetgevingHoofdstukID
+	""" 
+	];
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Hoofdstuk/{"HoofdstukID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:has_part; #heeft onderdeel
+		rr:objectMap [
+			rr:parentTriplesMap map:RechtsgrondArtikel; 
+			rr:joinCondition [
+				rr:child 'ArtikelVersieID'; #ArtikelVersieID is de VlacoID in RechtsgrondArtikel
+				rr:parent 'ID';
+			]
+		]
+	].
+
+#Onderdeel 1.7: Mapping van RechtsgrondArtikel
+
+map:RechtsgrondArtikel
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT	ArtikelVersie.ID AS VlacoID,
+				ArtikelVersie.WetgevingDocumentId AS VerbondenDocument
+		FROM WetgevingArtikelVersie as ArtikelVersie
+	""" 
+	];
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate codex:TypeRechtsgrondSubdivisie; 
@@ -565,44 +633,42 @@ map:RechtsgrondArtikel
 						rr:termType rr:IRI ];
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:is_part_of; #Heeft onderdeel
+		rr:predicate eli:is_part_of; #is deel van
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsgrondDocument; 
 			rr:joinCondition [
-				rr:child 'VlacoID';
+				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
 			]
 		]
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:is_realized_by; #is gerealiseerd door
+		rr:objectMap [
+			rr:parentTriplesMap map:VerschijningsvormArtikel; 
+			rr:joinCondition [
+				rr:child 'VlacoID';
+				rr:parent 'ID';
+				]
+		]
 	].
 
-#Onderdeel 1.9: Mappings van de Artikel -> Artikel relaties van Rechtsgrondsubdivisies
+#Onderdeel 1.8: Mappings van de Artikel -> Artikel relaties van Rechtsgrondsubdivisies
 
-map:RechtsgrondArtikelRelatieVeranderdDoor
+map:RechtsgrondArtikelArtikelRelatieVeranderdDoor
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
-				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
-				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
-				END) AS typeDocumentURI,
-				ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie
-		FROM WetgevingDocument as Document, WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+				ArtikelVersie1.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie1.WetgevingDocumentId = Document.Id
 		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
 		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
-		rr:class eli:Legalresourcesubdivision; 
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij
@@ -615,32 +681,20 @@ map:RechtsgrondArtikelRelatieVeranderdDoor
 		]
 	].
 
-map:RechtsgrondArtikelRelatieVervangenBij
+map:RechtsgrondArtikelArtikelRelatieVervangenBij
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
-				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
-				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
-				END) AS typeDocumentURI,
-				ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie
-		FROM WetgevingDocument as Document, WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+				ArtikelVersie1.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie1.WetgevingDocumentId = Document.Id
 		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
 		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
-		rr:class eli:Legalresourcesubdivision; 
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Vervangen bij
@@ -653,32 +707,20 @@ map:RechtsgrondArtikelRelatieVervangenBij
 		]
 	].
 
-map:RechtsgrondArtikelRelatieIngevoegdBij
+map:RechtsgrondArtikelArtikelRelatieIngevoegdBij
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
-				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
-				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
-				END) AS typeDocumentURI,
-				ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie
-		FROM WetgevingDocument as Document, WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+				ArtikelVersie1.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie1.WetgevingDocumentId = Document.Id
 		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
 		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
-		rr:class eli:Legalresourcesubdivision; 
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Ingevoegd bij
@@ -691,32 +733,20 @@ map:RechtsgrondArtikelRelatieIngevoegdBij
 		]
 	].
 
-map:RechtsgrondArtikelRelatieOpgehevenBij
+map:RechtsgrondArtikelArtikelRelatieOpgehevenBij
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
-				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
-				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
-				END) AS typeDocumentURI,
-				ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie
-		FROM WetgevingDocument as Document, WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+				ArtikelVersie1.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie1.WetgevingDocumentId = Document.Id
 		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
 		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
-		rr:class eli:Legalresourcesubdivision; 
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Opgeheven bij
@@ -729,32 +759,20 @@ map:RechtsgrondArtikelRelatieOpgehevenBij
 		]
 	].
 
-map:RechtsgrondArtikelRelatieIngetrokkenBij
+map:RechtsgrondArtikelArtikelRelatieIngetrokkenBij
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
-				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
-				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
-				END) AS typeDocumentURI,
-				ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie
-		FROM WetgevingDocument as Document, WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+				ArtikelVersie1.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie1.WetgevingDocumentId = Document.Id
 		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
 		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
-		rr:class eli:Legalresourcesubdivision; 
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Ingetrokken bij
@@ -767,70 +785,46 @@ map:RechtsgrondArtikelRelatieIngetrokkenBij
 		]
 	].
 
-map:RechtsgrondArtikelRelatieBekrachtigdBij
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
-				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
-				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
-				END) AS typeDocumentURI,
-				ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie
-		FROM WetgevingDocument as Document, WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie1.WetgevingDocumentId = Document.Id
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
-		rr:class eli:Legalresourcesubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsgrondArtikel; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
+#map:RechtsgrondArtikelArtikelRelatieBekrachtigdBij
+#	rr:logicalTable [ rr:sqlQuery """
+#		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+#				ArtikelVersie1.id AS VlacoID
+#		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+#		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
+#		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
+#		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
+#		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6
+#	"""
+#	]; 
+#	rr:subjectMap [
+#		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+#		rr:class eli:LegalResourceSubdivision; 
+#	];
+#	rr:predicateObjectMap [
+#		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij
+#		rr:objectMap [
+#			rr:parentTriplesMap map:RechtsgrondArtikel; 
+#			rr:joinCondition [
+#				rr:child 'ArtikelRelatie';
+#				rr:parent 'ID';
+#			]
+#		]
+#	].
 
-map:RechtsgrondArtikelRelatieZieOok
+map:RechtsgrondArtikelArtikelRelatieZieOok
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
-				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
-				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
-				END) AS typeDocumentURI,
-				ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie
-		FROM WetgevingDocument as Document, WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+				ArtikelVersie1.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie1.WetgevingDocumentId = Document.Id
 		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
 		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
-		rr:class eli:Legalresourcesubdivision; 
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook
@@ -843,32 +837,20 @@ map:RechtsgrondArtikelRelatieZieOok
 		]
 	].
 
-map:RechtsgrondArtikelRelatieVerandert
+map:RechtsgrondArtikelArtikelRelatieVerandert
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
-				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
-				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
-				END) AS typeDocumentURI,
-				ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie
-		FROM WetgevingDocument as Document, WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+				ArtikelVersie1.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie1.WetgevingDocumentId = Document.Id
 		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
 		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
-		rr:class eli:Legalresourcesubdivision; 
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt
@@ -881,32 +863,20 @@ map:RechtsgrondArtikelRelatieVerandert
 		]
 	].
 
-map:RechtsgrondArtikelRelatieVervangt
+map:RechtsgrondArtikelArtikelRelatieVervangt
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
-				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
-				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
-				END) AS typeDocumentURI,
-				ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie
-		FROM WetgevingDocument as Document, WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+				ArtikelVersie1.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie1.WetgevingDocumentId = Document.Id
 		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
 		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
-		rr:class eli:Legalresourcesubdivision; 
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Vervangt
@@ -919,32 +889,20 @@ map:RechtsgrondArtikelRelatieVervangt
 		]
 	].
 
-map:RechtsgrondArtikelRelatieVoegtIn
+map:RechtsgrondArtikelArtikelRelatieVoegtIn
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
-				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
-				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
-				END) AS typeDocumentURI,
-				ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie
-		FROM WetgevingDocument as Document, WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+				ArtikelVersie1.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie1.WetgevingDocumentId = Document.Id
 		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
 		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
-		rr:class eli:Legalresourcesubdivision; 
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Voegt in
@@ -957,32 +915,20 @@ map:RechtsgrondArtikelRelatieVoegtIn
 		]
 	].
 
-map:RechtsgrondArtikelRelatieHeftOp
+map:RechtsgrondArtikelArtikelRelatieHeftOp
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
-				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
-				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
-				END) AS typeDocumentURI,
-				ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie
-		FROM WetgevingDocument as Document, WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+				ArtikelVersie1.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie1.WetgevingDocumentId = Document.Id
 		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
 		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
-		rr:class eli:Legalresourcesubdivision; 
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Heft op
@@ -995,35 +941,49 @@ map:RechtsgrondArtikelRelatieHeftOp
 		]
 	].
 
-map:RechtsgrondArtikelRelatieBekrachtigt
+#map:RechtsgrondArtikelArtikelRelatieBekrachtigt
+#	rr:logicalTable [ rr:sqlQuery """
+#		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+#				ArtikelVersie1.id AS VlacoID
+#		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+#		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
+#		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
+#		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
+#		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12
+#	"""
+#	]; 
+#	rr:subjectMap [
+#		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+#		rr:class eli:LegalResourceSubdivision; 
+#	];
+#	rr:predicateObjectMap [
+#		rr:predicate codex:bekrachtigt; #Bekrachtigt
+#		rr:objectMap [
+#			rr:parentTriplesMap map:RechtsgrondArtikel; 
+#			rr:joinCondition [
+#				rr:child 'ArtikelRelatie';
+#				rr:parent 'ID';
+#			]
+#		]
+#	].
+
+map:RechtsgrondArtikelArtikelRelatieTrektIn
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
-				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
-				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
-				END) AS typeDocumentURI,
-				ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie
-		FROM WetgevingDocument as Document, WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+				ArtikelVersie1.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie1.WetgevingDocumentId = Document.Id
 		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12
+		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
-		rr:class eli:Legalresourcesubdivision; 
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigt; #Bekrachtigt
+		rr:predicate eli:repeals; #Trekt in
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsgrondArtikel; 
 			rr:joinCondition [
@@ -1033,39 +993,27 @@ map:RechtsgrondArtikelRelatieBekrachtigt
 		]
 	].
 
-map:RechtsgrondArtikelRelatieTrektIn
+map:RechtsgrondArtikelHoofdstukRelatieIsDeelVan #Reverse van RechtsgrondHoofdstukArtikelRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
-				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
-				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
-				END) AS typeDocumentURI,
-				ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie
-		FROM WetgevingDocument as Document, WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie1.WetgevingDocumentId = Document.Id
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13
-	"""
-	]; 
+		SELECT	Hoofdstuk.ID AS HoofdstukID,
+				Artikel.ID AS ArtikelID,
+				Artikel.WetgevingHoofdstukID AS HoofdstukArtikelID,
+				ArtikelVersie.ID AS ArtikelVersieID
+		FROM WetgevingHoofdstuk AS Hoofdstuk, WetgevingArtikel AS Artikel, WetgevingArtikelVersie AS ArtikelVersie
+		WHERE Artikel.ID = ArtikelVersie.ID
+		AND	Hoofdstuk.ID = Artikel.WetgevingHoofdstukID
+	""" 
+	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
-		rr:class eli:Legalresourcesubdivision; 
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"ArtikelVersieID"}'; #ArtikelVersieID is de VlacoID in RechtsgrondArtikel #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Trekt in
+		rr:predicate eli:is_part_of; #is deel van
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsgrondArtikel; 
+			rr:parentTriplesMap map:RechtsgrondHoofdstuk; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'HoofdstukID';
 				rr:parent 'ID';
 			]
 		]
@@ -1138,24 +1086,27 @@ map:VerschijningsvormDocument
 		]
 	].
 
-map:VerschijningsvormDocumentTrefwoord
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT Document.id AS VlacoID,
-				REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(Trefwoord.Naam, '"', '&quot;'), 'à', '&agrave;'), 'è', '&egrave;'), 'é', '&eacute;'), 'ê', '&ecirc;'), 'ë', '&euml;') AS trefwoord
-		FROM WetgevingDocument AS Document, WetgevingDocument_Trefwoord AS DocumentTrefwoord, Trefwoord
-		WHERE Document.Id = DocumentTrefwoord.WetgevingDocumentId AND DocumentTrefwoord.TrefwoordId = Trefwoord.Id
-	""" 
-	];
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/doc/document/{"VlacoID"}';
-		rr:class eli:LegalExpression; 
-	];
-	rr:predicateObjectMap [ 
-		rr:predicate dcterms:subject; 
-		rr:objectMap [rr:column '"trefwoord"']; # synoniemen ook toevoegen?
-	].
+#map:VerschijningsvormDocumentTrefwoord
+#	rr:logicalTable [ rr:sqlQuery """
+#		SELECT Document.id AS VlacoID,
+#				REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(Trefwoord.Naam, '"', '&quot;'), 'à', '&agrave;'), 'è', '&egrave;'), 'é', '&eacute;'), 'ê', '&ecirc;'), 'ë', '&euml;') AS trefwoord
+#		FROM WetgevingDocument AS Document, WetgevingDocument_Trefwoord AS DocumentTrefwoord, Trefwoord
+#		WHERE Document.Id = DocumentTrefwoord.WetgevingDocumentId AND DocumentTrefwoord.TrefwoordId = Trefwoord.Id
+#	""" 
+#	];
+#	rr:subjectMap [
+#		rr:template 'https://codex.vlaanderen.be/doc/document/{"VlacoID"}';
+#		rr:class eli:LegalExpression; 
+#	];
+#	rr:predicateObjectMap [ 
+#		rr:predicate dcterms:subject; 
+#		rr:objectMap [rr:column '"trefwoord"']; # synoniemen ook toevoegen?
+#	].
 
-#Onderdeel 2.2: Mapping van VerschijningsvormArtikel
+#Onderdeel 2.2: Mapping van VerschijningsvormHoofdstuk
+#TODO
+
+#Onderdeel 2.3: Mapping van VerschijningsvormArtikel
 
 map:VerschijningsvormArtikel
 	rr:logicalTable [ rr:sqlQuery """
@@ -1167,6 +1118,16 @@ map:VerschijningsvormArtikel
 	rr:subjectMap [
 		rr:template 'https://codex.vlaanderen.be/doc/artikel/{"VlacoID"}';
 		rr:class eli:LegalExpression; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:realizes; #realiseert
+		rr:objectMap [
+			rr:parentTriplesMap map:RechtsgrondArtikel; 
+			rr:joinCondition [
+				rr:child 'VlacoID';
+				rr:parent 'ID';
+				]
+		]
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate prov:value; 
