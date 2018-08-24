@@ -145,7 +145,7 @@ map:RechtsgrondDocumentThema
 	].
 
 #Onderdeel 1.2: Mappings van de Document -> Artikel relaties van Rechtsgrond(subdivisie)
-map:RechtsgrondDocumentArtikelRelatie
+map:RechtsgrondDocumentArtikelRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -187,7 +187,7 @@ map:RechtsgrondDocumentArtikelRelatie
 #tip to self: adhv van reverseid
 
 #Onderdeel 1.4: Mappings van de Document -> Hoofdstuk relaties van Rechtsgrond(subdivisies)
-map:RechtsgrondDocumentHoofdstukRelatie
+map:RechtsgrondDocumentHoofdstukRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -254,7 +254,31 @@ map:RechtsgrondHoofdstuk
 	].
 
 #Onderdeel 1.7: Mappings van de Hoofdstuk -> Artikel relaties van Rechtsgrondsubdivisies
-#TODO
+map:RechtsgrondHoofdstukArtikelRelatieHeeftOnderdeel
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT	Hoofdstuk.ID AS HoofdstukID,
+				Artikel.ID AS ArtikelID,
+				Artikel.WetgevingHoofdstukID AS HoofdstukArtikelID,
+				ArtikelVersie.ID AS ArtikelVersieID
+		FROM WetgevingHoofdstuk AS Hoofdstuk, WetgevingArtikel AS Artikel, WetgevingArtikelVersie AS ArtikelVersie
+		WHERE Artikel.ID = ArtikelVersie.ID
+		AND	Hoofdstuk.ID = Artikel.WetgevingHoofdstukID
+	""" 
+	];
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Hoofdstuk/{"HoofdstukID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:has_part; #heeft onderdeel
+		rr:objectMap [
+			rr:parentTriplesMap map:RechtsgrondArtikel; 
+			rr:joinCondition [
+				rr:child 'ArtikelVersieID';
+				rr:parent 'ID';
+			]
+		]
+	].
 
 #Onderdeel 1.8: Mapping van RechtsgrondArtikel
 
