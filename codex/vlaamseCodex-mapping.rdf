@@ -922,7 +922,7 @@ map:RechtsgrondHoofdstuk
 		]
 	].
 
-#Onderdeel 1.7: Mappings van de Hoofdstuk -> Artikel relaties van Rechtsgrondsubdivisies
+#Onderdeel 1.7: Mappings van de Hoofdstuk -> Artikel en Artikel -> Hoofdstuk relaties van Rechtsgrondsubdivisies
 
 map:RechtsgrondHoofdstukArtikelRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
@@ -950,8 +950,34 @@ map:RechtsgrondHoofdstukArtikelRelatieHeeftOnderdeel
 		]
 	].
 
+
+map:RechtsgrondArtikelHoofdstukRelatieIsDeelVan #Reverse van RechtsgrondHoofdstukArtikelRelatieHeeftOnderdeel
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT	Hoofdstuk.ID AS HoofdstukID,
+				Artikel.ID AS ArtikelID,
+				Artikel.WetgevingHoofdstukID AS HoofdstukArtikelID,
+				ArtikelVersie.ID AS ArtikelVersieID
+		FROM WetgevingHoofdstuk AS Hoofdstuk, WetgevingArtikel AS Artikel, WetgevingArtikelVersie AS ArtikelVersie
+		WHERE Artikel.ID = ArtikelVersie.ID
+		AND	Hoofdstuk.ID = Artikel.WetgevingHoofdstukID
+	""" 
+	];
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"ArtikelVersieID"}'; #ArtikelVersieID is de VlacoID in RechtsgrondArtikel #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:is_part_of; #is deel van
+		rr:objectMap [
+			rr:parentTriplesMap map:RechtsgrondHoofdstuk; 
+			rr:joinCondition [
+				rr:child 'HoofdstukID';
+				rr:parent 'ID';
+			]
+		]
+	].
+	
 #Onderdeel 1.8: Mapping van RechtsgrondArtikel
-#TODO #relatie leggen tussen RechtsgrondArtikel en RechtsgrondHoofdstuk
 
 map:RechtsgrondArtikel
 	rr:logicalTable [ rr:sqlQuery """
@@ -1326,32 +1352,6 @@ map:RechtsgrondArtikelArtikelRelatieTrektIn
 			rr:parentTriplesMap map:RechtsgrondArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsgrondArtikelHoofdstukRelatieIsDeelVan #Reverse van RechtsgrondHoofdstukArtikelRelatieHeeftOnderdeel
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT	Hoofdstuk.ID AS HoofdstukID,
-				Artikel.ID AS ArtikelID,
-				Artikel.WetgevingHoofdstukID AS HoofdstukArtikelID,
-				ArtikelVersie.ID AS ArtikelVersieID
-		FROM WetgevingHoofdstuk AS Hoofdstuk, WetgevingArtikel AS Artikel, WetgevingArtikelVersie AS ArtikelVersie
-		WHERE Artikel.ID = ArtikelVersie.ID
-		AND	Hoofdstuk.ID = Artikel.WetgevingHoofdstukID
-	""" 
-	];
-	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"ArtikelVersieID"}'; #ArtikelVersieID is de VlacoID in RechtsgrondArtikel #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:is_part_of; #is deel van
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsgrondHoofdstuk; 
-			rr:joinCondition [
-				rr:child 'HoofdstukID';
 				rr:parent 'ID';
 			]
 		]
