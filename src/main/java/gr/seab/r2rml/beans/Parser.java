@@ -132,20 +132,20 @@ public class Parser {
 			}
 			
 			//Sorting: evaluate first the logical table mappings without reference to a parent triples map
+			//Volgende drie lijnen zijn oude originele code:
 			@SuppressWarnings("rawtypes")
-			//Volgende twee lijnen zijn oude code:
 			Comparator c =  new LogicalTableMappingComparator();
 			Collections.sort(mappingDocument.getLogicalTableMappings(), c);
 			
-			//Volgende acht lijnen omvat de code die als alternatief door de ontwikkelaar wordt voorgesteld:
-//			LinkedList<LogicalTableMapping> first = new LinkedList<LogicalTableMapping>();
-//			LinkedList<LogicalTableMapping> second = new LinkedList<LogicalTableMapping>();
-//			for (LogicalTableMapping ltm : mappingDocument.getLogicalTableMappings()) {
-//				for (PredicateObjectMap p : ltm.getPredicateObjectMaps()) {
-//					if (p.getRefObjectMap() != null && p.getRefObjectMap().getParentTriplesMapUri() != null && StringUtils.isNotBlank(p.getRefObjectMap().getParentTriplesMapUri())) second.addAll((Collection<? extends LogicalTableMapping>) p); else first.addAll((Collection<? extends LogicalTableMapping>) p);
-//				}
-//			}
-//			mappingDocument.setLogicalTableMappings(first.addAll(second));
+			//Volgende acht lijnen omvat de code die als alternatief door de ontwikkelaar wordt voorgesteld (met aanpassingen om het te laten werken):
+			//LinkedList<LogicalTableMapping> first = new LinkedList<LogicalTableMapping>();
+			//			LinkedList<LogicalTableMapping> second = new LinkedList<LogicalTableMapping>();
+			//for (LogicalTableMapping ltm : mappingDocument.getLogicalTableMappings()) {
+			//for (PredicateObjectMap p : ltm.getPredicateObjectMaps()) {
+			//	if (p.getRefObjectMap() != null && p.getRefObjectMap().getParentTriplesMapUri() != null && StringUtils.isNotBlank(p.getRefObjectMap().getParentTriplesMapUri())) second.add(p); else first.add(p);
+			//}
+			//}
+			//mappingDocument.setLogicalTableMappings(first.addAll(second));
 		
 			if (verbose) {
 				log.info("Logical table mappings will be parsed in the following order:");
