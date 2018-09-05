@@ -9,8 +9,6 @@
 @prefix eli: <http://data.europa.eu/eli/ontology#> .
 @prefix codex: <https://data.vlaanderen.be/ns/wetgeving#> .
 
-#!!! Er moeten nog enkele mappings verwijderd worden om dit script te laten runnen aangezien het aantal mappings >31 (java comparison method violation)
-
 #Onderdeel 1: Mapping van RegelgevendDoc
 #Onderdeel 1.1: Mappings van RegelgevendDocDocument met attributen
 
@@ -444,7 +442,7 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigdBij
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBij #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBij #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -779,7 +777,7 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigdBijReverse
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBijReverse #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBijReverse #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document2.Numac WHEN 0 THEN Document2.BSPagina ELSE Document2.Numac END) AS ID,
 				YEAR(CONVERT(date, Document2.Datum)) AS datumDocumentJaar,
@@ -856,7 +854,7 @@ map:RegelgevendDocDocumentArtikelRelatieHeeftOnderdeel
 	].
 
 
-map:RegelgevendDocDocumentArtikelRelatieVerandert #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentArtikelRelatieVerandert #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -894,7 +892,7 @@ map:RegelgevendDocDocumentArtikelRelatieVerandert #Deze mapping kan eruit gelate
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieHeftOp #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentArtikelRelatieHeftOp #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -932,7 +930,7 @@ map:RegelgevendDocDocumentArtikelRelatieHeftOp #Deze mapping kan eruit gelaten w
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieBekrachtigt #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentArtikelRelatieBekrachtigt #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -970,7 +968,7 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigt #Deze mapping kan eruit gela
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieTrektIn #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentArtikelRelatieTrektIn #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1046,7 +1044,7 @@ map:RegelgevendDocDocumentArtikelRelatieZieOok
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieVeranderdDoor #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentArtikelRelatieVeranderdDoor #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1160,7 +1158,7 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigdBij
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBij #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBij #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1533,7 +1531,7 @@ map:RegelgevendDocArtikelArtikelRelatieOpgehevenBij
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBij #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBij #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -1561,7 +1559,7 @@ map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBij #Deze mapping kan eruit ge
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieBekrachtigdBij #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelArtikelRelatieBekrachtigdBij #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -1645,7 +1643,7 @@ map:RegelgevendDocArtikelArtikelRelatieVerandert
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieVervangt #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelArtikelRelatieVervangt #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -1729,7 +1727,7 @@ map:RegelgevendDocArtikelArtikelRelatieHeftOp
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieBekrachtigt #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelArtikelRelatieBekrachtigt #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -1864,7 +1862,7 @@ map:RegelgevendDocDocumentBijlageRelatieHeeftOnderdeel
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieVerandert #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieVerandert #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1902,7 +1900,7 @@ map:RegelgevendDocDocumentBijlageRelatieVerandert #Deze mapping kan eruit gelate
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieHeftOp #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieHeftOp #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1940,7 +1938,7 @@ map:RegelgevendDocDocumentBijlageRelatieHeftOp #Deze mapping kan eruit gelaten w
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieBekrachtigt #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieBekrachtigt #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1978,7 +1976,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigt #Deze mapping kan eruit gela
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieTrektIn #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieTrektIn #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -2054,7 +2052,7 @@ map:RegelgevendDocDocumentBijlageRelatieZieOok
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieVeranderdDoor #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieVeranderdDoor #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -2092,7 +2090,7 @@ map:RegelgevendDocDocumentBijlageRelatieVeranderdDoor #Deze mapping kan eruit ge
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieOpgehevenBij #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieOpgehevenBij #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -2130,7 +2128,7 @@ map:RegelgevendDocDocumentBijlageRelatieOpgehevenBij #Deze mapping kan eruit gel
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBij #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBij #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -2168,7 +2166,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBij #Deze mapping kan eruit g
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBij #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBij #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -2209,7 +2207,7 @@ map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBij #Deze mapping kan eruit g
 #Onderdeel 1.12: Mappings van de Artikel -> Bijlage relaties van RegelgevendDoc(subdivisie)
 #TODO #Reverse nog nodig van deze relaties
 
-map:RegelgevendDocArtikelBijlageRelatieVeranderdDoor #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieVeranderdDoor #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2237,7 +2235,7 @@ map:RegelgevendDocArtikelBijlageRelatieVeranderdDoor #Deze mapping kan eruit gel
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVervangenBij #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieVervangenBij #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2265,7 +2263,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangenBij #Deze mapping kan eruit gela
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieIngevoegdBij #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieIngevoegdBij #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2293,7 +2291,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngevoegdBij #Deze mapping kan eruit gela
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieOpgehevenBij #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieOpgehevenBij #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2321,7 +2319,7 @@ map:RegelgevendDocArtikelBijlageRelatieOpgehevenBij #Deze mapping kan eruit gela
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBij #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBij #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2349,7 +2347,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBij #Deze mapping kan eruit ge
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBij #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBij #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2377,7 +2375,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBij #Deze mapping kan eruit ge
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieZieOok #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieZieOok #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2405,7 +2403,7 @@ map:RegelgevendDocArtikelBijlageRelatieZieOok #Deze mapping kan eruit gelaten wo
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVerandert #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieVerandert #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2433,7 +2431,7 @@ map:RegelgevendDocArtikelBijlageRelatieVerandert #Deze mapping kan eruit gelaten
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVervangt #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieVervangt #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2461,7 +2459,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangt #Deze mapping kan eruit gelaten 
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVoegtIn #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieVoegtIn #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2489,7 +2487,7 @@ map:RegelgevendDocArtikelBijlageRelatieVoegtIn #Deze mapping kan eruit gelaten w
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieHeftOp #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieHeftOp #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2517,7 +2515,7 @@ map:RegelgevendDocArtikelBijlageRelatieHeftOp #Deze mapping kan eruit gelaten wo
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieBekrachtigt #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieBekrachtigt #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2545,7 +2543,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigt #Deze mapping kan eruit gelat
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieTrektIn #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieTrektIn #Deze mapping kan er uit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
