@@ -1423,7 +1423,7 @@ map:RegelgevendDocArtikel
 
 map:RegelgevendDocArtikelArtikelRelatieVeranderdDoor
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -1451,7 +1451,7 @@ map:RegelgevendDocArtikelArtikelRelatieVeranderdDoor
 
 map:RegelgevendDocArtikelArtikelRelatieVervangenBij
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -1479,7 +1479,7 @@ map:RegelgevendDocArtikelArtikelRelatieVervangenBij
 
 map:RegelgevendDocArtikelArtikelRelatieIngevoegdBij
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -1507,7 +1507,7 @@ map:RegelgevendDocArtikelArtikelRelatieIngevoegdBij
 
 map:RegelgevendDocArtikelArtikelRelatieOpgehevenBij
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -1535,7 +1535,7 @@ map:RegelgevendDocArtikelArtikelRelatieOpgehevenBij
 
 map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBij #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -1563,7 +1563,7 @@ map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBij #Deze mapping kan eruit ge
 
 map:RegelgevendDocArtikelArtikelRelatieBekrachtigdBij #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -1591,7 +1591,7 @@ map:RegelgevendDocArtikelArtikelRelatieBekrachtigdBij #Deze mapping kan eruit ge
 
 map:RegelgevendDocArtikelArtikelRelatieZieOok
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -1619,7 +1619,7 @@ map:RegelgevendDocArtikelArtikelRelatieZieOok
 
 map:RegelgevendDocArtikelArtikelRelatieVerandert
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -1647,7 +1647,7 @@ map:RegelgevendDocArtikelArtikelRelatieVerandert
 
 map:RegelgevendDocArtikelArtikelRelatieVervangt #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -1675,7 +1675,7 @@ map:RegelgevendDocArtikelArtikelRelatieVervangt #Deze mapping kan eruit gelaten 
 
 map:RegelgevendDocArtikelArtikelRelatieVoegtIn
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -1703,7 +1703,7 @@ map:RegelgevendDocArtikelArtikelRelatieVoegtIn
 
 map:RegelgevendDocArtikelArtikelRelatieHeftOp
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -1731,7 +1731,7 @@ map:RegelgevendDocArtikelArtikelRelatieHeftOp
 
 map:RegelgevendDocArtikelArtikelRelatieBekrachtigt #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -1759,7 +1759,7 @@ map:RegelgevendDocArtikelArtikelRelatieBekrachtigt #Deze mapping kan eruit gelat
 
 map:RegelgevendDocArtikelArtikelRelatieTrektIn
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -2211,7 +2211,7 @@ map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBij #Deze mapping kan eruit g
 
 map:RegelgevendDocArtikelBijlageRelatieVeranderdDoor #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -2239,7 +2239,7 @@ map:RegelgevendDocArtikelBijlageRelatieVeranderdDoor #Deze mapping kan eruit gel
 
 map:RegelgevendDocArtikelBijlageRelatieVervangenBij #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -2267,7 +2267,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangenBij #Deze mapping kan eruit gela
 
 map:RegelgevendDocArtikelBijlageRelatieIngevoegdBij #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -2295,7 +2295,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngevoegdBij #Deze mapping kan eruit gela
 
 map:RegelgevendDocArtikelBijlageRelatieOpgehevenBij #Deze mapping kan eruit gelaten worden indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -2323,7 +2323,7 @@ map:RegelgevendDocArtikelBijlageRelatieOpgehevenBij #Deze mapping kan eruit gela
 
 map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBij #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -2351,7 +2351,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBij #Deze mapping kan eruit ge
 
 map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBij #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -2379,7 +2379,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBij #Deze mapping kan eruit ge
 
 map:RegelgevendDocArtikelBijlageRelatieZieOok #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -2407,7 +2407,7 @@ map:RegelgevendDocArtikelBijlageRelatieZieOok #Deze mapping kan eruit gelaten wo
 
 map:RegelgevendDocArtikelBijlageRelatieVerandert #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -2435,7 +2435,7 @@ map:RegelgevendDocArtikelBijlageRelatieVerandert #Deze mapping kan eruit gelaten
 
 map:RegelgevendDocArtikelBijlageRelatieVervangt #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -2463,7 +2463,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangt #Deze mapping kan eruit gelaten 
 
 map:RegelgevendDocArtikelBijlageRelatieVoegtIn #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -2491,7 +2491,7 @@ map:RegelgevendDocArtikelBijlageRelatieVoegtIn #Deze mapping kan eruit gelaten w
 
 map:RegelgevendDocArtikelBijlageRelatieHeftOp #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -2519,7 +2519,7 @@ map:RegelgevendDocArtikelBijlageRelatieHeftOp #Deze mapping kan eruit gelaten wo
 
 map:RegelgevendDocArtikelBijlageRelatieBekrachtigt #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
@@ -2547,7 +2547,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigt #Deze mapping kan eruit gelat
 
 map:RegelgevendDocArtikelBijlageRelatieTrektIn #Deze mapping kan eruit gelaten worden gedurende PoC fase indien bug van max. aantal mappings bereikt is aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.WetgevingDocumentId AS ArtikelRelatie,
+		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
