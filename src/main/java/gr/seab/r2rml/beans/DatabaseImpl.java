@@ -1,14 +1,3 @@
-/**
- * Licensed under the Creative Commons Attribution-NonCommercial 4.0 Unported 
- * License (the "License"). You may not use this file except in compliance with
- * the License. You may obtain a copy of the License at:
- * 
- *  http://creativecommons.org/licenses/by-nc/4.0/
- *  
- * Unless required by applicable law or agreed to in writing, software distributed
- * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied.
- */
 package gr.seab.r2rml.beans;
 
 import java.sql.Connection;
@@ -17,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.SQLTimeoutException;
 import java.sql.Statement;
 import java.util.Properties;
 
@@ -26,7 +14,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Database functions
- * @author nkons
  * 
  */
 public class DatabaseImpl implements Database {
@@ -54,14 +41,7 @@ public class DatabaseImpl implements Database {
                     log.error("The property db.url cannot be empty! It must contain a valid database connection string.");
                     System.exit(1);
 				}
-				try {
-					connection = DriverManager.getConnection(dbConnectionString, properties.getProperty("db.login"), properties.getProperty("db.password"));
-				} catch (SQLTimeoutException e) {
-					log.error(e.toString());
-				}catch (SQLException e) {
-					log.error(e.toString());
-				} 
-				
+				connection = DriverManager.getConnection(dbConnectionString, properties.getProperty("db.login"), properties.getProperty("db.password"));
 			
 				log.info("Established source (relational) connection.");
 				return connection;
@@ -105,7 +85,7 @@ public class DatabaseImpl implements Database {
 			
 			preparedStatement.close();
 		} catch (SQLException e) {
-			log.error("Error testing query! Query was: " + query + e);
+			log.error("Error testing query! Query was: " + query);
 			System.exit(1);
 		}
 	}

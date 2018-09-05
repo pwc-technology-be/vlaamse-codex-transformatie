@@ -1,17 +1,5 @@
-/**
- * Licensed under the Creative Commons Attribution-NonCommercial 4.0 Unported 
- * License (the "License"). You may not use this file except in compliance with
- * the License. You may obtain a copy of the License at:
- * 
- *  http://creativecommons.org/licenses/by-nc/4.0/
- *  
- * Unless required by applicable law or agreed to in writing, software distributed
- * under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
- * CONDITIONS OF ANY KIND, either express or implied.
- */
 package gr.seab.r2rml.beans;
 
-import gr.seab.r2rml.beans.util.LogicalTableMappingComparator;
 import gr.seab.r2rml.entities.DatabaseType;
 import gr.seab.r2rml.entities.LogicalTableMapping;
 import gr.seab.r2rml.entities.LogicalTableView;
@@ -26,9 +14,6 @@ import gr.seab.r2rml.entities.sql.SelectQuery;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
@@ -54,7 +39,6 @@ import com.hp.hpl.jena.util.FileManager;
 /**
  * Parses a valid R2RML file and produces a mapping document
  * @see MappingDocument
- * @author nkons
  *
  */
 public class Parser {
@@ -105,7 +89,6 @@ public class Parser {
 	public Parser() {
 	}
 	
-	@SuppressWarnings("unchecked")
 	public MappingDocument parse() {
 
 		init();
@@ -132,21 +115,22 @@ public class Parser {
 			}
 			
 			//Sorting: evaluate first the logical table mappings without reference to a parent triples map
-			//Volgende drie lijnen zijn oude originele code:
-			@SuppressWarnings("rawtypes")
-			Comparator c =  new LogicalTableMappingComparator();
-			Collections.sort(mappingDocument.getLogicalTableMappings(), c);
+			LinkedList<LogicalTableMapping> first = new LinkedList<LogicalTableMapping>();
+			LinkedList<LogicalTableMapping> second = new LinkedList<LogicalTableMapping>();
+			for (LogicalTableMapping ltm : mappingDocument.getLogicalTableMappings()) {
+				for (PredicateObjectMap p : ltm.getPredicateObjectMaps()) {
+					if (p.getRefObjectMap() != null &&
+						p.getRefObjectMap().getParentTriplesMapUri() != null &&
+						StringUtils.isNotBlank(p.getRefObjectMap().getParentTriplesMapUri())) {
+						second.add(ltm);
+					} else {
+						first.add(ltm);
+					}
+				}
+			}
+			first.addAll(second);
+			mappingDocument.setLogicalTableMappings(first);
 			
-			//Volgende acht lijnen omvat de code die als alternatief door de ontwikkelaar wordt voorgesteld (met aanpassingen om het te laten werken):
-			//LinkedList<LogicalTableMapping> first = new LinkedList<LogicalTableMapping>();
-			//			LinkedList<LogicalTableMapping> second = new LinkedList<LogicalTableMapping>();
-			//for (LogicalTableMapping ltm : mappingDocument.getLogicalTableMappings()) {
-			//for (PredicateObjectMap p : ltm.getPredicateObjectMaps()) {
-			//	if (p.getRefObjectMap() != null && p.getRefObjectMap().getParentTriplesMapUri() != null && StringUtils.isNotBlank(p.getRefObjectMap().getParentTriplesMapUri())) second.add(p); else first.add(p);
-			//}
-			//}
-			//mappingDocument.setLogicalTableMappings(first.addAll(second));
-		
 			if (verbose) {
 				log.info("Logical table mappings will be parsed in the following order:");
 				for (LogicalTableMapping ltm : mappingDocument.getLogicalTableMappings()) {
