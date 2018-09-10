@@ -479,7 +479,7 @@ map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBij #Deze mapping kan er eve
 		]
 	].
 
-#Onderdeel 1.2.1 Reverse mappings uit 1.2
+#Onderdeel 1.2.1: Reverse mappings uit 1.2
 
 map:RegelgevendDocDocumentDocumentRelatieVerandertReverse
 	rr:logicalTable [ rr:sqlQuery """
@@ -1195,7 +1195,7 @@ map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBij #Deze mapping kan er even
 		]
 	].
 
-#Onderdeel 1.4: Mappings van de Artikel -> Document relaties van RegelgevendDoc(subdivisie)
+#Onderdeel 1.4: Mappings van de Artikel -> Document relaties van RegelgevendDoc(subdivisie) (Reverse mappings uit 1.3)
 
 map:RegelgevendDocDocumentArtikelRelatieVerandertReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 	rr:logicalTable [ rr:sqlQuery """
@@ -2025,6 +2025,374 @@ map:RegelgevendDocArtikelArtikelRelatieTrektIn
 			]
 		]
 	].
+
+#Onderdeel 1.9.1: Reverse mappings uit 1.9
+
+map:RegelgevendDocArtikelArtikelRelatieVeranderdDoorReverse
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
+				ArtikelVersie2.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
+		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
+		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
+		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1
+		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
+		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+	"""
+	]; 
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:amends; #Wijzigt (reverse van gewijzigd bij)
+		rr:objectMap [
+			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:joinCondition [
+				rr:child 'ArtikelRelatie';
+				rr:parent 'ID';
+			]
+		]
+	].
+
+map:RegelgevendDocArtikelArtikelRelatieVervangenBijReverse
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
+				ArtikelVersie2.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
+		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
+		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
+		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2
+		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
+		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+	"""
+	]; 
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:repeals; #Vervangt (reverse van Vervangen bij)
+		rr:objectMap [
+			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:joinCondition [
+				rr:child 'ArtikelRelatie';
+				rr:parent 'ID';
+			]
+		]
+	].
+
+map:RegelgevendDocArtikelArtikelRelatieIngevoegdBijReverse
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
+				ArtikelVersie2.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
+		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
+		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
+		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3
+		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
+		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+	"""
+	]; 
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:amends; #Voegt in (reverse van Ingevoegd bij)
+		rr:objectMap [
+			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:joinCondition [
+				rr:child 'ArtikelRelatie';
+				rr:parent 'ID';
+			]
+		]
+	].
+
+map:RegelgevendDocArtikelArtikelRelatieOpgehevenBijReverse
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
+				ArtikelVersie2.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
+		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
+		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
+		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4
+		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
+		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+	"""
+	]; 
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:repeals; #Heft op (reverse van Opgeheven bij)
+		rr:objectMap [
+			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:joinCondition [
+				rr:child 'ArtikelRelatie';
+				rr:parent 'ID';
+			]
+		]
+	].
+
+map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBijReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
+				ArtikelVersie2.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
+		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
+		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
+		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5
+		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
+		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+	"""
+	]; 
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:repeals; #Trekt in (reverse van Ingetrokken bij)
+		rr:objectMap [
+			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:joinCondition [
+				rr:child 'ArtikelRelatie';
+				rr:parent 'ID';
+			]
+		]
+	].
+
+map:RegelgevendDocArtikelArtikelRelatieBekrachtigdBijReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
+				ArtikelVersie2.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
+		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
+		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
+		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6
+		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
+		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+	"""
+	]; 
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate codex:bekrachtigt; #Bekrachtigt (reverse van Bekrachtigd bij)
+		rr:objectMap [
+			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:joinCondition [
+				rr:child 'ArtikelRelatie';
+				rr:parent 'ID';
+			]
+		]
+	].
+
+map:RegelgevendDocArtikelArtikelRelatieZieOokReverse
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
+				ArtikelVersie2.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
+		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
+		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
+		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7
+		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
+		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+	"""
+	]; 
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:related_to; #zie ook (reverse van zie ook)
+		rr:objectMap [
+			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:joinCondition [
+				rr:child 'ArtikelRelatie';
+				rr:parent 'ID';
+			]
+		]
+	].
+
+map:RegelgevendDocArtikelArtikelRelatieVerandertReverse
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
+				ArtikelVersie2.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
+		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
+		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
+		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8
+		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
+		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+	"""
+	]; 
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:amended_by; #Gewijzigd bij (reverse van Wijzigt)
+		rr:objectMap [
+			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:joinCondition [
+				rr:child 'ArtikelRelatie';
+				rr:parent 'ID';
+			]
+		]
+	].
+
+map:RegelgevendDocArtikelArtikelRelatieVervangtReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
+				ArtikelVersie2.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
+		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
+		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
+		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9
+		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
+		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+	"""
+	]; 
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:repealed_by; #Vervangen bij (reverse van Vervangt)
+		rr:objectMap [
+			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:joinCondition [
+				rr:child 'ArtikelRelatie';
+				rr:parent 'ID';
+			]
+		]
+	].
+
+map:RegelgevendDocArtikelArtikelRelatieVoegtInReverse
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
+				ArtikelVersie2.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
+		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
+		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
+		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10
+		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
+		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+	"""
+	]; 
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:amended_by; #Ingevoegd bij (reverse van Voegt in)
+		rr:objectMap [
+			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:joinCondition [
+				rr:child 'ArtikelRelatie';
+				rr:parent 'ID';
+			]
+		]
+	].
+
+map:RegelgevendDocArtikelArtikelRelatieHeftOpReverse
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
+				ArtikelVersie2.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
+		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
+		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
+		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11
+		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
+		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+	"""
+	]; 
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:repealed_by; #Opgeheven bij (reverse van Heft op)
+		rr:objectMap [
+			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:joinCondition [
+				rr:child 'ArtikelRelatie';
+				rr:parent 'ID';
+			]
+		]
+	].
+
+map:RegelgevendDocArtikelArtikelRelatieBekrachtigtReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
+				ArtikelVersie2.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
+		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
+		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
+		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12
+		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
+		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+	"""
+	]; 
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij (reverse van Bekrachtigt)
+		rr:objectMap [
+			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:joinCondition [
+				rr:child 'ArtikelRelatie';
+				rr:parent 'ID';
+			]
+		]
+	].
+
+map:RegelgevendDocArtikelArtikelRelatieTrektInReverse
+	rr:logicalTable [ rr:sqlQuery """
+		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
+				ArtikelVersie2.id AS VlacoID
+		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
+		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
+		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
+		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
+		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13
+		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
+		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+	"""
+	]; 
+	rr:subjectMap [
+		rr:template 'http://www.ejustice.just.fgov.be/eli/Artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:class eli:LegalResourceSubdivision; 
+	];
+	rr:predicateObjectMap [
+		rr:predicate eli:repealed_by; #Ingetrokken bij (reverse van Trekt in)
+		rr:objectMap [
+			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:joinCondition [
+				rr:child 'ArtikelRelatie';
+				rr:parent 'ID';
+			]
+		]
+	].
+
+
 
 #Onderdeel 1.10: Mapping van RegelgevendDocBijlage
 
