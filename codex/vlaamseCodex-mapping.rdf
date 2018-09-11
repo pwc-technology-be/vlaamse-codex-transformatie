@@ -9,6 +9,8 @@
 @prefix eli: <http://data.europa.eu/eli/ontology#> .
 @prefix codex: <https://data.vlaanderen.be/ns/wetgeving#> .
 
+#OPM.1: #De mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+
 #Onderdeel 1: Mapping van RegelgevendDoc
 #Onderdeel 1.1: Mappings van RegelgevendDocDocument met attributen
 
@@ -528,7 +530,7 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigdBij
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBij #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBij #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -863,7 +865,7 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigdBijReverse
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBijReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBijReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document2.Numac WHEN 0 THEN Document2.BSPagina ELSE Document2.Numac END) AS ID,
 				YEAR(CONVERT(date, Document2.Datum)) AS datumDocumentJaar,
@@ -1015,7 +1017,7 @@ map:RegelgevendDocDocumentBijlageRelatieHeeftOnderdeel
 #-----------------------------------------
 #Onderdeel 1.7: Mappings van de Document -> Artikel relaties van RegelgevendDoc(subdivisie)
 
-map:RegelgevendDocDocumentArtikelRelatieVerandert #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentArtikelRelatieVerandert #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1053,7 +1055,7 @@ map:RegelgevendDocDocumentArtikelRelatieVerandert #Deze mapping kan er eventueel
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieHeftOp #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentArtikelRelatieHeftOp #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1091,7 +1093,7 @@ map:RegelgevendDocDocumentArtikelRelatieHeftOp #Deze mapping kan er eventueel ui
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieBekrachtigt #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentArtikelRelatieBekrachtigt #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1129,7 +1131,7 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigt #Deze mapping kan er eventue
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieTrektIn #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentArtikelRelatieTrektIn #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1205,7 +1207,7 @@ map:RegelgevendDocDocumentArtikelRelatieZieOok
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieVeranderdDoor #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentArtikelRelatieVeranderdDoor #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1319,7 +1321,7 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigdBij
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBij #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBij #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1360,7 +1362,7 @@ map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBij #Deze mapping kan er even
 #-----------------------------------------
 #Onderdeel 1.7.1: Mappings van de Artikel -> Document relaties van RegelgevendDoc(subdivisie) (Reverse mappings uit 1.7)
 
-map:RegelgevendDocDocumentArtikelRelatieVerandertReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentArtikelRelatieVerandertReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS VerbondenDocument
@@ -1387,7 +1389,7 @@ map:RegelgevendDocDocumentArtikelRelatieVerandertReverse #Deze mapping kan er ev
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieHeftOpReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentArtikelRelatieHeftOpReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS VerbondenDocument
@@ -1414,7 +1416,7 @@ map:RegelgevendDocDocumentArtikelRelatieHeftOpReverse #Deze mapping kan er event
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieBekrachtigtReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentArtikelRelatieBekrachtigtReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS VerbondenDocument
@@ -1441,7 +1443,7 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigtReverse #Deze mapping kan er 
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieTrektInReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentArtikelRelatieTrektInReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS VerbondenDocument
@@ -1495,7 +1497,7 @@ map:RegelgevendDocDocumentArtikelRelatieZieOokReverse
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieVeranderdDoorReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentArtikelRelatieVeranderdDoorReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS VerbondenDocument
@@ -1576,7 +1578,7 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigdBijReverse
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBijReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBijReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS VerbondenDocument
@@ -1608,7 +1610,7 @@ map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBijReverse #Deze mapping kan 
 #-----------------------------------------
 #Onderdeel 1.8: Mappings van de Document -> Bijlage relaties van RegelgevendDoc(subdivisie)
 
-map:RegelgevendDocDocumentBijlageRelatieVerandert #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieVerandert #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1646,7 +1648,7 @@ map:RegelgevendDocDocumentBijlageRelatieVerandert #Deze mapping kan er eventueel
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieHeftOp #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieHeftOp #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1684,7 +1686,7 @@ map:RegelgevendDocDocumentBijlageRelatieHeftOp #Deze mapping kan er eventueel ui
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieBekrachtigt #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieBekrachtigt #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1722,7 +1724,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigt #Deze mapping kan er eventue
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieTrektIn #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieTrektIn #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1798,7 +1800,7 @@ map:RegelgevendDocDocumentBijlageRelatieZieOok
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieVeranderdDoor #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieVeranderdDoor #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1836,7 +1838,7 @@ map:RegelgevendDocDocumentBijlageRelatieVeranderdDoor #Deze mapping kan er event
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieOpgehevenBij #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieOpgehevenBij #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1874,7 +1876,7 @@ map:RegelgevendDocDocumentBijlageRelatieOpgehevenBij #Deze mapping kan er eventu
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBij #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBij #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1912,7 +1914,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBij #Deze mapping kan er even
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBij #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBij #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
@@ -1953,7 +1955,7 @@ map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBij #Deze mapping kan er even
 #-----------------------------------------
 #Onderdeel 1.8.1: Mappings van de Bijlage -> Document relaties van RegelgevendDoc(subdivisie) (Reverse mappings uit 1.8)
 
-map:RegelgevendDocDocumentBijlageRelatieVerandertReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieVerandertReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS VerbondenDocument
@@ -1980,7 +1982,7 @@ map:RegelgevendDocDocumentBijlageRelatieVerandertReverse #Deze mapping kan er ev
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieHeftOpReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieHeftOpReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS VerbondenDocument
@@ -2007,7 +2009,7 @@ map:RegelgevendDocDocumentBijlageRelatieHeftOpReverse #Deze mapping kan er event
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieBekrachtigtReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieBekrachtigtReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS VerbondenDocument
@@ -2034,7 +2036,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigtReverse #Deze mapping kan er 
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieTrektInReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieTrektInReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS VerbondenDocument
@@ -2088,7 +2090,7 @@ map:RegelgevendDocDocumentBijlageRelatieZieOokReverse
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieVeranderdDoorReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieVeranderdDoorReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS VerbondenDocument
@@ -2115,7 +2117,7 @@ map:RegelgevendDocDocumentBijlageRelatieVeranderdDoorReverse #Deze mapping kan e
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieOpgehevenBijReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieOpgehevenBijReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS VerbondenDocument
@@ -2142,7 +2144,7 @@ map:RegelgevendDocDocumentBijlageRelatieOpgehevenBijReverse #Deze mapping kan er
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBijReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBijReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS VerbondenDocument
@@ -2169,7 +2171,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBijReverse #Deze mapping kan 
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBijReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBijReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS VerbondenDocument
@@ -2425,7 +2427,7 @@ map:RegelgevendDocArtikelArtikelRelatieOpgehevenBij
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBij #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBij #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2453,7 +2455,7 @@ map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBij #Deze mapping kan er event
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieBekrachtigdBij #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelArtikelRelatieBekrachtigdBij #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2537,7 +2539,7 @@ map:RegelgevendDocArtikelArtikelRelatieVerandert
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieVervangt #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelArtikelRelatieVervangt #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2621,7 +2623,7 @@ map:RegelgevendDocArtikelArtikelRelatieHeftOp
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieBekrachtigt #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelArtikelRelatieBekrachtigt #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2792,7 +2794,7 @@ map:RegelgevendDocArtikelArtikelRelatieOpgehevenBijReverse
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBijReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBijReverse #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -2820,7 +2822,7 @@ map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBijReverse #Deze mapping kan e
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieBekrachtigdBijReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelArtikelRelatieBekrachtigdBijReverse #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -2904,7 +2906,7 @@ map:RegelgevendDocArtikelArtikelRelatieVerandertReverse
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieVervangtReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelArtikelRelatieVervangtReverse #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -2988,7 +2990,7 @@ map:RegelgevendDocArtikelArtikelRelatieHeftOpReverse
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieBekrachtigtReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelArtikelRelatieBekrachtigtReverse #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3047,7 +3049,7 @@ map:RegelgevendDocArtikelArtikelRelatieTrektInReverse
 #-----------------------------------------
 #Onderdeel 1.12: Mappings van de Artikel -> Bijlage relaties van RegelgevendDoc(subdivisie)
 
-map:RegelgevendDocArtikelBijlageRelatieVeranderdDoor #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieVeranderdDoor #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3075,7 +3077,7 @@ map:RegelgevendDocArtikelBijlageRelatieVeranderdDoor #Deze mapping kan er eventu
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVervangenBij #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieVervangenBij #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3103,7 +3105,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangenBij #Deze mapping kan er eventue
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieIngevoegdBij #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieIngevoegdBij #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3131,7 +3133,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngevoegdBij #Deze mapping kan er eventue
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieOpgehevenBij #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieOpgehevenBij #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3159,7 +3161,7 @@ map:RegelgevendDocArtikelBijlageRelatieOpgehevenBij #Deze mapping kan er eventue
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBij #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBij #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3187,7 +3189,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBij #Deze mapping kan er event
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBij #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBij #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3215,7 +3217,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBij #Deze mapping kan er event
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieZieOok #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelBijlageRelatieZieOok #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3243,7 +3245,7 @@ map:RegelgevendDocArtikelBijlageRelatieZieOok #Deze mapping kan er eventueel uit
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVerandert #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelBijlageRelatieVerandert #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3271,7 +3273,7 @@ map:RegelgevendDocArtikelBijlageRelatieVerandert #Deze mapping kan er eventueel 
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVervangt #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelBijlageRelatieVervangt #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3299,7 +3301,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangt #Deze mapping kan er eventueel u
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVoegtIn #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelBijlageRelatieVoegtIn #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3327,7 +3329,7 @@ map:RegelgevendDocArtikelBijlageRelatieVoegtIn #Deze mapping kan er eventueel ui
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieHeftOp #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelBijlageRelatieHeftOp #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3355,7 +3357,7 @@ map:RegelgevendDocArtikelBijlageRelatieHeftOp #Deze mapping kan er eventueel uit
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieBekrachtigt #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelBijlageRelatieBekrachtigt #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3383,7 +3385,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigt #Deze mapping kan er eventuee
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieTrektIn #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelBijlageRelatieTrektIn #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3414,7 +3416,7 @@ map:RegelgevendDocArtikelBijlageRelatieTrektIn #Deze mapping kan er eventueel ui
 #-----------------------------------------
 #Onderdeel 1.12.1: Mappings van de Bijlage -> Artikel relaties van RegelgevendDoc(subdivisie) (Reverse mappings uit 1.12)
 
-map:RegelgevendDocArtikelBijlageRelatieVeranderdDoorReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieVeranderdDoorReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3442,7 +3444,7 @@ map:RegelgevendDocArtikelBijlageRelatieVeranderdDoorReverse #Deze mapping kan er
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVervangenBijReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieVervangenBijReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3470,7 +3472,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangenBijReverse #Deze mapping kan er 
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieIngevoegdBijReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieIngevoegdBijReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3498,7 +3500,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngevoegdBijReverse #Deze mapping kan er 
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieOpgehevenBijReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
+map:RegelgevendDocArtikelBijlageRelatieOpgehevenBijReverse #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3526,7 +3528,7 @@ map:RegelgevendDocArtikelBijlageRelatieOpgehevenBijReverse #Deze mapping kan er 
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBijReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBijReverse #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3554,7 +3556,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBijReverse #Deze mapping kan e
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBijReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBijReverse #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3582,7 +3584,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBijReverse #Deze mapping kan e
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieZieOokReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelBijlageRelatieZieOokReverse #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3610,7 +3612,7 @@ map:RegelgevendDocArtikelBijlageRelatieZieOokReverse #Deze mapping kan er eventu
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVerandertReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelBijlageRelatieVerandertReverse #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3638,7 +3640,7 @@ map:RegelgevendDocArtikelBijlageRelatieVerandertReverse #Deze mapping kan er eve
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVervangtReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelBijlageRelatieVervangtReverse #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3666,7 +3668,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangtReverse #Deze mapping kan er even
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVoegtInReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelBijlageRelatieVoegtInReverse #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3694,7 +3696,7 @@ map:RegelgevendDocArtikelBijlageRelatieVoegtInReverse #Deze mapping kan er event
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieHeftOpReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelBijlageRelatieHeftOpReverse #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3722,7 +3724,7 @@ map:RegelgevendDocArtikelBijlageRelatieHeftOpReverse #Deze mapping kan er eventu
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieBekrachtigtReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelBijlageRelatieBekrachtigtReverse #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3750,7 +3752,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigtReverse #Deze mapping kan er e
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieTrektInReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocArtikelBijlageRelatieTrektInReverse #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3893,7 +3895,7 @@ map:RegelgevendDocBijlageBijlageRelatieOpgehevenBij
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieIngetrokkenBij #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocBijlageBijlageRelatieIngetrokkenBij #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3921,7 +3923,7 @@ map:RegelgevendDocBijlageBijlageRelatieIngetrokkenBij #Deze mapping kan er event
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieBekrachtigdBij #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocBijlageBijlageRelatieBekrachtigdBij #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -4005,7 +4007,7 @@ map:RegelgevendDocBijlageBijlageRelatieVerandert
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieVervangt #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocBijlageBijlageRelatieVervangt #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -4089,7 +4091,7 @@ map:RegelgevendDocBijlageBijlageRelatieHeftOp
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieBekrachtigt #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocBijlageBijlageRelatieBekrachtigt #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -4260,7 +4262,7 @@ map:RegelgevendDocBijlageBijlageRelatieOpgehevenBijReverse
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieIngetrokkenBijReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocBijlageBijlageRelatieIngetrokkenBijReverse #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -4288,7 +4290,7 @@ map:RegelgevendDocBijlageBijlageRelatieIngetrokkenBijReverse #Deze mapping kan e
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieBekrachtigdBijReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocBijlageBijlageRelatieBekrachtigdBijReverse #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -4372,7 +4374,7 @@ map:RegelgevendDocBijlageBijlageRelatieVerandertReverse
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieVervangtReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocBijlageBijlageRelatieVervangtReverse #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -4456,7 +4458,7 @@ map:RegelgevendDocBijlageBijlageRelatieHeftOpReverse
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieBekrachtigtReverse #Deze mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen)..
+map:RegelgevendDocBijlageBijlageRelatieBekrachtigtReverse #Zie OPM.1 bovenaan..
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
