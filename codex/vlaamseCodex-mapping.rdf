@@ -4599,12 +4599,14 @@ map:VerschijningsvormDocument
 		]
 	].
 
+#TODO: synoniemen ook toevoegen?
 map:VerschijningsvormDocumentTrefwoord
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT Document.id AS VlacoID,
 				REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(Trefwoord.Naam, '"', '&quot;'), 'à', '&agrave;'), 'è', '&egrave;'), 'é', '&eacute;'), 'ê', '&ecirc;'), 'ë', '&euml;') AS trefwoord
 		FROM WetgevingDocument AS Document, WetgevingDocument_Trefwoord AS DocumentTrefwoord, Trefwoord
-		WHERE Document.Id = DocumentTrefwoord.WetgevingDocumentId AND DocumentTrefwoord.TrefwoordId = Trefwoord.Id
+		WHERE Document.Id = DocumentTrefwoord.WetgevingDocumentId 
+		AND DocumentTrefwoord.TrefwoordId = Trefwoord.Id
 	""" 
 	];
 	rr:subjectMap [
@@ -4621,7 +4623,8 @@ map:VerschijningsvormDocumentThema
 		SELECT	Document.id AS VlacoID,
 				Thema.Omschrijving AS thema
 		FROM WetgevingDocument AS Document, WetgevingDocument_Thema AS DocumentThema, Thema
-		WHERE Document.Id = DocumentThema.WetgevingDocumentId AND DocumentThema.ThemaId = Thema.Id
+		WHERE Document.Id = DocumentThema.WetgevingDocumentId 
+		AND DocumentThema.ThemaId = Thema.Id
 	""" 
 	];
 	rr:subjectMap [
