@@ -2859,7 +2859,7 @@ map:RegelgevendDocDocumentBijlageRelatieHeftOpReverse #Deze mapping kan er event
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Heft op
+		rr:predicate eli:repealed_by; #Opgeheven bij (reverse van Heft op)
 		rr:objectMap [
 			rr:parentTriplesMap map:RegelgevendDocDocument; 
 			rr:joinCondition [
@@ -2886,7 +2886,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigtReverse #Deze mapping kan er 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigt; #Bekrachtigt
+		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij (reverse van Bekrachtigt)
 		rr:objectMap [
 			rr:parentTriplesMap map:RegelgevendDocDocument; 
 			rr:joinCondition [
@@ -2913,7 +2913,7 @@ map:RegelgevendDocDocumentBijlageRelatieTrektInReverse #Deze mapping kan er even
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Trekt in
+		rr:predicate eli:repealed_by; #Ingetrokken bij (reverse van Trekt in)
 		rr:objectMap [
 			rr:parentTriplesMap map:RegelgevendDocDocument; 
 			rr:joinCondition [
@@ -2940,7 +2940,7 @@ map:RegelgevendDocDocumentBijlageRelatieZieOokReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:related_to; #zie ook
+		rr:predicate eli:related_to; #zie ook (reverse van zie ook)
 		rr:objectMap [
 			rr:parentTriplesMap map:RegelgevendDocDocument; 
 			rr:joinCondition [
@@ -2967,7 +2967,7 @@ map:RegelgevendDocDocumentBijlageRelatieVeranderdDoorReverse #Deze mapping kan e
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:amended_by; #Gewijzigd bij
+		rr:predicate eli:amends; #Wijzigt (reverse van gewijzigd bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RegelgevendDocDocument; 
 			rr:joinCondition [
@@ -2994,7 +2994,7 @@ map:RegelgevendDocDocumentBijlageRelatieOpgehevenBijReverse #Deze mapping kan er
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Opgeheven bij
+		rr:predicate eli:repeals; #Heft op (reverse van Opgeheven bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RegelgevendDocDocument; 
 			rr:joinCondition [
@@ -3021,7 +3021,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBijReverse #Deze mapping kan 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij
+		rr:predicate codex:bekrachtigt; #Bekrachtigt (reverse van Bekrachtigd bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RegelgevendDocDocument; 
 			rr:joinCondition [
@@ -3048,7 +3048,7 @@ map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBijReverse #Deze mapping kan 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Ingetrokken bij
+		rr:predicate eli:repeals; #Trekt in (reverse van Ingetrokken bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RegelgevendDocDocument; 
 			rr:joinCondition [
@@ -3424,9 +3424,6 @@ map:RegelgevendDocArtikelBijlageRelatieTrektIn #Deze mapping kan er eventueel ui
 			]
 		]
 	].
-
-#Onderdeel 1.13: Mappings van de Bijlage -> Document relaties van RegelgevendDoc(subdivisie)
-#TODO #tip to self: adhv van reverseid
 
 #Onderdeel 2: Mapping van Verschijningsvorm
 #Onderdeel 2.1: Mappings van VerschijningsvormDocument met attributen
