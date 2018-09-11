@@ -4599,14 +4599,25 @@ map:VerschijningsvormDocument
 		]
 	].
 
-#TODO: synoniemen ook toevoegen?
+#TODO: synoniemen van trefwoord nog toe te voegen
 map:VerschijningsvormDocumentTrefwoord
+#Volgende SQL gedeelte moet nog verder uitgewerkt worden
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT Document.id AS VlacoID,
-				REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(Trefwoord.Naam, '"', '&quot;'), 'à', '&agrave;'), 'è', '&egrave;'), 'é', '&eacute;'), 'ê', '&ecirc;'), 'ë', '&euml;') AS trefwoord
+		SELECT 	Document.id AS VlacoID,
+				REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(Trefwoord.Naam, '"', '&quot;'), 'à', '&agrave;'), 'è', '&egrave;'), 'é', '&eacute;'), 'ê', '&ecirc;'), 'ë', '&euml;') AS trefwoord1
 		FROM WetgevingDocument AS Document, WetgevingDocument_Trefwoord AS DocumentTrefwoord, Trefwoord
 		WHERE Document.Id = DocumentTrefwoord.WetgevingDocumentId 
 		AND DocumentTrefwoord.TrefwoordId = Trefwoord.Id
+		/*SELECT 	Document.id AS VlacoID,
+				Trefwoord1.id AS Trefwoord1id,
+				Trefwoord2.id AS Trefwoord2id,
+				REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(Trefwoord1.Naam, '"', '&quot;'), 'à', '&agrave;'), 'è', '&egrave;'), 'é', '&eacute;'), 'ê', '&ecirc;'), 'ë', '&euml;') AS trefwoord1,
+				REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(Trefwoord2.Naam, '"', '&quot;'), 'à', '&agrave;'), 'è', '&egrave;'), 'é', '&eacute;'), 'ê', '&ecirc;'), 'ë', '&euml;') AS trefwoord2
+		FROM WetgevingDocument AS Document, WetgevingDocument_Trefwoord AS DocumentTrefwoord, Trefwoord AS Trefwoord1, Trefwoord AS Trefwoord2, TrefwoordSynoniem
+		OUTER JOIN TrefwoordSynoniem ON TrefwoordSynoniem.Trefwoord1ID=Trefwoord1id AND TrefwoordSynoniem.Trefwoord2ID=Trefwoord2id
+		WHERE Document.Id = DocumentTrefwoord.WetgevingDocumentId
+		AND DocumentTrefwoord.TrefwoordId = Trefwoord1.Id
+		AND TrefwoordSynoniem.Trefwoord2ID = Trefwoord2.ID*/
 	""" 
 	];
 	rr:subjectMap [
@@ -4615,7 +4626,11 @@ map:VerschijningsvormDocumentTrefwoord
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate dcterms:subject; 
-		rr:objectMap [rr:column '"trefwoord"']; # synoniemen ook toevoegen?
+		rr:objectMap [rr:column '"trefwoord1"'];
+#	];
+#	rr:predicateObjectMap [ 
+#		rr:predicate dcterms:subject; 
+#		rr:objectMap [rr:column '"trefwoord2"'];
 	].
 
 map:VerschijningsvormDocumentThema
