@@ -21,12 +21,12 @@ map:RegelgevendDocDocument
 				MONTH(CONVERT(date, Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				ID as RGDID,
 				CONVERT(date, Datum) AS datumDocumentdatum
@@ -59,12 +59,12 @@ map:RegelgevendDocDocumentType
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				(CASE  
 					WHEN 
@@ -256,12 +256,12 @@ map:RegelgevendDocDocumentDocumentRelatieVerandert
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Document2.ID AS DocumentRelatie
 		FROM WetgevingDocument as Document, WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType
@@ -293,12 +293,12 @@ map:RegelgevendDocDocumentDocumentRelatieHeftOp
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Document2.ID AS DocumentRelatie
 		FROM WetgevingDocument as Document, WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType
@@ -330,12 +330,12 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigt
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Document2.ID AS DocumentRelatie
 		FROM WetgevingDocument as Document, WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType
@@ -367,12 +367,12 @@ map:RegelgevendDocDocumentDocumentRelatieTrektIn
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Document2.ID AS DocumentRelatie
 		FROM WetgevingDocument as Document, WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType
@@ -404,12 +404,12 @@ map:RegelgevendDocDocumentDocumentRelatieZieOok
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Document2.ID AS DocumentRelatie
 		FROM WetgevingDocument as Document, WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType
@@ -441,12 +441,12 @@ map:RegelgevendDocDocumentDocumentRelatieVeranderdDoor
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Document2.ID AS DocumentRelatie
 		FROM WetgevingDocument as Document, WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType
@@ -478,12 +478,12 @@ map:RegelgevendDocDocumentDocumentRelatieOpgehevenBij
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Document2.ID AS DocumentRelatie
 		FROM WetgevingDocument as Document, WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType
@@ -515,12 +515,12 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigdBij
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Document2.ID AS DocumentRelatie
 		FROM WetgevingDocument as Document, WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType
@@ -552,12 +552,12 @@ map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBij #Zie OPM.1 bovenaan.
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Document2.ID AS DocumentRelatie
 		FROM WetgevingDocument as Document, WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType
@@ -591,12 +591,12 @@ map:RegelgevendDocDocumentDocumentRelatieVerandertReverse
 				MONTH(CONVERT(date, Document2.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document2.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Document.ID AS DocumentRelatie
 		FROM WetgevingDocument as Document, WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType
@@ -628,12 +628,12 @@ map:RegelgevendDocDocumentDocumentRelatieHeftOpReverse
 				MONTH(CONVERT(date, Document2.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document2.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Document.ID AS DocumentRelatie
 		FROM WetgevingDocument as Document, WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType
@@ -665,12 +665,12 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigtReverse
 				MONTH(CONVERT(date, Document2.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document2.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Document.ID AS DocumentRelatie
 		FROM WetgevingDocument as Document, WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType
@@ -702,12 +702,12 @@ map:RegelgevendDocDocumentDocumentRelatieTrektInReverse
 				MONTH(CONVERT(date, Document2.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document2.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Document.ID AS DocumentRelatie
 		FROM WetgevingDocument as Document, WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType
@@ -739,12 +739,12 @@ map:RegelgevendDocDocumentDocumentRelatieZieOokReverse
 				MONTH(CONVERT(date, Document2.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document2.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Document.ID AS DocumentRelatie
 		FROM WetgevingDocument as Document, WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType
@@ -776,12 +776,12 @@ map:RegelgevendDocDocumentDocumentRelatieVeranderdDoorReverse
 				MONTH(CONVERT(date, Document2.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document2.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Document.ID AS DocumentRelatie
 		FROM WetgevingDocument as Document, WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType
@@ -813,12 +813,12 @@ map:RegelgevendDocDocumentDocumentRelatieOpgehevenBijReverse
 				MONTH(CONVERT(date, Document2.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document2.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Document.ID AS DocumentRelatie
 		FROM WetgevingDocument as Document, WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType
@@ -850,12 +850,12 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigdBijReverse
 				MONTH(CONVERT(date, Document2.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document2.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Document.ID AS DocumentRelatie
 		FROM WetgevingDocument as Document, WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType
@@ -887,12 +887,12 @@ map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBijReverse #Zie OPM.1 bovena
 				MONTH(CONVERT(date, Document2.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document2.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Document.ID AS DocumentRelatie
 		FROM WetgevingDocument as Document, WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType
@@ -927,12 +927,12 @@ map:RegelgevendDocDocumentHoofdstukRelatieHeeftOnderdeel
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				Hoofdstuk.ID as HoofdstukID,
 				CONVERT(date, Document.Datum) AS datumDocumentdatum
@@ -964,12 +964,12 @@ map:RegelgevendDocDocumentArtikelRelatieHeeftOnderdeel
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				ArtikelVersie.ID as ArtikelID,
 				CONVERT(date, Document.Datum) AS datumDocumentdatum
@@ -1000,12 +1000,12 @@ map:RegelgevendDocDocumentBijlageRelatieHeeftOnderdeel
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				ArtikelVersie.ID as ArtikelRelatie,
 				CONVERT(date, Document.Datum) AS datumDocumentdatum
@@ -1039,12 +1039,12 @@ map:RegelgevendDocDocumentArtikelRelatieVerandert #Zie OPM.1 bovenaan.
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
@@ -1077,12 +1077,12 @@ map:RegelgevendDocDocumentArtikelRelatieHeftOp #Zie OPM.1 bovenaan.
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
@@ -1115,12 +1115,12 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigt #Zie OPM.1 bovenaan.
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
@@ -1153,12 +1153,12 @@ map:RegelgevendDocDocumentArtikelRelatieTrektIn #Zie OPM.1 bovenaan.
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
@@ -1191,12 +1191,12 @@ map:RegelgevendDocDocumentArtikelRelatieZieOok
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
@@ -1229,12 +1229,12 @@ map:RegelgevendDocDocumentArtikelRelatieVeranderdDoor #Zie OPM.1 bovenaan.
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
@@ -1267,12 +1267,12 @@ map:RegelgevendDocDocumentArtikelRelatieOpgehevenBij
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
@@ -1305,12 +1305,12 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigdBij
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
@@ -1343,12 +1343,12 @@ map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBij #Zie OPM.1 bovenaan.
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
@@ -1632,12 +1632,12 @@ map:RegelgevendDocDocumentBijlageRelatieVerandert #Zie OPM.1 bovenaan.
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
@@ -1670,12 +1670,12 @@ map:RegelgevendDocDocumentBijlageRelatieHeftOp #Zie OPM.1 bovenaan.
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
@@ -1708,12 +1708,12 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigt #Zie OPM.1 bovenaan.
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
@@ -1746,12 +1746,12 @@ map:RegelgevendDocDocumentBijlageRelatieTrektIn #Zie OPM.1 bovenaan.
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
@@ -1784,12 +1784,12 @@ map:RegelgevendDocDocumentBijlageRelatieZieOok
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
@@ -1822,12 +1822,12 @@ map:RegelgevendDocDocumentBijlageRelatieVeranderdDoor #Zie OPM.1 bovenaan.
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
@@ -1860,12 +1860,12 @@ map:RegelgevendDocDocumentBijlageRelatieOpgehevenBij #Zie OPM.1 bovenaan.
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
@@ -1898,12 +1898,12 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBij #Zie OPM.1 bovenaan.
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
@@ -1936,12 +1936,12 @@ map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBij #Zie OPM.1 bovenaan.
 				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
 				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
 				(CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'BESLUIT'
-					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'WET'
-					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'DECREET'
-					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'GRONDWET'
-					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ORDONNANTIE'
-					ELSE 'AFTESTEMMEN'
+					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
+					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
+					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN 'decreet'
+					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN 'grondwet'
+					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN 'ordonnantie'
+					ELSE 'aftestemmen'
 				END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
