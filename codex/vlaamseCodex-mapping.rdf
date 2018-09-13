@@ -8,6 +8,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix eli: <http://data.europa.eu/eli/ontology#> .
 @prefix codex: <https://data.vlaanderen.be/ns/wetgeving#> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
 
 #OPM.1: #De mapping kan er eventueel uit gelaten worden gedurende PoC fase aangezien sqlquery resultaat set leeg of extreem klein is (<10 lijnen).
 
