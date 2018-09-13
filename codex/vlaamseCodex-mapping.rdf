@@ -4576,9 +4576,12 @@ map:VerschijningsvormDocument
 	rr:predicateObjectMap [ 
 		rr:predicate eli:id_local; 
 		rr:objectMap [
-			rr:column '"lokaleID"';
-			rr:termType rr:Literal; 
-		];
+			rr:parentTriplesMap map:VerschijningsvormDocumentLocalID; 
+			rr:joinCondition [
+				rr:child 'VlacoID';
+				rr:parent 'id';
+			]
+		]
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate eli:title; 
@@ -4597,6 +4600,31 @@ map:VerschijningsvormDocument
 				rr:parent 'id';
 			]
 		]
+	].
+
+map:VerschijningsvormDocumentLocalID
+	rr:logicalTable [rr:sqlQuery """
+		SELECT	id AS id
+		FROM WetgevingDocument
+	"""];
+	rr:subjectMap [
+		rr:template '{"id"}';
+		rr:termType rr:BlankNode;
+		rr:class adms:Identifier; 
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate skos:notation; 
+		rr:objectMap [
+			rr:column '"id"';
+			rr:termType rr:Literal; 
+		];
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate dcterms:creator; 
+		rr:objectMap [
+			rr:template 'https://data.vlaanderen.be/id/organisatie/OVO003155';
+			rr:termType rr:IRI; 
+		];
 	].
 
 #TODO: synoniemen van trefwoord nog toe te voegen
