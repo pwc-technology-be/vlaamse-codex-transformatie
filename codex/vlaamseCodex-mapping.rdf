@@ -34,7 +34,7 @@ map:RegelgevendDocDocument
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [ 
@@ -109,7 +109,7 @@ map:RegelgevendDocDocumentType
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [ 
@@ -131,7 +131,7 @@ map:RegelgevendDocHoofdstuk
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/hoofdstuk/{"HoofdstukID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/hoofdstuk/{"HoofdstukID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [ 
@@ -167,7 +167,7 @@ map:RegelgevendDocArtikel
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [ 
@@ -213,7 +213,7 @@ map:RegelgevendDocBijlage
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [ 
@@ -272,7 +272,7 @@ map:RegelgevendDocDocumentDocumentRelatieVerandert
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -309,7 +309,7 @@ map:RegelgevendDocDocumentDocumentRelatieHeftOp
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -346,7 +346,7 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigt
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -383,7 +383,7 @@ map:RegelgevendDocDocumentDocumentRelatieTrektIn
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -420,7 +420,7 @@ map:RegelgevendDocDocumentDocumentRelatieZieOok
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -457,7 +457,7 @@ map:RegelgevendDocDocumentDocumentRelatieVeranderdDoor
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -494,7 +494,7 @@ map:RegelgevendDocDocumentDocumentRelatieOpgehevenBij
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -531,7 +531,7 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigdBij
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -568,7 +568,7 @@ map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBij #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -607,7 +607,7 @@ map:RegelgevendDocDocumentDocumentRelatieVerandertReverse
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -644,7 +644,7 @@ map:RegelgevendDocDocumentDocumentRelatieHeftOpReverse
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -681,7 +681,7 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigtReverse
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -718,7 +718,7 @@ map:RegelgevendDocDocumentDocumentRelatieTrektInReverse
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -755,7 +755,7 @@ map:RegelgevendDocDocumentDocumentRelatieZieOokReverse
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -792,7 +792,7 @@ map:RegelgevendDocDocumentDocumentRelatieVeranderdDoorReverse
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -829,7 +829,7 @@ map:RegelgevendDocDocumentDocumentRelatieOpgehevenBijReverse
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -866,7 +866,7 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigdBijReverse
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -903,7 +903,7 @@ map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBijReverse #Zie OPM.1 bovena
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -941,7 +941,7 @@ map:RegelgevendDocDocumentHoofdstukRelatieHeeftOnderdeel
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -979,7 +979,7 @@ map:RegelgevendDocDocumentArtikelRelatieHeeftOnderdeel
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1015,7 +1015,7 @@ map:RegelgevendDocDocumentBijlageRelatieHeeftOnderdeel
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1056,7 +1056,7 @@ map:RegelgevendDocDocumentArtikelRelatieVerandert #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1094,7 +1094,7 @@ map:RegelgevendDocDocumentArtikelRelatieHeftOp #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1132,7 +1132,7 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigt #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1170,7 +1170,7 @@ map:RegelgevendDocDocumentArtikelRelatieTrektIn #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1208,7 +1208,7 @@ map:RegelgevendDocDocumentArtikelRelatieZieOok
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1246,7 +1246,7 @@ map:RegelgevendDocDocumentArtikelRelatieVeranderdDoor #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1284,7 +1284,7 @@ map:RegelgevendDocDocumentArtikelRelatieOpgehevenBij
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1322,7 +1322,7 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigdBij
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1360,7 +1360,7 @@ map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBij #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1390,7 +1390,7 @@ map:RegelgevendDocDocumentArtikelRelatieVerandertReverse #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
@@ -1417,7 +1417,7 @@ map:RegelgevendDocDocumentArtikelRelatieHeftOpReverse #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
@@ -1444,7 +1444,7 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigtReverse #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
@@ -1471,7 +1471,7 @@ map:RegelgevendDocDocumentArtikelRelatieTrektInReverse #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
@@ -1498,7 +1498,7 @@ map:RegelgevendDocDocumentArtikelRelatieZieOokReverse
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
@@ -1525,7 +1525,7 @@ map:RegelgevendDocDocumentArtikelRelatieVeranderdDoorReverse #Zie OPM.1 bovenaan
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
@@ -1552,7 +1552,7 @@ map:RegelgevendDocDocumentArtikelRelatieOpgehevenBijReverse
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
@@ -1579,7 +1579,7 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigdBijReverse
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
@@ -1606,7 +1606,7 @@ map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBijReverse #Zie OPM.1 bovenaa
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
@@ -1649,7 +1649,7 @@ map:RegelgevendDocDocumentBijlageRelatieVerandert #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1687,7 +1687,7 @@ map:RegelgevendDocDocumentBijlageRelatieHeftOp #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1725,7 +1725,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigt #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1763,7 +1763,7 @@ map:RegelgevendDocDocumentBijlageRelatieTrektIn #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1801,7 +1801,7 @@ map:RegelgevendDocDocumentBijlageRelatieZieOok
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1839,7 +1839,7 @@ map:RegelgevendDocDocumentBijlageRelatieVeranderdDoor #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1877,7 +1877,7 @@ map:RegelgevendDocDocumentBijlageRelatieOpgehevenBij #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1915,7 +1915,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBij #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1953,7 +1953,7 @@ map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBij #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/{"typeDocumentURI"}/{"datumDocumentJaar"}/{"datumDocumentMaand"}/{"datumDocumentDag"}/{"ID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1983,7 +1983,7 @@ map:RegelgevendDocDocumentBijlageRelatieVerandertReverse #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2010,7 +2010,7 @@ map:RegelgevendDocDocumentBijlageRelatieHeftOpReverse #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2037,7 +2037,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigtReverse #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2064,7 +2064,7 @@ map:RegelgevendDocDocumentBijlageRelatieTrektInReverse #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2091,7 +2091,7 @@ map:RegelgevendDocDocumentBijlageRelatieZieOokReverse
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2118,7 +2118,7 @@ map:RegelgevendDocDocumentBijlageRelatieVeranderdDoorReverse #Zie OPM.1 bovenaan
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2145,7 +2145,7 @@ map:RegelgevendDocDocumentBijlageRelatieOpgehevenBijReverse #Zie OPM.1 bovenaan.
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2172,7 +2172,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBijReverse #Zie OPM.1 bovenaa
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2199,7 +2199,7 @@ map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBijReverse #Zie OPM.1 bovenaa
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2229,7 +2229,7 @@ map:RegelgevendDocHoofdstukArtikelRelatieHeeftOnderdeel
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/hoofdstuk/{"HoofdstukID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/hoofdstuk/{"HoofdstukID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2256,7 +2256,7 @@ map:RegelgevendDocArtikelHoofdstukRelatieIsDeelVan #Reverse van RegelgevendDocHo
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"ArtikelVersieID"}'; #ArtikelVersieID is de VlacoID in RegelgevendDocArtikel #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"ArtikelVersieID"}'; #ArtikelVersieID is de VlacoID in RegelgevendDocArtikel #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2286,7 +2286,7 @@ map:RegelgevendDocHoofdstukBijlageRelatieHeeftOnderdeel
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/hoofdstuk/{"HoofdstukID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/hoofdstuk/{"HoofdstukID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2313,7 +2313,7 @@ map:RegelgevendDocBijlageHoofdstukRelatieIsDeelVan #Reverse van RegelgevendDocHo
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/Bijlage/{"ArtikelVersieID"}'; #ArtikelVersieID is de VlacoID in RegelgevendDocArtikel #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/Bijlage/{"ArtikelVersieID"}'; #ArtikelVersieID is de VlacoID in RegelgevendDocArtikel #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2344,7 +2344,7 @@ map:RegelgevendDocArtikelArtikelRelatieVeranderdDoor
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2372,7 +2372,7 @@ map:RegelgevendDocArtikelArtikelRelatieVervangenBij
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2400,7 +2400,7 @@ map:RegelgevendDocArtikelArtikelRelatieIngevoegdBij
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2428,7 +2428,7 @@ map:RegelgevendDocArtikelArtikelRelatieOpgehevenBij
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2456,7 +2456,7 @@ map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBij #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2484,7 +2484,7 @@ map:RegelgevendDocArtikelArtikelRelatieBekrachtigdBij #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2512,7 +2512,7 @@ map:RegelgevendDocArtikelArtikelRelatieZieOok
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2540,7 +2540,7 @@ map:RegelgevendDocArtikelArtikelRelatieVerandert
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2568,7 +2568,7 @@ map:RegelgevendDocArtikelArtikelRelatieVervangt #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2596,7 +2596,7 @@ map:RegelgevendDocArtikelArtikelRelatieVoegtIn
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2624,7 +2624,7 @@ map:RegelgevendDocArtikelArtikelRelatieHeftOp
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2652,7 +2652,7 @@ map:RegelgevendDocArtikelArtikelRelatieBekrachtigt #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2680,7 +2680,7 @@ map:RegelgevendDocArtikelArtikelRelatieTrektIn
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2711,7 +2711,7 @@ map:RegelgevendDocArtikelArtikelRelatieVeranderdDoorReverse
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2739,7 +2739,7 @@ map:RegelgevendDocArtikelArtikelRelatieVervangenBijReverse
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2767,7 +2767,7 @@ map:RegelgevendDocArtikelArtikelRelatieIngevoegdBijReverse
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2795,7 +2795,7 @@ map:RegelgevendDocArtikelArtikelRelatieOpgehevenBijReverse
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2823,7 +2823,7 @@ map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBijReverse #Zie OPM.1 bovenaan
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2851,7 +2851,7 @@ map:RegelgevendDocArtikelArtikelRelatieBekrachtigdBijReverse #Zie OPM.1 bovenaan
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2879,7 +2879,7 @@ map:RegelgevendDocArtikelArtikelRelatieZieOokReverse
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2907,7 +2907,7 @@ map:RegelgevendDocArtikelArtikelRelatieVerandertReverse
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2935,7 +2935,7 @@ map:RegelgevendDocArtikelArtikelRelatieVervangtReverse #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2963,7 +2963,7 @@ map:RegelgevendDocArtikelArtikelRelatieVoegtInReverse
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -2991,7 +2991,7 @@ map:RegelgevendDocArtikelArtikelRelatieHeftOpReverse
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3019,7 +3019,7 @@ map:RegelgevendDocArtikelArtikelRelatieBekrachtigtReverse #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3047,7 +3047,7 @@ map:RegelgevendDocArtikelArtikelRelatieTrektInReverse
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3078,7 +3078,7 @@ map:RegelgevendDocArtikelBijlageRelatieVeranderdDoor #Zie OPM.1 bovenaan.
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3106,7 +3106,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangenBij #Zie OPM.1 bovenaan.
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3134,7 +3134,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngevoegdBij #Zie OPM.1 bovenaan.
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3162,7 +3162,7 @@ map:RegelgevendDocArtikelBijlageRelatieOpgehevenBij #Zie OPM.1 bovenaan.
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3190,7 +3190,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBij #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3218,7 +3218,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBij #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3246,7 +3246,7 @@ map:RegelgevendDocArtikelBijlageRelatieZieOok #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3274,7 +3274,7 @@ map:RegelgevendDocArtikelBijlageRelatieVerandert #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3302,7 +3302,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangt #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3330,7 +3330,7 @@ map:RegelgevendDocArtikelBijlageRelatieVoegtIn #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3358,7 +3358,7 @@ map:RegelgevendDocArtikelBijlageRelatieHeftOp #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3386,7 +3386,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigt #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3414,7 +3414,7 @@ map:RegelgevendDocArtikelBijlageRelatieTrektIn #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3445,7 +3445,7 @@ map:RegelgevendDocArtikelBijlageRelatieVeranderdDoorReverse #Zie OPM.1 bovenaan.
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3473,7 +3473,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangenBijReverse #Zie OPM.1 bovenaan.
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3501,7 +3501,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngevoegdBijReverse #Zie OPM.1 bovenaan.
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3529,7 +3529,7 @@ map:RegelgevendDocArtikelBijlageRelatieOpgehevenBijReverse #Zie OPM.1 bovenaan.
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3557,7 +3557,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBijReverse #Zie OPM.1 bovenaan
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3585,7 +3585,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBijReverse #Zie OPM.1 bovenaan
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3613,7 +3613,7 @@ map:RegelgevendDocArtikelBijlageRelatieZieOokReverse #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3641,7 +3641,7 @@ map:RegelgevendDocArtikelBijlageRelatieVerandertReverse #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3669,7 +3669,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangtReverse #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3697,7 +3697,7 @@ map:RegelgevendDocArtikelBijlageRelatieVoegtInReverse #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3725,7 +3725,7 @@ map:RegelgevendDocArtikelBijlageRelatieHeftOpReverse #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3753,7 +3753,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigtReverse #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3781,7 +3781,7 @@ map:RegelgevendDocArtikelBijlageRelatieTrektInReverse #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3812,7 +3812,7 @@ map:RegelgevendDocBijlageBijlageRelatieVeranderdDoor
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3840,7 +3840,7 @@ map:RegelgevendDocBijlageBijlageRelatieVervangenBij
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3868,7 +3868,7 @@ map:RegelgevendDocBijlageBijlageRelatieIngevoegdBij
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3896,7 +3896,7 @@ map:RegelgevendDocBijlageBijlageRelatieOpgehevenBij
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3924,7 +3924,7 @@ map:RegelgevendDocBijlageBijlageRelatieIngetrokkenBij #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3952,7 +3952,7 @@ map:RegelgevendDocBijlageBijlageRelatieBekrachtigdBij #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3980,7 +3980,7 @@ map:RegelgevendDocBijlageBijlageRelatieZieOok
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4008,7 +4008,7 @@ map:RegelgevendDocBijlageBijlageRelatieVerandert
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4036,7 +4036,7 @@ map:RegelgevendDocBijlageBijlageRelatieVervangt #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4064,7 +4064,7 @@ map:RegelgevendDocBijlageBijlageRelatieVoegtIn
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4092,7 +4092,7 @@ map:RegelgevendDocBijlageBijlageRelatieHeftOp
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4120,7 +4120,7 @@ map:RegelgevendDocBijlageBijlageRelatieBekrachtigt #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4148,7 +4148,7 @@ map:RegelgevendDocBijlageBijlageRelatieTrektIn
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4179,7 +4179,7 @@ map:RegelgevendDocBijlageBijlageRelatieVeranderdDoorReverse
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4207,7 +4207,7 @@ map:RegelgevendDocBijlageBijlageRelatieVervangenBijReverse
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4235,7 +4235,7 @@ map:RegelgevendDocBijlageBijlageRelatieIngevoegdBijReverse
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4263,7 +4263,7 @@ map:RegelgevendDocBijlageBijlageRelatieOpgehevenBijReverse
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4291,7 +4291,7 @@ map:RegelgevendDocBijlageBijlageRelatieIngetrokkenBijReverse #Zie OPM.1 bovenaan
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4319,7 +4319,7 @@ map:RegelgevendDocBijlageBijlageRelatieBekrachtigdBijReverse #Zie OPM.1 bovenaan
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4347,7 +4347,7 @@ map:RegelgevendDocBijlageBijlageRelatieZieOokReverse
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4375,7 +4375,7 @@ map:RegelgevendDocBijlageBijlageRelatieVerandertReverse
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4403,7 +4403,7 @@ map:RegelgevendDocBijlageBijlageRelatieVervangtReverse #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4431,7 +4431,7 @@ map:RegelgevendDocBijlageBijlageRelatieVoegtInReverse
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4459,7 +4459,7 @@ map:RegelgevendDocBijlageBijlageRelatieHeftOpReverse
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4487,7 +4487,7 @@ map:RegelgevendDocBijlageBijlageRelatieBekrachtigtReverse #Zie OPM.1 bovenaan..
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -4515,7 +4515,7 @@ map:RegelgevendDocBijlageBijlageRelatieTrektInReverse
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'http://www.ejustice.just.fgov.be/eli/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
+		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; #Fallback (Blank note) voorzien indien artikel van voor 97 is (toen nog geen Numac toegevoegd) -> pagina staatsblad, maakt met datum unieke verwijzing)
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
