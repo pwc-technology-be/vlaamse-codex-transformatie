@@ -18,8 +18,8 @@ map:RegelgevendDocDocument
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	(CASE Numac WHEN 0 THEN BSPagina ELSE Numac END) AS ID,
 				YEAR(CONVERT(date, Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Datum), ('MM')) AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -56,8 +56,8 @@ map:RegelgevendDocDocumentType
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -253,8 +253,8 @@ map:RegelgevendDocDocumentDocumentRelatieVerandert
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -290,8 +290,8 @@ map:RegelgevendDocDocumentDocumentRelatieHeftOp
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -327,8 +327,8 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigt
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -364,8 +364,8 @@ map:RegelgevendDocDocumentDocumentRelatieTrektIn
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -401,8 +401,8 @@ map:RegelgevendDocDocumentDocumentRelatieZieOok
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -438,8 +438,8 @@ map:RegelgevendDocDocumentDocumentRelatieVeranderdDoor
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -475,8 +475,8 @@ map:RegelgevendDocDocumentDocumentRelatieOpgehevenBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -512,8 +512,8 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigdBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -549,8 +549,8 @@ map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBij #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -588,8 +588,8 @@ map:RegelgevendDocDocumentDocumentRelatieVerandertReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document2.Numac WHEN 0 THEN Document2.BSPagina ELSE Document2.Numac END) AS ID,
 				YEAR(CONVERT(date, Document2.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document2.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document2.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document2.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document2.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -625,8 +625,8 @@ map:RegelgevendDocDocumentDocumentRelatieHeftOpReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document2.Numac WHEN 0 THEN Document2.BSPagina ELSE Document2.Numac END) AS ID,
 				YEAR(CONVERT(date, Document2.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document2.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document2.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document2.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document2.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -662,8 +662,8 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigtReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document2.Numac WHEN 0 THEN Document2.BSPagina ELSE Document2.Numac END) AS ID,
 				YEAR(CONVERT(date, Document2.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document2.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document2.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document2.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document2.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -699,8 +699,8 @@ map:RegelgevendDocDocumentDocumentRelatieTrektInReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document2.Numac WHEN 0 THEN Document2.BSPagina ELSE Document2.Numac END) AS ID,
 				YEAR(CONVERT(date, Document2.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document2.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document2.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document2.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document2.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -736,8 +736,8 @@ map:RegelgevendDocDocumentDocumentRelatieZieOokReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document2.Numac WHEN 0 THEN Document2.BSPagina ELSE Document2.Numac END) AS ID,
 				YEAR(CONVERT(date, Document2.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document2.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document2.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document2.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document2.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -773,8 +773,8 @@ map:RegelgevendDocDocumentDocumentRelatieVeranderdDoorReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document2.Numac WHEN 0 THEN Document2.BSPagina ELSE Document2.Numac END) AS ID,
 				YEAR(CONVERT(date, Document2.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document2.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document2.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document2.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document2.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -810,8 +810,8 @@ map:RegelgevendDocDocumentDocumentRelatieOpgehevenBijReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document2.Numac WHEN 0 THEN Document2.BSPagina ELSE Document2.Numac END) AS ID,
 				YEAR(CONVERT(date, Document2.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document2.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document2.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document2.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document2.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -847,8 +847,8 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigdBijReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document2.Numac WHEN 0 THEN Document2.BSPagina ELSE Document2.Numac END) AS ID,
 				YEAR(CONVERT(date, Document2.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document2.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document2.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document2.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document2.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -884,8 +884,8 @@ map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBijReverse #Zie OPM.1 bovena
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document2.Numac WHEN 0 THEN Document2.BSPagina ELSE Document2.Numac END) AS ID,
 				YEAR(CONVERT(date, Document2.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document2.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document2.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document2.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document2.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -924,8 +924,8 @@ map:RegelgevendDocDocumentHoofdstukRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -961,8 +961,8 @@ map:RegelgevendDocDocumentArtikelRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -997,8 +997,8 @@ map:RegelgevendDocDocumentBijlageRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -1036,8 +1036,8 @@ map:RegelgevendDocDocumentArtikelRelatieVerandert #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -1074,8 +1074,8 @@ map:RegelgevendDocDocumentArtikelRelatieHeftOp #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -1112,8 +1112,8 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigt #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -1150,8 +1150,8 @@ map:RegelgevendDocDocumentArtikelRelatieTrektIn #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -1188,8 +1188,8 @@ map:RegelgevendDocDocumentArtikelRelatieZieOok
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -1226,8 +1226,8 @@ map:RegelgevendDocDocumentArtikelRelatieVeranderdDoor #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -1264,8 +1264,8 @@ map:RegelgevendDocDocumentArtikelRelatieOpgehevenBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -1302,8 +1302,8 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigdBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -1340,8 +1340,8 @@ map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBij #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -1629,8 +1629,8 @@ map:RegelgevendDocDocumentBijlageRelatieVerandert #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -1667,8 +1667,8 @@ map:RegelgevendDocDocumentBijlageRelatieHeftOp #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -1705,8 +1705,8 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigt #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -1743,8 +1743,8 @@ map:RegelgevendDocDocumentBijlageRelatieTrektIn #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -1781,8 +1781,8 @@ map:RegelgevendDocDocumentBijlageRelatieZieOok
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -1819,8 +1819,8 @@ map:RegelgevendDocDocumentBijlageRelatieVeranderdDoor #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -1857,8 +1857,8 @@ map:RegelgevendDocDocumentBijlageRelatieOpgehevenBij #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -1895,8 +1895,8 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBij #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
@@ -1933,8 +1933,8 @@ map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBij #Zie OPM.1 bovenaan.
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE Document.Numac WHEN 0 THEN Document.BSPagina ELSE Document.Numac END) AS ID,
 				YEAR(CONVERT(date, Document.Datum)) AS datumDocumentJaar,
-				MONTH(CONVERT(date, Document.Datum)) AS datumDocumentMaand,
-				DAY(CONVERT(date, Document.Datum)) AS datumDocumentDag,
+				FORMAT(CONVERT(date, Document.Datum), 'MM') AS datumDocumentMaand,
+				FORMAT(CONVERT(date, Document.Datum), 'dd') AS datumDocumentDag,
 				(CASE  
 					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN 'besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN 'wet'
