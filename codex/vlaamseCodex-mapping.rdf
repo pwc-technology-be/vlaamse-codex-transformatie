@@ -94,14 +94,14 @@ map:RegelgevendDocDocumentType
 						'Huishoudelijk Reglement' ,
 						'Besluit van het Politiek College van de Vlaams-Nederlandse Scheldecommissie')
 					THEN 'Andere'
-					WHEN DocumentType.Omschrijving = 'Besluit van de Vlaamse Regering' THEN 'Besluit_van_de_Vlaamse_Regering'
-					WHEN DocumentType.Omschrijving = 'Bijzonder Decreet' THEN 'Besluit_van_de_Vlaamse_Regering'
-					WHEN DocumentType.Omschrijving = 'Bijzondere Wet' THEN 'Bijzondere_Wet'
-					WHEN DocumentType.Omschrijving = 'Gecodificeerde decreten' THEN 'Gecodificeerde_decreten'
-					WHEN DocumentType.Omschrijving = 'Gecoördineerde wetten' THEN 'Gecoördineerde_wetten'
-					WHEN DocumentType.Omschrijving = 'Genummerd koninklijk besluit' THEN 'Genummerd_koninklijk_besluit'
-					WHEN DocumentType.Omschrijving = 'Koninklijk Besluit' THEN 'Koninklijk_Besluit'
-					WHEN DocumentType.Omschrijving = 'Ministerieel besluit' THEN 'Ministerieel_besluit'
+					WHEN DocumentType.Omschrijving = 'Besluit van de Vlaamse Regering' THEN 'BesluitVanDeVlaamseRegering'
+					WHEN DocumentType.Omschrijving = 'Bijzonder Decreet' THEN 'BesluitVanDeVlaamseRegering'
+					WHEN DocumentType.Omschrijving = 'Bijzondere Wet' THEN 'BijzondereWet'
+					WHEN DocumentType.Omschrijving = 'Gecodificeerde decreten' THEN 'GecodificeerdeDecreten'
+					WHEN DocumentType.Omschrijving = 'Gecoördineerde wetten' THEN 'GecoordineerdeWetten'
+					WHEN DocumentType.Omschrijving = 'Genummerd koninklijk besluit' THEN 'GenummerdKoninklijkBesluit'
+					WHEN DocumentType.Omschrijving = 'Koninklijk Besluit' THEN 'KoninklijkBesluit'
+					WHEN DocumentType.Omschrijving = 'Ministerieel besluit' THEN 'MinisterieelBesluit'
 					ELSE DocumentType.Omschrijving
 				END) AS typeDocument
 		FROM WetgevingDocument AS Document, WetgevingDocumentType AS DocumentType
