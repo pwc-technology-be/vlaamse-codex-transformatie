@@ -4610,7 +4610,6 @@ map:VerschijningsvormDocumentLocalID
 	"""];
 	rr:subjectMap [
 		rr:template '{"id"}';
-		rr:termType rr:BlankNode;
 		rr:class adms:Identifier; 
 	];
 	rr:predicateObjectMap [ 
