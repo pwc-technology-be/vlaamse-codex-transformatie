@@ -834,6 +834,25 @@ public class Generator {
         //log.info("4 Finished logging.");
 	}
 
+	private static String convertUnicodePoints(String input) {
+	    // getting char array from input
+	    char[] chars =  input.toCharArray();
+	    // initializing output
+	    StringBuilder sb = new StringBuilder();
+	    // iterating input chars
+	    for (int i = 0; i < input.length(); i++) {
+	    	int asciitable = Character.codePointAt(input, i);
+	    	
+	        if (asciitable > 123 || (asciitable >= 33 && asciitable <= 36) || (asciitable >= 60 && asciitable <= 62) ) {
+	        	sb.append(String.format("&#%d;", (int)chars[i]));
+	        }
+	        else {
+	        	sb.append(chars[i]);
+	        }
+	    }
+	    return sb.toString();
+	}
+
 	private String getStringValue(String field, ResultSet rs) {
 		String result = null;
 		try {
@@ -844,7 +863,7 @@ public class Generator {
 			if (fieldDataType != null && fieldDataType.getURI().equals(XSDDatatype.XSDdate.getURI())) {
 				result = xsdDateFormat.format(rs.getDate(field));
 			} else {
-				result = rs.getString(field);
+				result =  convertUnicodePoints(rs.getString(field));
 			}
 		} catch (Exception e) {
 			log.error("Failed to get value as string for column " + field, e);

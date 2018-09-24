@@ -4542,7 +4542,7 @@ map:VerschijningsvormDocument
 				ISNULL(Commentaar, '') AS inhoudstafel,
 				CONVERT(date, BSDatum) AS publicatiedatum,
 				Numac AS lokaleID,
-				REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(ISNULL(Opschrift, ''), '"', '&quot;'), '>', '&gt;'), '<', '&lt;'), '°', '&deg;'), '²', '&sup2;'), 'à', '&agrave;'), 'è', '&egrave;'), 'é', '&eacute;'), 'ê', '&ecirc;'), 'ë', '&euml;'), 'ï', '&iuml;'), 'î', '&icirc;'), 'ó', '&oacute;'), 'ö', '&ouml;'), 'ô', '&ocirc;'), 'ü', '&uuml;'), 'ç', '&ccedil;'), 'ù', '&ugrave; '), '©', '&copy;'), '®', '&reg;'), '«', '&laquo;'), '»', '&raquo;'), '–', '&ndash;'), '¤', '&#164;'), '§', '&#167;')  AS opschrift,
+				Opschrift AS opschrift,
 				(CASE 
 					WHEN CONVERT(date, StartDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2900'), CONVERT(date, '01/01/3000')) THEN  null
 					ELSE CONVERT(date, StartDatum) 
@@ -4632,20 +4632,10 @@ map:VerschijningsvormDocumentTrefwoord
 #Volgende SQL gedeelte moet nog verder uitgewerkt worden
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	Document.id AS VlacoID,
-				REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(Trefwoord.Naam, '"', '&quot;'), 'à', '&agrave;'), 'è', '&egrave;'), 'é', '&eacute;'), 'ê', '&ecirc;'), 'ë', '&euml;') AS trefwoord1
+				Trefwoord.Naam AS trefwoord1
 		FROM WetgevingDocument AS Document, WetgevingDocument_Trefwoord AS DocumentTrefwoord, Trefwoord
 		WHERE Document.Id = DocumentTrefwoord.WetgevingDocumentId 
 		AND DocumentTrefwoord.TrefwoordId = Trefwoord.Id
-		/*SELECT 	Document.id AS VlacoID,
-				Trefwoord1.id AS Trefwoord1id,
-				Trefwoord2.id AS Trefwoord2id,
-				REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(Trefwoord1.Naam, '"', '&quot;'), 'à', '&agrave;'), 'è', '&egrave;'), 'é', '&eacute;'), 'ê', '&ecirc;'), 'ë', '&euml;') AS trefwoord1,
-				REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(Trefwoord2.Naam, '"', '&quot;'), 'à', '&agrave;'), 'è', '&egrave;'), 'é', '&eacute;'), 'ê', '&ecirc;'), 'ë', '&euml;') AS trefwoord2
-		FROM WetgevingDocument AS Document, WetgevingDocument_Trefwoord AS DocumentTrefwoord, Trefwoord AS Trefwoord1, Trefwoord AS Trefwoord2, TrefwoordSynoniem
-		OUTER JOIN TrefwoordSynoniem ON TrefwoordSynoniem.Trefwoord1ID=Trefwoord1id AND TrefwoordSynoniem.Trefwoord2ID=Trefwoord2id
-		WHERE Document.Id = DocumentTrefwoord.WetgevingDocumentId
-		AND DocumentTrefwoord.TrefwoordId = Trefwoord1.Id
-		AND TrefwoordSynoniem.Trefwoord2ID = Trefwoord2.ID*/
 	""" 
 	];
 	rr:subjectMap [
@@ -4710,7 +4700,7 @@ map:VerschijningsvormHoofdstuk
 map:VerschijningsvormArtikel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT id AS VlacoID,
-				REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(Tekst, '"', '&quot;'), '>', '&gt;'), '<', '&lt;'), '°', '&deg;'), '²', '&sup2;'), 'à', '&agrave;'), 'è', '&egrave;'), 'é', '&eacute;'), 'ê', '&ecirc;'), 'ë', '&euml;'), 'ï', '&iuml;'), 'î', '&icirc;'), 'ó', '&oacute;'), 'ö', '&ouml;'), 'ô', '&ocirc;'), 'ü', '&uuml;'), 'ç', '&ccedil;'), 'ù', '&ugrave; '), '©', '&copy;'), '®', '&reg;'), '«', '&laquo;'), '»', '&raquo;'), '–', '&ndash;'), '¤', '&#164;'), '§', '&#167;')  AS inhoud
+				Tekst AS inhoud
 		FROM WetgevingArtikelVersie
 		WHERE NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
 	""" 
@@ -4740,7 +4730,7 @@ map:VerschijningsvormArtikel
 map:VerschijningsvormBijlage
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT id AS VlacoID,
-				REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(Tekst, '"', '&quot;'), '>', '&gt;'), '<', '&lt;'), '°', '&deg;'), '²', '&sup2;'), 'à', '&agrave;'), 'è', '&egrave;'), 'é', '&eacute;'), 'ê', '&ecirc;'), 'ë', '&euml;'), 'ï', '&iuml;'), 'î', '&icirc;'), 'ó', '&oacute;'), 'ö', '&ouml;'), 'ô', '&ocirc;'), 'ü', '&uuml;'), 'ç', '&ccedil;'), 'ù', '&ugrave; '), '©', '&copy;'), '®', '&reg;'), '«', '&laquo;'), '»', '&raquo;'), '–', '&ndash;'), '¤', '&#164;'), '§', '&#167;')  AS inhoud
+				Tekst AS inhoud
 		FROM WetgevingArtikelVersie
 		WHERE WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
 	""" 
