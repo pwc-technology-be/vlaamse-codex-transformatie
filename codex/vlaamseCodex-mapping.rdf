@@ -4657,7 +4657,7 @@ map:VerschijningsvormDocumentTrefwoord
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate dcterms:subject; 
-		rr:objectMap [rr:column '"trefwoord1"'];
+		rr:objectMap [rr:column '"TrefwoordNaam"'];
 	].
 
 map:VerschijningsvormDocumentThema
