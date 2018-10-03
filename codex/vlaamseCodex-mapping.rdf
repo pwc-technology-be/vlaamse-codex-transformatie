@@ -4627,15 +4627,28 @@ map:VerschijningsvormDocumentLocalID
 		];
 	].
 
-#TODO: synoniemen van trefwoord nog toe te voegen
 map:VerschijningsvormDocumentTrefwoord
-#Volgende SQL gedeelte moet nog verder uitgewerkt worden
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	Document.id AS VlacoID,
-				Trefwoord.Naam AS trefwoord1
-		FROM WetgevingDocument AS Document, WetgevingDocument_Trefwoord AS DocumentTrefwoord, Trefwoord
-		WHERE Document.Id = DocumentTrefwoord.WetgevingDocumentId 
-		AND DocumentTrefwoord.TrefwoordId = Trefwoord.Id
+		(
+		SELECT
+			Document.WetgevingDocumentId as VlacoID,
+			Trefwoord.Id as TrefwoordID,
+			Trefwoord.Naam as TrefwoordNaam
+		FROM
+			WetgevingDocument_Trefwoord AS Document
+			INNER JOIN Trefwoord ON Document.Id = Trefwoord.Id
+		)
+		UNION
+		(
+		SELECT
+			WetgevingDocument_Trefwoord.WetgevingDocumentId as VlacoID,
+			TrefwoordSynoniem.Trefwoord2Id as TrefwoordID,
+			Trefwoord.Naam as TrefwoordNaam
+		FROM
+			TrefwoordSynoniem
+			INNER JOIN Trefwoord ON TrefwoordSynoniem.Trefwoord2Id = Trefwoord.Id
+			INNER JOIN WetgevingDocument_Trefwoord ON TrefwoordSynoniem.Trefwoord1Id = WetgevingDocument_Trefwoord.TrefwoordID
+		);
 	""" 
 	];
 	rr:subjectMap [
@@ -4645,10 +4658,6 @@ map:VerschijningsvormDocumentTrefwoord
 	rr:predicateObjectMap [ 
 		rr:predicate dcterms:subject; 
 		rr:objectMap [rr:column '"trefwoord1"'];
-#	];
-#	rr:predicateObjectMap [ 
-#		rr:predicate dcterms:subject; 
-#		rr:objectMap [rr:column '"trefwoord2"'];
 	].
 
 map:VerschijningsvormDocumentThema
