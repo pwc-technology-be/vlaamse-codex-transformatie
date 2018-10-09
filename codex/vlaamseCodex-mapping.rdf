@@ -126,7 +126,6 @@ map:RegelgevendDocDocumentType
 map:RegelgevendDocHoofdstuk
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	Hoofdstuk.ID AS HoofdstukID,
-				CONCAT('Hoofdstuk_', Hoofdstuk.ID) AS nummer,
 				Hoofdstuk.WetgevingDocumentId AS VerbondenDocument
 		FROM WetgevingHoofdstuk as Hoofdstuk
 	""" 
@@ -139,10 +138,6 @@ map:RegelgevendDocHoofdstuk
 		rr:predicate codex:TypeRegelgevendDocSubdivisie; 
 		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRegelgevendDocSubdivisie/Hoofdstuk';
 						rr:termType rr:IRI ];
-	];
-	rr:predicateObjectMap [ 
-		rr:predicate eli:number; 
-		rr:objectMap [rr:column '"nummer"'];
 	];
 	rr:predicateObjectMap [
 		rr:predicate eli:is_part_of; #is deel van
@@ -161,7 +156,7 @@ map:RegelgevendDocHoofdstuk
 map:RegelgevendDocArtikel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	ArtikelVersie.ID AS VlacoID,
-				CONCAT('Artikel_', ArtikelVersie.ID) AS nummer,
+				CONCAT('Artikel ', ArtikelVersie.ArtikelNummer) AS nummer,
 				ArtikelVersie.WetgevingDocumentId AS VerbondenDocument
 		FROM WetgevingArtikelVersie as ArtikelVersie
 		WHERE NOT ArtikelVersie.ArtikelType = 'BIJLAGE'
@@ -176,7 +171,7 @@ map:RegelgevendDocArtikel
 		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRegelgevendDocSubdivisie/Artikel';
 						rr:termType rr:IRI ];
 	];
-		rr:predicateObjectMap [ 
+	rr:predicateObjectMap [ 
 		rr:predicate eli:number; 
 		rr:objectMap [rr:column '"nummer"'];
 	];
@@ -207,7 +202,7 @@ map:RegelgevendDocArtikel
 map:RegelgevendDocBijlage
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	ArtikelVersie.ID AS VlacoID,
-				CONCAT('Bijlage_', ArtikelVersie.ID) AS nummer,
+				CONCAT('Bijlage ', ArtikelVersie.ArtikelNummer) AS nummer,
 				ArtikelVersie.WetgevingDocumentId AS VerbondenDocument
 		FROM WetgevingArtikelVersie as ArtikelVersie
 		WHERE ArtikelVersie.ArtikelType = 'BIJLAGE'
