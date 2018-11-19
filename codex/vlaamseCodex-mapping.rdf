@@ -21,7 +21,7 @@ map:RechtsbronDocument
 				datumDocumentMaand,
 				datumDocumentDag,
 				typeDocumentURI,
-				RGID,
+				RGDID,
 				datumDocumentdatum
 		FROM vwRegelgevendDocDocument WITH ( NOEXPAND )
 	""" 
@@ -237,15 +237,15 @@ map:RechtsbronDocumentDocumentRelaties
 				vwRegelgevendDocDocument.datumDocumentMaand,
 				vwRegelgevendDocDocument.datumDocumentDag,
 				vwRegelgevendDocDocument.typeDocumentURI,
-				CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 1 THEN Document2.ID END  AS wijzigt,
-				CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 2 THEN Document2.ID END  AS heft_op,
-				CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 3 THEN Document2.ID END  AS bekrachtigt,
-				CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 4 THEN Document2.ID END  AS trekt_in,
-				CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 5 THEN Document2.ID END  AS zie_ook,
-				CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 6 THEN Document2.ID END  AS gewijzigd_bij,
-				CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 7 THEN Document2.ID END  AS opgehoven_bij,
-				CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 8 THEN Document2.ID END  AS bekrachtigd_bij,
-				CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 9 THEN Document2.ID END  AS ingetrokken_bij
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 1 THEN Document2.ID END ) AS wijzigt,
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 2 THEN Document2.ID END ) AS heft_op,
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 3 THEN Document2.ID END ) AS bekrachtigt,
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 4 THEN Document2.ID END ) AS trekt_in,
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 5 THEN Document2.ID END ) AS zie_ook,
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 6 THEN Document2.ID END ) AS gewijzigd_bij,
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 7 THEN Document2.ID END ) AS opgehoven_bij,
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 8 THEN Document2.ID END ) AS bekrachtigd_bij,
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 9 THEN Document2.ID END ) AS ingetrokken_bij
 		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRegelgevendDocDocument WITH ( NOEXPAND )
 		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
 		AND vwRegelgevendDocDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
@@ -358,15 +358,15 @@ map:RechtsbronDocumentDocumentRelatiesReverse
 				vwRegelgevendDocDocument.datumDocumentMaand,
 				vwRegelgevendDocDocument.datumDocumentDag,
 				vwRegelgevendDocDocument.typeDocumentURI,
-				CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 1 THEN vwRegelgevendDocDocument.RGDID END  AS gewijzigd_bij,
-				CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 2 THEN vwRegelgevendDocDocument.RGDID END  AS opgeheven_bij,
-				CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 3 THEN vwRegelgevendDocDocument.RGDID END  AS bekrachtigd_bij,
-				CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 4 THEN vwRegelgevendDocDocument.RGDID END  AS ingetrokken_bij,
-				CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 5 THEN vwRegelgevendDocDocument.RGDID END  AS zie_ook,
-				CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 6 THEN vwRegelgevendDocDocument.RGDID END  AS wijzigt,
-				CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 7 THEN vwRegelgevendDocDocument.RGDID END  AS heft_op,
-				CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 8 THEN vwRegelgevendDocDocument.RGDID END  AS bekrachtigt,
-				CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 9 THEN vwRegelgevendDocDocument.RGDID END  AS trekt_in
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 1 THEN vwRegelgevendDocDocument.RGDID END ) AS gewijzigd_bij,
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 2 THEN vwRegelgevendDocDocument.RGDID END ) AS opgeheven_bij,
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 3 THEN vwRegelgevendDocDocument.RGDID END ) AS bekrachtigd_bij,
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 4 THEN vwRegelgevendDocDocument.RGDID END ) AS ingetrokken_bij,
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 5 THEN vwRegelgevendDocDocument.RGDID END ) AS zie_ook,
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 6 THEN vwRegelgevendDocDocument.RGDID END ) AS wijzigt,
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 7 THEN vwRegelgevendDocDocument.RGDID END ) AS heft_op,
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 8 THEN vwRegelgevendDocDocument.RGDID END ) AS bekrachtigt,
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 9 THEN vwRegelgevendDocDocument.RGDID END ) AS trekt_in
 		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRegelgevendDocDocument WITH ( NOEXPAND )
 		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
 		AND vwRegelgevendDocDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
@@ -687,15 +687,15 @@ map:RechtsbronDocumentArtikelRelaties
 map:RechtsbronDocumentArtikelRelatiesReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
-				CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 1 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END  AS gewijzigd_bij,
-				CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 2 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END  AS opgeheven_bij,
-				CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 3 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END  AS bekrachtigd_bij,
-				CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 4 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END  AS ingetrokken_bij,
-				CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 5 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END  AS zie_ook,
-				CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 6 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END  AS wijzigt,
-				CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 7 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END  AS heft_op,
-				CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 8 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END  AS bekrachtigt,
-				CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 9 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END  AS trekt_in
+				(CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 1 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END ) AS gewijzigd_bij,
+				(CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 2 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END ) AS opgeheven_bij,
+				(CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 3 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END ) AS bekrachtigd_bij,
+				(CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 4 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END ) AS ingetrokken_bij,
+				(CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 5 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END ) AS zie_ook,
+				(CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 6 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END ) AS wijzigt,
+				(CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 7 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END ) AS heft_op,
+				(CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 8 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END ) AS bekrachtigt,
+				(CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 9 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END ) AS trekt_in
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
 		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
@@ -928,15 +928,15 @@ map:RechtsbronDocumentBijlageRelaties
 map:RechtsbronDocumentBijlageRelatiesReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
-				CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 1 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END  AS gewijzigd_bij,
-				CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 2 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END  AS opgeheven_bij,
-				CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 3 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END  AS bekrachtigd_bij,
-				CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 4 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END  AS ingetrokken_bij,
-				CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 5 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END  AS zie_ook,
-				CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 6 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END  AS wijzigt,
-				CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 7 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END  AS heft_op,
-				CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 8 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END  AS bekrachtigt,
-				CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 9 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END  AS trekt_in
+				(CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 1 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END ) AS gewijzigd_bij,
+				(CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 2 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END ) AS opgeheven_bij,
+				(CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 3 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END ) AS bekrachtigd_bij,
+				(CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 4 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END ) AS ingetrokken_bij,
+				(CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 5 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END ) AS zie_ook,
+				(CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 6 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END ) AS wijzigt,
+				(CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 7 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END ) AS heft_op,
+				(CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 8 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END ) AS bekrachtigt,
+				(CASE WHEN DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 9 THEN (CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) END ) AS trekt_in
 		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
 		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
@@ -1159,19 +1159,19 @@ map:RechtsbronBijlageHoofdstukRelatieIsDeelVan #Reverse van RechtsbronHoofdstukB
 map:RechtsbronArtikelArtikelRelaties
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.id AS VlacoID,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1 THEN ArtikelVersie2.ID END  AS gewijzigd_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2 THEN ArtikelVersie2.ID END  AS vervangen_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3 THEN ArtikelVersie2.ID END  AS ingevoegd_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4 THEN ArtikelVersie2.ID END  AS opgeheven_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5 THEN ArtikelVersie2.ID END  AS ingetrokken_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6 THEN ArtikelVersie2.ID END  AS bekrachtigd_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7 THEN ArtikelVersie2.ID END  AS zie_ook,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8 THEN ArtikelVersie2.ID END  AS wijzigt,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9 THEN ArtikelVersie2.ID END  AS vervangt,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10 THEN ArtikelVersie2.ID END  AS voegt_in,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11 THEN ArtikelVersie2.ID END  AS heft_op,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12 THEN ArtikelVersie2.ID END  AS bekrachtigt,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13 THEN ArtikelVersie2.ID END  AS trekt_in
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1 THEN ArtikelVersie2.ID END ) AS gewijzigd_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2 THEN ArtikelVersie2.ID END ) AS vervangen_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3 THEN ArtikelVersie2.ID END ) AS ingevoegd_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4 THEN ArtikelVersie2.ID END ) AS opgeheven_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5 THEN ArtikelVersie2.ID END ) AS ingetrokken_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6 THEN ArtikelVersie2.ID END ) AS bekrachtigd_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7 THEN ArtikelVersie2.ID END ) AS zie_ook,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8 THEN ArtikelVersie2.ID END ) AS wijzigt,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9 THEN ArtikelVersie2.ID END ) AS vervangt,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10 THEN ArtikelVersie2.ID END ) AS voegt_in,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11 THEN ArtikelVersie2.ID END ) AS heft_op,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12 THEN ArtikelVersie2.ID END ) AS bekrachtigt,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13 THEN ArtikelVersie2.ID END ) AS trekt_in
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
@@ -1321,19 +1321,19 @@ map:RechtsbronArtikelArtikelRelaties
 map:RechtsbronArtikelArtikelRelatiesReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.id AS VlacoID,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1 THEN ArtikelVersie1.ID END  AS wijzigt,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2 THEN ArtikelVersie1.ID END  AS vervangt,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3 THEN ArtikelVersie1.ID END  AS voegt_in,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4 THEN ArtikelVersie1.ID END  AS heft_op,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5 THEN ArtikelVersie1.ID END  AS trekt_in,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6 THEN ArtikelVersie1.ID END  AS bekrachtigt,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7 THEN ArtikelVersie1.ID END  AS zie_ook,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8 THEN ArtikelVersie1.ID END  AS gewijzigd_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9 THEN ArtikelVersie1.ID END  AS vervangen_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10 THEN ArtikelVersie1.ID END  AS ingevoegd_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11 THEN ArtikelVersie1.ID END  AS opgeheven_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12 THEN ArtikelVersie1.ID END  AS bekrachtigd_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13 THEN ArtikelVersie1.ID END  AS ingetrokken_bij
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1 THEN ArtikelVersie1.ID END ) AS wijzigt,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2 THEN ArtikelVersie1.ID END ) AS vervangt,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3 THEN ArtikelVersie1.ID END ) AS voegt_in,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4 THEN ArtikelVersie1.ID END ) AS heft_op,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5 THEN ArtikelVersie1.ID END ) AS trekt_in,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6 THEN ArtikelVersie1.ID END ) AS bekrachtigt,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7 THEN ArtikelVersie1.ID END ) AS zie_ook,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8 THEN ArtikelVersie1.ID END ) AS gewijzigd_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9 THEN ArtikelVersie1.ID END ) AS vervangen_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10 THEN ArtikelVersie1.ID END ) AS ingevoegd_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11 THEN ArtikelVersie1.ID END ) AS opgeheven_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12 THEN ArtikelVersie1.ID END ) AS bekrachtigd_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13 THEN ArtikelVersie1.ID END ) AS ingetrokken_bij
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
@@ -1483,19 +1483,19 @@ map:RechtsbronArtikelArtikelRelatiesReverse
 map:RechtsbronArtikelBijlageRelaties 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.id AS VlacoID,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1 THEN ArtikelVersie2.ID END  AS gewijzigd_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2 THEN ArtikelVersie2.ID END  AS vervangen_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3 THEN ArtikelVersie2.ID END  AS ingevoegd_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4 THEN ArtikelVersie2.ID END  AS opgeheven_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5 THEN ArtikelVersie2.ID END  AS ingetrokken_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6 THEN ArtikelVersie2.ID END  AS bekrachtigd_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7 THEN ArtikelVersie2.ID END  AS zie_ook,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8 THEN ArtikelVersie2.ID END  AS wijzigt,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9 THEN ArtikelVersie2.ID END  AS vervangt,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10 THEN ArtikelVersie2.ID END  AS voegt_in,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11 THEN ArtikelVersie2.ID END  AS heft_op,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12 THEN ArtikelVersie2.ID END  AS bekrachtigt,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13 THEN ArtikelVersie2.ID END  AS trekt_in
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1 THEN ArtikelVersie2.ID END ) AS gewijzigd_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2 THEN ArtikelVersie2.ID END ) AS vervangen_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3 THEN ArtikelVersie2.ID END ) AS ingevoegd_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4 THEN ArtikelVersie2.ID END ) AS opgeheven_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5 THEN ArtikelVersie2.ID END ) AS ingetrokken_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6 THEN ArtikelVersie2.ID END ) AS bekrachtigd_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7 THEN ArtikelVersie2.ID END ) AS zie_ook,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8 THEN ArtikelVersie2.ID END ) AS wijzigt,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9 THEN ArtikelVersie2.ID END ) AS vervangt,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10 THEN ArtikelVersie2.ID END ) AS voegt_in,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11 THEN ArtikelVersie2.ID END ) AS heft_op,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12 THEN ArtikelVersie2.ID END ) AS bekrachtigt,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13 THEN ArtikelVersie2.ID END ) AS trekt_in
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
@@ -1645,19 +1645,19 @@ map:RechtsbronArtikelBijlageRelaties
 map:RechtsbronArtikelBijlageRelatiesReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.id AS VlacoID,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1 THEN ArtikelVersie1.ID END  AS wijzigt,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2 THEN ArtikelVersie1.ID END  AS vervangt,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3 THEN ArtikelVersie1.ID END  AS voegt_in,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4 THEN ArtikelVersie1.ID END  AS heft_op,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5 THEN ArtikelVersie1.ID END  AS trekt_in,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6 THEN ArtikelVersie1.ID END  AS bekrachtigt,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7 THEN ArtikelVersie1.ID END  AS zie_ook,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8 THEN ArtikelVersie1.ID END  AS gewijzigd_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9 THEN ArtikelVersie1.ID END  AS vervangen_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10 THEN ArtikelVersie1.ID END  AS ingevoegd_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11 THEN ArtikelVersie1.ID END  AS opgeheven_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12 THEN ArtikelVersie1.ID END  AS bekrachtigd_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13 THEN ArtikelVersie1.ID END  AS ingetrokken_bij
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1 THEN ArtikelVersie1.ID END ) AS wijzigt,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2 THEN ArtikelVersie1.ID END ) AS vervangt,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3 THEN ArtikelVersie1.ID END ) AS voegt_in,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4 THEN ArtikelVersie1.ID END ) AS heft_op,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5 THEN ArtikelVersie1.ID END ) AS trekt_in,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6 THEN ArtikelVersie1.ID END ) AS bekrachtigt,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7 THEN ArtikelVersie1.ID END ) AS zie_ook,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8 THEN ArtikelVersie1.ID END ) AS gewijzigd_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9 THEN ArtikelVersie1.ID END ) AS vervangen_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10 THEN ArtikelVersie1.ID END ) AS ingevoegd_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11 THEN ArtikelVersie1.ID END ) AS opgeheven_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12 THEN ArtikelVersie1.ID END ) AS bekrachtigd_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13 THEN ArtikelVersie1.ID END ) AS ingetrokken_bij
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
@@ -1807,19 +1807,19 @@ map:RechtsbronArtikelBijlageRelatiesReverse
 map:RechtsbronBijlageBijlageRelaties
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.id AS VlacoID,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1 THEN ArtikelVersie2.ID END  AS gewijzigd_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2 THEN ArtikelVersie2.ID END  AS vervangen_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3 THEN ArtikelVersie2.ID END  AS ingevoegd_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4 THEN ArtikelVersie2.ID END  AS opgeheven_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5 THEN ArtikelVersie2.ID END  AS ingetrokken_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6 THEN ArtikelVersie2.ID END  AS bekrachtigd_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7 THEN ArtikelVersie2.ID END  AS zie_ook,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8 THEN ArtikelVersie2.ID END  AS wijzigt,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9 THEN ArtikelVersie2.ID END  AS vervangt,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10 THEN ArtikelVersie2.ID END  AS voegt_in,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11 THEN ArtikelVersie2.ID END  AS heft_op,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12 THEN ArtikelVersie2.ID END  AS bekrachtigt,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13 THEN ArtikelVersie2.ID END  AS trekt_in
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1 THEN ArtikelVersie2.ID END ) AS gewijzigd_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2 THEN ArtikelVersie2.ID END ) AS vervangen_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3 THEN ArtikelVersie2.ID END ) AS ingevoegd_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4 THEN ArtikelVersie2.ID END ) AS opgeheven_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5 THEN ArtikelVersie2.ID END ) AS ingetrokken_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6 THEN ArtikelVersie2.ID END ) AS bekrachtigd_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7 THEN ArtikelVersie2.ID END ) AS zie_ook,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8 THEN ArtikelVersie2.ID END ) AS wijzigt,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9 THEN ArtikelVersie2.ID END ) AS vervangt,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10 THEN ArtikelVersie2.ID END ) AS voegt_in,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11 THEN ArtikelVersie2.ID END ) AS heft_op,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12 THEN ArtikelVersie2.ID END ) AS bekrachtigt,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13 THEN ArtikelVersie2.ID END ) AS trekt_in
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
@@ -1969,19 +1969,19 @@ map:RechtsbronBijlageBijlageRelaties
 map:RechtsbronBijlageBijlageRelatiesReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.id AS VlacoID,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1 THEN ArtikelVersie1.ID END  AS wijzigt,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2 THEN ArtikelVersie1.ID END  AS vervangt,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3 THEN ArtikelVersie1.ID END  AS voegt_in,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4 THEN ArtikelVersie1.ID END  AS heft_op,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5 THEN ArtikelVersie1.ID END  AS trekt_in,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6 THEN ArtikelVersie1.ID END  AS bekrachtigt,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7 THEN ArtikelVersie1.ID END  AS zie_ook,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8 THEN ArtikelVersie1.ID END  AS gewijzigd_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9 THEN ArtikelVersie1.ID END  AS vervangen_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10 THEN ArtikelVersie1.ID END  AS ingevoegd_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11 THEN ArtikelVersie1.ID END  AS opgeheven_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12 THEN ArtikelVersie1.ID END  AS bekrachtigd_bij,
-				CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13 THEN ArtikelVersie1.ID END  AS ingetrokken_bij
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1 THEN ArtikelVersie1.ID END ) AS wijzigt,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2 THEN ArtikelVersie1.ID END ) AS vervangt,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3 THEN ArtikelVersie1.ID END ) AS voegt_in,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4 THEN ArtikelVersie1.ID END ) AS heft_op,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5 THEN ArtikelVersie1.ID END ) AS trekt_in,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6 THEN ArtikelVersie1.ID END ) AS bekrachtigt,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7 THEN ArtikelVersie1.ID END ) AS zie_ook,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8 THEN ArtikelVersie1.ID END ) AS gewijzigd_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9 THEN ArtikelVersie1.ID END ) AS vervangen_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10 THEN ArtikelVersie1.ID END ) AS ingevoegd_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11 THEN ArtikelVersie1.ID END ) AS opgeheven_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12 THEN ArtikelVersie1.ID END ) AS bekrachtigd_bij,
+				(CASE WHEN ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13 THEN ArtikelVersie1.ID END ) AS ingetrokken_bij
 		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
@@ -2311,7 +2311,7 @@ map:VerschijningsvormArtikel
 					WHEN CONVERT(date, EindDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2900'), CONVERT(date, '01/01/3000')) THEN  null
 					ELSE CONVERT(date, EindDatum) 
 				END) AS buitenwerkingtreding,
-				CONCAT('Artikel ', ArtikelVersie.ArtikelNummer) AS nummer,
+				CONCAT('Artikel ', WetgevingArtikelVersie.ArtikelNummer) AS nummer,
 				Tekst AS inhoud
 		FROM WetgevingArtikelVersie
 		WHERE NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
@@ -2396,7 +2396,7 @@ map:VerschijningsvormBijlage
 					WHEN CONVERT(date, EindDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2900'), CONVERT(date, '01/01/3000')) THEN  null
 					ELSE CONVERT(date, EindDatum) 
 				END) AS buitenwerkingtreding,
-				CONCAT('Bijlage ', ArtikelVersie.ArtikelNummer) AS nummer,
+				CONCAT('Bijlage ', WetgevingArtikelVersie.ArtikelNummer) AS nummer,
 				Tekst AS inhoud
 		FROM WetgevingArtikelVersie
 		WHERE WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
