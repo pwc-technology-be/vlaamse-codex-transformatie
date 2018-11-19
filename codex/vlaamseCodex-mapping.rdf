@@ -154,7 +154,8 @@ map:RegelgevendDocHoofdstuk
 
 map:RegelgevendDocArtikel
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	ArtikelVersie.ID AS VlacoID,
+		SELECT	ArtikelVersie.WetgevingArtikelId AS ArtikelID,
+				ArtikelVersie.ID AS VlacoID,
 				CONCAT('Artikel ', ArtikelVersie.ArtikelNummer) AS nummer,
 				ArtikelVersie.WetgevingDocumentId AS VerbondenDocument
 		FROM WetgevingArtikelVersie as ArtikelVersie
@@ -162,7 +163,7 @@ map:RegelgevendDocArtikel
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"ArtikelID"}'; 
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [ 
