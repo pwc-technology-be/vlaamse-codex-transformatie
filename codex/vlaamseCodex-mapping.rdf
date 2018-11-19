@@ -4576,7 +4576,6 @@ map:VerschijningsvormDocument
 		SELECT	id AS VlacoID,
 				ISNULL(Commentaar, '') AS inhoudstafel,
 				CONVERT(date, BSDatum) AS publicatiedatum,
-				Numac AS lokaleID,
 				Opschrift AS opschrift,
 				(CASE 
 					WHEN CONVERT(date, StartDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2900'), CONVERT(date, '01/01/3000')) THEN  null
@@ -4644,7 +4643,7 @@ map:VerschijningsvormDocumentLocalID
 		FROM WetgevingDocument
 	"""];
 	rr:subjectMap [
-		rr:template '{"id"}';
+		rr:template 'Document{"id"}';
 		rr:class adms:Identifier; 
 	];
 	rr:predicateObjectMap [ 
@@ -4776,6 +4775,40 @@ map:VerschijningsvormArtikel
 	rr:predicateObjectMap [ 
 		rr:predicate prov:value; 
 		rr:objectMap [rr:column '"inhoud"'];
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:id_local; 
+		rr:objectMap [
+			rr:parentTriplesMap map:VerschijningsvormArtikelLocalID; 
+			rr:joinCondition [
+				rr:child 'VlacoID';
+				rr:parent 'id';
+			]
+		]
+	].
+
+map:VerschijningsvormArtikelLocalID
+	rr:logicalTable [rr:sqlQuery """
+		SELECT	id AS id
+		FROM WetgevingArtikelVersie
+	"""];
+	rr:subjectMap [
+		rr:template 'Artikel{"id"}';
+		rr:class adms:Identifier; 
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate skos:notation; 
+		rr:objectMap [
+			rr:column '"id"';
+			rr:termType rr:Literal; 
+		];
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate dcterms:creator; 
+		rr:objectMap [
+			rr:template 'https://data.vlaanderen.be/id/organisatie/OVO003155';
+			rr:termType rr:IRI; 
+		];
 	].
 
 #-----------------------------------------
