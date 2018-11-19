@@ -4580,7 +4580,7 @@ map:RechtsbronBijlageBijlageRelatieTrektInReverse
 map:VerschijningsvormDocument
 	rr:logicalTable [rr:sqlQuery """
 		SELECT	id AS VlacoID,
-				ISNULL(Commentaar, '') AS inhoudstafel,
+				ISNULL(Commentaar, '') AS commentaar,
 				CONVERT(date, BSDatum) AS publicatiedatum,
 				Opschrift AS opschrift,
 				(CASE 
@@ -4600,7 +4600,7 @@ map:VerschijningsvormDocument
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate dcterms:description; 
-		rr:objectMap [rr:column '"inhoudstafel"'];
+		rr:objectMap [rr:column '"commentaar"'];
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate eli:date_publication; 
