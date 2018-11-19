@@ -156,7 +156,6 @@ map:RechtsbronArtikel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	ArtikelVersie.WetgevingArtikelId AS ArtikelID,
 				ArtikelVersie.ID AS VlacoID,
-				CONCAT('Artikel ', ArtikelVersie.ArtikelNummer) AS nummer,
 				ArtikelVersie.WetgevingDocumentId AS VerbondenDocument
 		FROM WetgevingArtikelVersie as ArtikelVersie
 		WHERE NOT ArtikelVersie.ArtikelType = 'BIJLAGE'
@@ -170,10 +169,6 @@ map:RechtsbronArtikel
 		rr:predicate dcterms:type; 
 		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRechtsbrononderdeel/Artikel';
 						rr:termType rr:IRI ];
-	];
-	rr:predicateObjectMap [ 
-		rr:predicate eli:number; 
-		rr:objectMap [rr:column '"nummer"'];
 	];
 	rr:predicateObjectMap [
 		rr:predicate eli:is_part_of; #is deel van
@@ -202,7 +197,6 @@ map:RechtsbronArtikel
 map:RechtsbronBijlage
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	ArtikelVersie.ID AS VlacoID,
-				CONCAT('Bijlage ', ArtikelVersie.ArtikelNummer) AS nummer,
 				ArtikelVersie.WetgevingDocumentId AS VerbondenDocument
 		FROM WetgevingArtikelVersie as ArtikelVersie
 		WHERE ArtikelVersie.ArtikelType = 'BIJLAGE'
@@ -216,10 +210,6 @@ map:RechtsbronBijlage
 		rr:predicate dcterms:type; 
 		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRechtsbrononderdeel/Bijlage';
 						rr:termType rr:IRI ];
-	];
-	rr:predicateObjectMap [ 
-		rr:predicate eli:number; 
-		rr:objectMap [rr:column '"nummer"'];
 	];
 	rr:predicateObjectMap [
 		rr:predicate eli:is_part_of; #is deel van
@@ -4745,6 +4735,7 @@ map:VerschijningsvormArtikel
 		SELECT 	id AS VlacoID,
 				StartDatum AS inwerkingtreding,
 				EindDatum AS buitenwerkingtreding,
+				CONCAT('Artikel ', ArtikelVersie.ArtikelNummer) AS nummer,
 				Tekst AS inhoud
 		FROM WetgevingArtikelVersie
 		WHERE NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
@@ -4753,6 +4744,10 @@ map:VerschijningsvormArtikel
 	rr:subjectMap [
 		rr:template 'https://codex.vlaanderen.be/doc/artikel/{"VlacoID"}';
 		rr:class eli:LegalExpression; 
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:number; 
+		rr:objectMap [rr:column '"nummer"'];
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate eli:first_date_entry_in_force; 
@@ -4819,6 +4814,7 @@ map:VerschijningsvormBijlage
 		SELECT id AS VlacoID,
 				StartDatum AS inwerkingtreding,
 				EindDatum AS buitenwerkingtreding,
+				CONCAT('Bijlage ', ArtikelVersie.ArtikelNummer) AS nummer,
 				Tekst AS inhoud
 		FROM WetgevingArtikelVersie
 		WHERE WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
@@ -4827,6 +4823,10 @@ map:VerschijningsvormBijlage
 	rr:subjectMap [
 		rr:template 'https://codex.vlaanderen.be/doc/bijlage/{"VlacoID"}';
 		rr:class eli:LegalExpression; 
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:number; 
+		rr:objectMap [rr:column '"nummer"'];
 	];
 	rr:predicateObjectMap [
 		rr:predicate eli:realizes; #realiseert
