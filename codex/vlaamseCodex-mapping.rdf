@@ -4817,6 +4817,8 @@ map:VerschijningsvormArtikelLocalID
 map:VerschijningsvormBijlage
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT id AS VlacoID,
+				StartDatum AS inwerkingtreding,
+				EindDatum AS buitenwerkingtreding,
 				Tekst AS inhoud
 		FROM WetgevingArtikelVersie
 		WHERE WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
@@ -4839,4 +4841,12 @@ map:VerschijningsvormBijlage
 	rr:predicateObjectMap [ 
 		rr:predicate prov:value; 
 		rr:objectMap [rr:column '"inhoud"'];
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:first_date_entry_in_force; 
+		rr:objectMap [rr:column '"inwerkingtreding"'];
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:date_no_longer_in_force; 
+		rr:objectMap [rr:column '"buitenwerkingtreding"'];
 	].
