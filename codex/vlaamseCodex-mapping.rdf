@@ -29,13 +29,29 @@ map:RechtsbronDocument
 					ELSE '/aftestemmen'
 				END)END) AS typeDocumentURI,
 				ID as RGDID,
-				CONVERT(date, Datum) AS datumDocumentdatum
+				CONVERT(date, Datum) AS datumDocumentdatum,
+				(CASE 
+					WHEN CONVERT(date, StartDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2900'), CONVERT(date, '01/01/3000')) THEN  null
+					ELSE CONVERT(date, StartDatum) 
+				END) AS inwerkingtreding,
+				(CASE 
+					WHEN CONVERT(date, EindDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2900'), CONVERT(date, '01/01/3000')) THEN  null
+					ELSE CONVERT(date, EindDatum) 
+				END) AS buitenwerkingtreding
 		FROM WetgevingDocument
 	""" 
 	];
 	rr:subjectMap [
 		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"ID"}'; 
 		rr:class eli:LegalResource; 
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:first_date_entry_in_force; 
+		rr:objectMap [rr:column '"inwerkingtreding"'];
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:date_no_longer_in_force; 
+		rr:objectMap [rr:column '"buitenwerkingtreding"'];
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate eli:date_document; 
@@ -4733,8 +4749,14 @@ map:VerschijningsvormHoofdstuk
 map:VerschijningsvormArtikel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	id AS VlacoID,
-				StartDatum AS inwerkingtreding,
-				EindDatum AS buitenwerkingtreding,
+				(CASE 
+					WHEN CONVERT(date, StartDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2900'), CONVERT(date, '01/01/3000')) THEN  null
+					ELSE CONVERT(date, StartDatum) 
+				END) AS inwerkingtreding,
+				(CASE 
+					WHEN CONVERT(date, EindDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2900'), CONVERT(date, '01/01/3000')) THEN  null
+					ELSE CONVERT(date, EindDatum) 
+				END) AS buitenwerkingtreding,
 				CONCAT('Artikel ', ArtikelVersie.ArtikelNummer) AS nummer,
 				Tekst AS inhoud
 		FROM WetgevingArtikelVersie
@@ -4812,8 +4834,14 @@ map:VerschijningsvormArtikelLocalID
 map:VerschijningsvormBijlage
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT id AS VlacoID,
-				StartDatum AS inwerkingtreding,
-				EindDatum AS buitenwerkingtreding,
+				(CASE 
+					WHEN CONVERT(date, StartDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2900'), CONVERT(date, '01/01/3000')) THEN  null
+					ELSE CONVERT(date, StartDatum) 
+				END) AS inwerkingtreding,
+				(CASE 
+					WHEN CONVERT(date, EindDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2900'), CONVERT(date, '01/01/3000')) THEN  null
+					ELSE CONVERT(date, EindDatum) 
+				END) AS buitenwerkingtreding,
 				CONCAT('Bijlage ', ArtikelVersie.ArtikelNummer) AS nummer,
 				Tekst AS inhoud
 		FROM WetgevingArtikelVersie
