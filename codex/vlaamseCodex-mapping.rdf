@@ -4743,7 +4743,9 @@ map:VerschijningsvormHoofdstuk
 
 map:VerschijningsvormArtikel
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT id AS VlacoID,
+		SELECT 	id AS VlacoID,
+				StartDatum AS inwerkingtreding,
+				EindDatum AS buitenwerkingtreding,
 				Tekst AS inhoud
 		FROM WetgevingArtikelVersie
 		WHERE NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
@@ -4752,6 +4754,14 @@ map:VerschijningsvormArtikel
 	rr:subjectMap [
 		rr:template 'https://codex.vlaanderen.be/doc/artikel/{"VlacoID"}';
 		rr:class eli:LegalExpression; 
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:first_date_entry_in_force; 
+		rr:objectMap [rr:column '"inwerkingtreding"'];
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:date_no_longer_in_force; 
+		rr:objectMap [rr:column '"buitenwerkingtreding"'];
 	];
 	rr:predicateObjectMap [
 		rr:predicate eli:realizes; #realiseert
