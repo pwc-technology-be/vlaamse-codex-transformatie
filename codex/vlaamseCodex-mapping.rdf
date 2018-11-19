@@ -134,7 +134,7 @@ map:RechtsbronHoofdstuk
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [ 
-		rr:predicate codex:TypeRechtsbrononderdeel; 
+		rr:predicate dcterms:type; 
 		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRechtsbrononderdeel/Hoofdstuk';
 						rr:termType rr:IRI ];
 	];
@@ -167,7 +167,7 @@ map:RechtsbronArtikel
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [ 
-		rr:predicate codex:TypeRechtsbrononderdeel; 
+		rr:predicate dcterms:type; 
 		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRechtsbrononderdeel/Artikel';
 						rr:termType rr:IRI ];
 	];
@@ -213,7 +213,7 @@ map:RechtsbronBijlage
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [ 
-		rr:predicate codex:TypeRechtsbrononderdeel; 
+		rr:predicate dcterms:type; 
 		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRechtsbrononderdeel/Bijlage';
 						rr:termType rr:IRI ];
 	];
