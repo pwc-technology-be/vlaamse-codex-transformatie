@@ -10,10 +10,10 @@
 @prefix codex: <https://data.vlaanderen.be/ns/wetgeving#> .
 @prefix adms: <http://www.w3.org/ns/adms#> .
 
-#Onderdeel 1: Mapping van RegelgevendDoc
-#Onderdeel 1.1: Mappings van RegelgevendDocDocument met attributen
+#Onderdeel 1: Mapping van Rechtsbron
+#Onderdeel 1.1: Mappings van RechtsbronDocument met attributen
 
-map:RegelgevendDocDocument
+map:RechtsbronDocument
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	(CASE ISNULL(Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Numac,0) WHEN 0 THEN ID ELSE Numac END) AS ID,
@@ -52,7 +52,7 @@ map:RegelgevendDocDocument
 		]
 	].
 
-map:RegelgevendDocDocumentType
+map:RechtsbronDocumentType
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -120,9 +120,9 @@ map:RegelgevendDocDocumentType
 	].
 
 #-----------------------------------------
-#Onderdeel 1.2: Mapping van RegelgevendDocHoofdstuk
+#Onderdeel 1.2: Mapping van RechtsbronHoofdstuk
 
-map:RegelgevendDocHoofdstuk
+map:RechtsbronHoofdstuk
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	Hoofdstuk.ID AS HoofdstukID,
 				Hoofdstuk.WetgevingDocumentId AS VerbondenDocument
@@ -134,14 +134,14 @@ map:RegelgevendDocHoofdstuk
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [ 
-		rr:predicate codex:TypeRegelgevendDocSubdivisie; 
-		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRegelgevendDocSubdivisie/Hoofdstuk';
+		rr:predicate codex:TypeRechtsbrononderdeel; 
+		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRechtsbrononderdeel/Hoofdstuk';
 						rr:termType rr:IRI ];
 	];
 	rr:predicateObjectMap [
 		rr:predicate eli:is_part_of; #is deel van
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -150,9 +150,9 @@ map:RegelgevendDocHoofdstuk
 	].
 
 #-----------------------------------------
-#Onderdeel 1.3: Mapping van RegelgevendDocArtikel
+#Onderdeel 1.3: Mapping van RechtsbronArtikel
 
-map:RegelgevendDocArtikel
+map:RechtsbronArtikel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	ArtikelVersie.WetgevingArtikelId AS ArtikelID,
 				ArtikelVersie.ID AS VlacoID,
@@ -167,8 +167,8 @@ map:RegelgevendDocArtikel
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [ 
-		rr:predicate codex:TypeRegelgevendDocSubdivisie; 
-		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRegelgevendDocSubdivisie/Artikel';
+		rr:predicate codex:TypeRechtsbrononderdeel; 
+		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRechtsbrononderdeel/Artikel';
 						rr:termType rr:IRI ];
 	];
 	rr:predicateObjectMap [ 
@@ -178,7 +178,7 @@ map:RegelgevendDocArtikel
 	rr:predicateObjectMap [
 		rr:predicate eli:is_part_of; #is deel van
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -197,9 +197,9 @@ map:RegelgevendDocArtikel
 	].
 
 #-----------------------------------------
-#Onderdeel 1.4: Mapping van RegelgevendDocBijlage
+#Onderdeel 1.4: Mapping van RechtsbronBijlage
 
-map:RegelgevendDocBijlage
+map:RechtsbronBijlage
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	ArtikelVersie.ID AS VlacoID,
 				CONCAT('Bijlage ', ArtikelVersie.ArtikelNummer) AS nummer,
@@ -213,8 +213,8 @@ map:RegelgevendDocBijlage
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [ 
-		rr:predicate codex:TypeRegelgevendDocSubdivisie; 
-		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRegelgevendDocSubdivisie/Bijlage';
+		rr:predicate codex:TypeRechtsbrononderdeel; 
+		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRechtsbrononderdeel/Bijlage';
 						rr:termType rr:IRI ];
 	];
 	rr:predicateObjectMap [ 
@@ -224,7 +224,7 @@ map:RegelgevendDocBijlage
 	rr:predicateObjectMap [
 		rr:predicate eli:is_part_of; #is deel van
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -243,9 +243,9 @@ map:RegelgevendDocBijlage
 	].
 
 #-----------------------------------------
-#Onderdeel 1.5: Mappings van de Document -> Document relaties van RegelgevendDoc
+#Onderdeel 1.5: Mappings van de Document -> Document relaties van Rechtsbron
 
-map:RegelgevendDocDocumentDocumentRelatieVerandert
+map:RechtsbronDocumentDocumentRelatieVerandert
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -275,7 +275,7 @@ map:RegelgevendDocDocumentDocumentRelatieVerandert
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
 				rr:parent 'ID';
@@ -283,7 +283,7 @@ map:RegelgevendDocDocumentDocumentRelatieVerandert
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieHeftOp 
+map:RechtsbronDocumentDocumentRelatieHeftOp 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -313,7 +313,7 @@ map:RegelgevendDocDocumentDocumentRelatieHeftOp
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Heft op
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
 				rr:parent 'ID';
@@ -321,7 +321,7 @@ map:RegelgevendDocDocumentDocumentRelatieHeftOp
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieBekrachtigt 
+map:RechtsbronDocumentDocumentRelatieBekrachtigt 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -351,7 +351,7 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigt
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
 				rr:parent 'ID';
@@ -359,7 +359,7 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigt
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieTrektIn 
+map:RechtsbronDocumentDocumentRelatieTrektIn 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -389,7 +389,7 @@ map:RegelgevendDocDocumentDocumentRelatieTrektIn
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Trekt in
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
 				rr:parent 'ID';
@@ -397,7 +397,7 @@ map:RegelgevendDocDocumentDocumentRelatieTrektIn
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieZieOok
+map:RechtsbronDocumentDocumentRelatieZieOok
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -427,7 +427,7 @@ map:RegelgevendDocDocumentDocumentRelatieZieOok
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
 				rr:parent 'ID';
@@ -435,7 +435,7 @@ map:RegelgevendDocDocumentDocumentRelatieZieOok
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieVeranderdDoor 
+map:RechtsbronDocumentDocumentRelatieVeranderdDoor 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -465,7 +465,7 @@ map:RegelgevendDocDocumentDocumentRelatieVeranderdDoor
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
 				rr:parent 'ID';
@@ -473,7 +473,7 @@ map:RegelgevendDocDocumentDocumentRelatieVeranderdDoor
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieOpgehevenBij
+map:RechtsbronDocumentDocumentRelatieOpgehevenBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -503,7 +503,7 @@ map:RegelgevendDocDocumentDocumentRelatieOpgehevenBij
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Opgeheven bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
 				rr:parent 'ID';
@@ -511,7 +511,7 @@ map:RegelgevendDocDocumentDocumentRelatieOpgehevenBij
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieBekrachtigdBij
+map:RechtsbronDocumentDocumentRelatieBekrachtigdBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -541,7 +541,7 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigdBij
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
 				rr:parent 'ID';
@@ -549,7 +549,7 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigdBij
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBij 
+map:RechtsbronDocumentDocumentRelatieIngetrokkenBij 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -579,7 +579,7 @@ map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBij
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Ingetrokken bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
 				rr:parent 'ID';
@@ -590,7 +590,7 @@ map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBij
 #-----------------------------------------
 #Onderdeel 1.5.1: Reverse mappings uit 1.5
 
-map:RegelgevendDocDocumentDocumentRelatieVerandertReverse
+map:RechtsbronDocumentDocumentRelatieVerandertReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -620,7 +620,7 @@ map:RegelgevendDocDocumentDocumentRelatieVerandertReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij (reverse van wijzigt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
 				rr:parent 'ID';
@@ -628,7 +628,7 @@ map:RegelgevendDocDocumentDocumentRelatieVerandertReverse
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieHeftOpReverse
+map:RechtsbronDocumentDocumentRelatieHeftOpReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -658,7 +658,7 @@ map:RegelgevendDocDocumentDocumentRelatieHeftOpReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Opgeheven bij (reverse van heft op)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
 				rr:parent 'ID';
@@ -666,7 +666,7 @@ map:RegelgevendDocDocumentDocumentRelatieHeftOpReverse
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieBekrachtigtReverse
+map:RechtsbronDocumentDocumentRelatieBekrachtigtReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -696,7 +696,7 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigtReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij (reverse van bekrachtigt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
 				rr:parent 'ID';
@@ -704,7 +704,7 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigtReverse
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieTrektInReverse 
+map:RechtsbronDocumentDocumentRelatieTrektInReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -734,7 +734,7 @@ map:RegelgevendDocDocumentDocumentRelatieTrektInReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Ingetrokken bij (reverse van trekt in)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
 				rr:parent 'ID';
@@ -742,7 +742,7 @@ map:RegelgevendDocDocumentDocumentRelatieTrektInReverse
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieZieOokReverse
+map:RechtsbronDocumentDocumentRelatieZieOokReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -772,7 +772,7 @@ map:RegelgevendDocDocumentDocumentRelatieZieOokReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook (reverse van zie ook (is identiek))
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
 				rr:parent 'ID';
@@ -780,7 +780,7 @@ map:RegelgevendDocDocumentDocumentRelatieZieOokReverse
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieVeranderdDoorReverse 
+map:RechtsbronDocumentDocumentRelatieVeranderdDoorReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -810,7 +810,7 @@ map:RegelgevendDocDocumentDocumentRelatieVeranderdDoorReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt (reverse van gewijzigd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
 				rr:parent 'ID';
@@ -818,7 +818,7 @@ map:RegelgevendDocDocumentDocumentRelatieVeranderdDoorReverse
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieOpgehevenBijReverse
+map:RechtsbronDocumentDocumentRelatieOpgehevenBijReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -848,7 +848,7 @@ map:RegelgevendDocDocumentDocumentRelatieOpgehevenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Heft op (reverse van opgeheven bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
 				rr:parent 'ID';
@@ -856,7 +856,7 @@ map:RegelgevendDocDocumentDocumentRelatieOpgehevenBijReverse
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieBekrachtigdBijReverse
+map:RechtsbronDocumentDocumentRelatieBekrachtigdBijReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -886,7 +886,7 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigdBijReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt (reverse van bekrachtigd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
 				rr:parent 'ID';
@@ -894,7 +894,7 @@ map:RegelgevendDocDocumentDocumentRelatieBekrachtigdBijReverse
 		]
 	].
 
-map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBijReverse 
+map:RechtsbronDocumentDocumentRelatieIngetrokkenBijReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -924,7 +924,7 @@ map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Trekt in (reverse van ingetrokken bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
 				rr:parent 'ID';
@@ -933,9 +933,9 @@ map:RegelgevendDocDocumentDocumentRelatieIngetrokkenBijReverse
 	].
 
 #-----------------------------------------
-#Onderdeel 1.6: Mapping van de Document -> Hoofdstuk, Document -> Artikel en Document -> Bijlage 'Heeft Onderdeel' relaties van RegelgevendDoc(subdivisies)
+#Onderdeel 1.6: Mapping van de Document -> Hoofdstuk, Document -> Artikel en Document -> Bijlage 'Heeft Onderdeel' relaties van Rechtsbron(onderdelen)
 
-map:RegelgevendDocDocumentHoofdstukRelatieHeeftOnderdeel
+map:RechtsbronDocumentHoofdstukRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -963,7 +963,7 @@ map:RegelgevendDocDocumentHoofdstukRelatieHeeftOnderdeel
 	rr:predicateObjectMap [
 		rr:predicate eli:has_part; #heeft onderdeel
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocHoofdstuk; 
+			rr:parentTriplesMap map:RechtsbronHoofdstuk; 
 			rr:joinCondition [
 				rr:child 'HoofdstukID';
 				rr:parent 'ID';
@@ -973,7 +973,7 @@ map:RegelgevendDocDocumentHoofdstukRelatieHeeftOnderdeel
 
 
 
-map:RegelgevendDocDocumentArtikelRelatieHeeftOnderdeel
+map:RechtsbronDocumentArtikelRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1002,7 +1002,7 @@ map:RegelgevendDocDocumentArtikelRelatieHeeftOnderdeel
 	rr:predicateObjectMap [
 		rr:predicate eli:has_part; #heeft onderdeel
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelID';
 				rr:parent 'ID';
@@ -1010,7 +1010,7 @@ map:RegelgevendDocDocumentArtikelRelatieHeeftOnderdeel
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieHeeftOnderdeel
+map:RechtsbronDocumentBijlageRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1039,7 +1039,7 @@ map:RegelgevendDocDocumentBijlageRelatieHeeftOnderdeel
 	rr:predicateObjectMap [
 		rr:predicate eli:has_part; #heeft onderdeel
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1048,9 +1048,9 @@ map:RegelgevendDocDocumentBijlageRelatieHeeftOnderdeel
 	].
 
 #-----------------------------------------
-#Onderdeel 1.7: Mappings van de Document -> Artikel relaties van RegelgevendDoc(subdivisie)
+#Onderdeel 1.7: Mappings van de Document -> Artikel relaties van Rechtsbron(onderdeel)
 
-map:RegelgevendDocDocumentArtikelRelatieVerandert 
+map:RechtsbronDocumentArtikelRelatieVerandert 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1081,7 +1081,7 @@ map:RegelgevendDocDocumentArtikelRelatieVerandert
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1089,7 +1089,7 @@ map:RegelgevendDocDocumentArtikelRelatieVerandert
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieHeftOp 
+map:RechtsbronDocumentArtikelRelatieHeftOp 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1120,7 +1120,7 @@ map:RegelgevendDocDocumentArtikelRelatieHeftOp
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Heft op
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1128,7 +1128,7 @@ map:RegelgevendDocDocumentArtikelRelatieHeftOp
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieBekrachtigt 
+map:RechtsbronDocumentArtikelRelatieBekrachtigt 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1159,7 +1159,7 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigt
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1167,7 +1167,7 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigt
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieTrektIn 
+map:RechtsbronDocumentArtikelRelatieTrektIn 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1198,7 +1198,7 @@ map:RegelgevendDocDocumentArtikelRelatieTrektIn
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Trekt in
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1206,7 +1206,7 @@ map:RegelgevendDocDocumentArtikelRelatieTrektIn
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieZieOok
+map:RechtsbronDocumentArtikelRelatieZieOok
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1237,7 +1237,7 @@ map:RegelgevendDocDocumentArtikelRelatieZieOok
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1245,7 +1245,7 @@ map:RegelgevendDocDocumentArtikelRelatieZieOok
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieVeranderdDoor 
+map:RechtsbronDocumentArtikelRelatieVeranderdDoor 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1276,7 +1276,7 @@ map:RegelgevendDocDocumentArtikelRelatieVeranderdDoor
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1284,7 +1284,7 @@ map:RegelgevendDocDocumentArtikelRelatieVeranderdDoor
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieOpgehevenBij
+map:RechtsbronDocumentArtikelRelatieOpgehevenBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1315,7 +1315,7 @@ map:RegelgevendDocDocumentArtikelRelatieOpgehevenBij
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Opgeheven bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1323,7 +1323,7 @@ map:RegelgevendDocDocumentArtikelRelatieOpgehevenBij
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieBekrachtigdBij
+map:RechtsbronDocumentArtikelRelatieBekrachtigdBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1354,7 +1354,7 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigdBij
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1362,7 +1362,7 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigdBij
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBij 
+map:RechtsbronDocumentArtikelRelatieIngetrokkenBij 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1393,7 +1393,7 @@ map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBij
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Ingetrokken bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1402,9 +1402,9 @@ map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBij
 	].
 
 #-----------------------------------------
-#Onderdeel 1.7.1: Mappings van de Artikel -> Document relaties van RegelgevendDoc(subdivisie) (Reverse mappings uit 1.7)
+#Onderdeel 1.7.1: Mappings van de Artikel -> Document relaties van Rechtsbron(onderdeel) (Reverse mappings uit 1.7)
 
-map:RegelgevendDocDocumentArtikelRelatieVerandertReverse 
+map:RechtsbronDocumentArtikelRelatieVerandertReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
@@ -1423,7 +1423,7 @@ map:RegelgevendDocDocumentArtikelRelatieVerandertReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij (reverse van wijzigt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -1431,7 +1431,7 @@ map:RegelgevendDocDocumentArtikelRelatieVerandertReverse
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieHeftOpReverse 
+map:RechtsbronDocumentArtikelRelatieHeftOpReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
@@ -1450,7 +1450,7 @@ map:RegelgevendDocDocumentArtikelRelatieHeftOpReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Opgeheven bij (reverse van heft op)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -1458,7 +1458,7 @@ map:RegelgevendDocDocumentArtikelRelatieHeftOpReverse
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieBekrachtigtReverse 
+map:RechtsbronDocumentArtikelRelatieBekrachtigtReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
@@ -1477,7 +1477,7 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigtReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij (reverse van bekrachtigt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -1485,7 +1485,7 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigtReverse
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieTrektInReverse 
+map:RechtsbronDocumentArtikelRelatieTrektInReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
@@ -1504,7 +1504,7 @@ map:RegelgevendDocDocumentArtikelRelatieTrektInReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Ingetrokken bij (reverse van trekt in)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -1512,7 +1512,7 @@ map:RegelgevendDocDocumentArtikelRelatieTrektInReverse
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieZieOokReverse
+map:RechtsbronDocumentArtikelRelatieZieOokReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
@@ -1531,7 +1531,7 @@ map:RegelgevendDocDocumentArtikelRelatieZieOokReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook (reverse van zie ook (is identiek))
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -1539,7 +1539,7 @@ map:RegelgevendDocDocumentArtikelRelatieZieOokReverse
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieVeranderdDoorReverse 
+map:RechtsbronDocumentArtikelRelatieVeranderdDoorReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
@@ -1558,7 +1558,7 @@ map:RegelgevendDocDocumentArtikelRelatieVeranderdDoorReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt (reverse van gewijzigd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -1566,7 +1566,7 @@ map:RegelgevendDocDocumentArtikelRelatieVeranderdDoorReverse
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieOpgehevenBijReverse
+map:RechtsbronDocumentArtikelRelatieOpgehevenBijReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
@@ -1585,7 +1585,7 @@ map:RegelgevendDocDocumentArtikelRelatieOpgehevenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Heft op (reverse van opgeheven bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -1593,7 +1593,7 @@ map:RegelgevendDocDocumentArtikelRelatieOpgehevenBijReverse
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieBekrachtigdBijReverse
+map:RechtsbronDocumentArtikelRelatieBekrachtigdBijReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
@@ -1612,7 +1612,7 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigdBijReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt (reverse van bekrachtigd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -1620,7 +1620,7 @@ map:RegelgevendDocDocumentArtikelRelatieBekrachtigdBijReverse
 		]
 	].
 
-map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBijReverse 
+map:RechtsbronDocumentArtikelRelatieIngetrokkenBijReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
@@ -1639,7 +1639,7 @@ map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Trekt in (reverse van ingetrokken bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -1650,9 +1650,9 @@ map:RegelgevendDocDocumentArtikelRelatieIngetrokkenBijReverse
 
 
 #-----------------------------------------
-#Onderdeel 1.8: Mappings van de Document -> Bijlage relaties van RegelgevendDoc(subdivisie)
+#Onderdeel 1.8: Mappings van de Document -> Bijlage relaties van Rechtsbron(onderdeel)
 
-map:RegelgevendDocDocumentBijlageRelatieVerandert 
+map:RechtsbronDocumentBijlageRelatieVerandert 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1683,7 +1683,7 @@ map:RegelgevendDocDocumentBijlageRelatieVerandert
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1691,7 +1691,7 @@ map:RegelgevendDocDocumentBijlageRelatieVerandert
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieHeftOp 
+map:RechtsbronDocumentBijlageRelatieHeftOp 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1722,7 +1722,7 @@ map:RegelgevendDocDocumentBijlageRelatieHeftOp
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Heft op
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1730,7 +1730,7 @@ map:RegelgevendDocDocumentBijlageRelatieHeftOp
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieBekrachtigt 
+map:RechtsbronDocumentBijlageRelatieBekrachtigt 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1761,7 +1761,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigt
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1769,7 +1769,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigt
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieTrektIn 
+map:RechtsbronDocumentBijlageRelatieTrektIn 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1800,7 +1800,7 @@ map:RegelgevendDocDocumentBijlageRelatieTrektIn
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Trekt in
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1808,7 +1808,7 @@ map:RegelgevendDocDocumentBijlageRelatieTrektIn
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieZieOok
+map:RechtsbronDocumentBijlageRelatieZieOok
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1839,7 +1839,7 @@ map:RegelgevendDocDocumentBijlageRelatieZieOok
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1847,7 +1847,7 @@ map:RegelgevendDocDocumentBijlageRelatieZieOok
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieVeranderdDoor 
+map:RechtsbronDocumentBijlageRelatieVeranderdDoor 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1878,7 +1878,7 @@ map:RegelgevendDocDocumentBijlageRelatieVeranderdDoor
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1886,7 +1886,7 @@ map:RegelgevendDocDocumentBijlageRelatieVeranderdDoor
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieOpgehevenBij 
+map:RechtsbronDocumentBijlageRelatieOpgehevenBij 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1917,7 +1917,7 @@ map:RegelgevendDocDocumentBijlageRelatieOpgehevenBij
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Opgeheven bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1925,7 +1925,7 @@ map:RegelgevendDocDocumentBijlageRelatieOpgehevenBij
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBij 
+map:RechtsbronDocumentBijlageRelatieBekrachtigdBij 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1956,7 +1956,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBij
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1964,7 +1964,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBij
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBij 
+map:RechtsbronDocumentBijlageRelatieIngetrokkenBij 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	(CASE ISNULL(Document.Numac,0) WHEN 0 THEN 'https://codex.vlaanderen.be/id/document' ELSE 'http://www.ejustice.just.fgov.be/eli' END) AS URLpart1,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS ID,
@@ -1995,7 +1995,7 @@ map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBij
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Ingetrokken bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2004,9 +2004,9 @@ map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBij
 	].
 
 #-----------------------------------------
-#Onderdeel 1.8.1: Mappings van de Bijlage -> Document relaties van RegelgevendDoc(subdivisie) (Reverse mappings uit 1.8)
+#Onderdeel 1.8.1: Mappings van de Bijlage -> Document relaties van Rechtsbron(onderdeel) (Reverse mappings uit 1.8)
 
-map:RegelgevendDocDocumentBijlageRelatieVerandertReverse 
+map:RechtsbronDocumentBijlageRelatieVerandertReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
@@ -2025,7 +2025,7 @@ map:RegelgevendDocDocumentBijlageRelatieVerandertReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij (reverse van Wijzigt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -2033,7 +2033,7 @@ map:RegelgevendDocDocumentBijlageRelatieVerandertReverse
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieHeftOpReverse 
+map:RechtsbronDocumentBijlageRelatieHeftOpReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
@@ -2052,7 +2052,7 @@ map:RegelgevendDocDocumentBijlageRelatieHeftOpReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Opgeheven bij (reverse van Heft op)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -2060,7 +2060,7 @@ map:RegelgevendDocDocumentBijlageRelatieHeftOpReverse
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieBekrachtigtReverse 
+map:RechtsbronDocumentBijlageRelatieBekrachtigtReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
@@ -2079,7 +2079,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigtReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij (reverse van Bekrachtigt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -2087,7 +2087,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigtReverse
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieTrektInReverse 
+map:RechtsbronDocumentBijlageRelatieTrektInReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
@@ -2106,7 +2106,7 @@ map:RegelgevendDocDocumentBijlageRelatieTrektInReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Ingetrokken bij (reverse van Trekt in)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -2114,7 +2114,7 @@ map:RegelgevendDocDocumentBijlageRelatieTrektInReverse
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieZieOokReverse
+map:RechtsbronDocumentBijlageRelatieZieOokReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
@@ -2133,7 +2133,7 @@ map:RegelgevendDocDocumentBijlageRelatieZieOokReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook (reverse van zie ook)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -2141,7 +2141,7 @@ map:RegelgevendDocDocumentBijlageRelatieZieOokReverse
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieVeranderdDoorReverse 
+map:RechtsbronDocumentBijlageRelatieVeranderdDoorReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
@@ -2160,7 +2160,7 @@ map:RegelgevendDocDocumentBijlageRelatieVeranderdDoorReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt (reverse van gewijzigd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -2168,7 +2168,7 @@ map:RegelgevendDocDocumentBijlageRelatieVeranderdDoorReverse
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieOpgehevenBijReverse 
+map:RechtsbronDocumentBijlageRelatieOpgehevenBijReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
@@ -2187,7 +2187,7 @@ map:RegelgevendDocDocumentBijlageRelatieOpgehevenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Heft op (reverse van Opgeheven bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -2195,7 +2195,7 @@ map:RegelgevendDocDocumentBijlageRelatieOpgehevenBijReverse
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBijReverse 
+map:RechtsbronDocumentBijlageRelatieBekrachtigdBijReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
@@ -2214,7 +2214,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBijReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt (reverse van Bekrachtigd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -2222,7 +2222,7 @@ map:RegelgevendDocDocumentBijlageRelatieBekrachtigdBijReverse
 		]
 	].
 
-map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBijReverse 
+map:RechtsbronDocumentBijlageRelatieIngetrokkenBijReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
@@ -2241,7 +2241,7 @@ map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Trekt in (reverse van Ingetrokken bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
 				rr:parent 'ID';
@@ -2250,9 +2250,9 @@ map:RegelgevendDocDocumentBijlageRelatieIngetrokkenBijReverse
 	].
 
 #-----------------------------------------
-#Onderdeel 1.9: Mappings van de Hoofdstuk -> Artikel en Artikel -> Hoofdstuk relaties van RegelgevendDoc-subdivisies
+#Onderdeel 1.9: Mappings van de Hoofdstuk -> Artikel en Artikel -> Hoofdstuk relaties van Rechtsbrononderdelen
 
-map:RegelgevendDocHoofdstukArtikelRelatieHeeftOnderdeel
+map:RechtsbronHoofdstukArtikelRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	Hoofdstuk.ID AS HoofdstukID,
 				Artikel.ID AS ArtikelID,
@@ -2271,15 +2271,15 @@ map:RegelgevendDocHoofdstukArtikelRelatieHeeftOnderdeel
 	rr:predicateObjectMap [
 		rr:predicate eli:has_part; #heeft onderdeel
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
-				rr:child 'ArtikelVersieID'; #ArtikelVersieID is de VlacoID in RegelgevendDocArtikel
+				rr:child 'ArtikelVersieID'; #ArtikelVersieID is de VlacoID in RechtsbronArtikel
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RegelgevendDocArtikelHoofdstukRelatieIsDeelVan #Reverse van RegelgevendDocHoofdstukArtikelRelatieHeeftOnderdeel
+map:RechtsbronArtikelHoofdstukRelatieIsDeelVan #Reverse van RechtsbronHoofdstukArtikelRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	Hoofdstuk.ID AS HoofdstukID,
 				Artikel.ID AS ArtikelID,
@@ -2292,13 +2292,13 @@ map:RegelgevendDocArtikelHoofdstukRelatieIsDeelVan #Reverse van RegelgevendDocHo
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"ArtikelVersieID"}'; #ArtikelVersieID is de VlacoID in RegelgevendDocArtikel 
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"ArtikelVersieID"}'; #ArtikelVersieID is de VlacoID in RechtsbronArtikel 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
 		rr:predicate eli:is_part_of; #is deel van
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocHoofdstuk; 
+			rr:parentTriplesMap map:RechtsbronHoofdstuk; 
 			rr:joinCondition [
 				rr:child 'HoofdstukID';
 				rr:parent 'ID';
@@ -2307,9 +2307,9 @@ map:RegelgevendDocArtikelHoofdstukRelatieIsDeelVan #Reverse van RegelgevendDocHo
 	].
 	
 #-----------------------------------------
-#Onderdeel 1.10: Mappings van de Hoofdstuk -> Bijlage en Bijlage -> Hoofdstuk relaties van RegelgevendDoc-subdivisies
+#Onderdeel 1.10: Mappings van de Hoofdstuk -> Bijlage en Bijlage -> Hoofdstuk relaties van Rechtsbrononderdelen
 
-map:RegelgevendDocHoofdstukBijlageRelatieHeeftOnderdeel
+map:RechtsbronHoofdstukBijlageRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	Hoofdstuk.ID AS HoofdstukID,
 				Artikel.ID AS ArtikelID,
@@ -2328,15 +2328,15 @@ map:RegelgevendDocHoofdstukBijlageRelatieHeeftOnderdeel
 	rr:predicateObjectMap [
 		rr:predicate eli:has_part; #heeft onderdeel
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelVersieID'; #ArtikelVersieID is de VlacoID in RegelgevendDocArtikel
+				rr:child 'ArtikelVersieID'; #ArtikelVersieID is de VlacoID in RechtsbronArtikel
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RegelgevendDocBijlageHoofdstukRelatieIsDeelVan #Reverse van RegelgevendDocHoofdstukBijlageRelatieHeeftOnderdeel
+map:RechtsbronBijlageHoofdstukRelatieIsDeelVan #Reverse van RechtsbronHoofdstukBijlageRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	Hoofdstuk.ID AS HoofdstukID,
 				Artikel.ID AS ArtikelID,
@@ -2349,13 +2349,13 @@ map:RegelgevendDocBijlageHoofdstukRelatieIsDeelVan #Reverse van RegelgevendDocHo
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/Bijlage/{"ArtikelVersieID"}'; #ArtikelVersieID is de VlacoID in RegelgevendDocArtikel 
+		rr:template 'https://codex.vlaanderen.be/id/Bijlage/{"ArtikelVersieID"}'; #ArtikelVersieID is de VlacoID in RechtsbronArtikel 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
 		rr:predicate eli:is_part_of; #is deel van
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocHoofdstuk; 
+			rr:parentTriplesMap map:RechtsbronHoofdstuk; 
 			rr:joinCondition [
 				rr:child 'HoofdstukID';
 				rr:parent 'ID';
@@ -2364,9 +2364,9 @@ map:RegelgevendDocBijlageHoofdstukRelatieIsDeelVan #Reverse van RegelgevendDocHo
 	].
 
 #-----------------------------------------
-#Onderdeel 1.11: Mappings van de Artikel -> Artikel relaties van RegelgevendDoc-subdivisies
+#Onderdeel 1.11: Mappings van de Artikel -> Artikel relaties van Rechtsbrononderdelen
 
-map:RegelgevendDocArtikelArtikelRelatieVeranderdDoor
+map:RechtsbronArtikelArtikelRelatieVeranderdDoor
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2386,7 +2386,7 @@ map:RegelgevendDocArtikelArtikelRelatieVeranderdDoor
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2394,7 +2394,7 @@ map:RegelgevendDocArtikelArtikelRelatieVeranderdDoor
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieVervangenBij
+map:RechtsbronArtikelArtikelRelatieVervangenBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2414,7 +2414,7 @@ map:RegelgevendDocArtikelArtikelRelatieVervangenBij
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Vervangen bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2422,7 +2422,7 @@ map:RegelgevendDocArtikelArtikelRelatieVervangenBij
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieIngevoegdBij
+map:RechtsbronArtikelArtikelRelatieIngevoegdBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2442,7 +2442,7 @@ map:RegelgevendDocArtikelArtikelRelatieIngevoegdBij
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Ingevoegd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2450,7 +2450,7 @@ map:RegelgevendDocArtikelArtikelRelatieIngevoegdBij
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieOpgehevenBij
+map:RechtsbronArtikelArtikelRelatieOpgehevenBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2470,7 +2470,7 @@ map:RegelgevendDocArtikelArtikelRelatieOpgehevenBij
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Opgeheven bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2478,7 +2478,7 @@ map:RegelgevendDocArtikelArtikelRelatieOpgehevenBij
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBij
+map:RechtsbronArtikelArtikelRelatieIngetrokkenBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2498,7 +2498,7 @@ map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBij
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Ingetrokken bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2506,7 +2506,7 @@ map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBij
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieBekrachtigdBij
+map:RechtsbronArtikelArtikelRelatieBekrachtigdBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2526,7 +2526,7 @@ map:RegelgevendDocArtikelArtikelRelatieBekrachtigdBij
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2534,7 +2534,7 @@ map:RegelgevendDocArtikelArtikelRelatieBekrachtigdBij
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieZieOok
+map:RechtsbronArtikelArtikelRelatieZieOok
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2554,7 +2554,7 @@ map:RegelgevendDocArtikelArtikelRelatieZieOok
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2562,7 +2562,7 @@ map:RegelgevendDocArtikelArtikelRelatieZieOok
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieVerandert
+map:RechtsbronArtikelArtikelRelatieVerandert
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2582,7 +2582,7 @@ map:RegelgevendDocArtikelArtikelRelatieVerandert
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2590,7 +2590,7 @@ map:RegelgevendDocArtikelArtikelRelatieVerandert
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieVervangt
+map:RechtsbronArtikelArtikelRelatieVervangt
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2610,7 +2610,7 @@ map:RegelgevendDocArtikelArtikelRelatieVervangt
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Vervangt
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2618,7 +2618,7 @@ map:RegelgevendDocArtikelArtikelRelatieVervangt
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieVoegtIn
+map:RechtsbronArtikelArtikelRelatieVoegtIn
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2638,7 +2638,7 @@ map:RegelgevendDocArtikelArtikelRelatieVoegtIn
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Voegt in
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2646,7 +2646,7 @@ map:RegelgevendDocArtikelArtikelRelatieVoegtIn
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieHeftOp
+map:RechtsbronArtikelArtikelRelatieHeftOp
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2666,7 +2666,7 @@ map:RegelgevendDocArtikelArtikelRelatieHeftOp
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Heft op
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2674,7 +2674,7 @@ map:RegelgevendDocArtikelArtikelRelatieHeftOp
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieBekrachtigt 
+map:RechtsbronArtikelArtikelRelatieBekrachtigt 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2694,7 +2694,7 @@ map:RegelgevendDocArtikelArtikelRelatieBekrachtigt
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2702,7 +2702,7 @@ map:RegelgevendDocArtikelArtikelRelatieBekrachtigt
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieTrektIn
+map:RechtsbronArtikelArtikelRelatieTrektIn
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -2722,7 +2722,7 @@ map:RegelgevendDocArtikelArtikelRelatieTrektIn
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Trekt in
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2733,7 +2733,7 @@ map:RegelgevendDocArtikelArtikelRelatieTrektIn
 #-----------------------------------------
 #Onderdeel 1.11.1: Reverse mappings uit 1.11
 
-map:RegelgevendDocArtikelArtikelRelatieVeranderdDoorReverse
+map:RechtsbronArtikelArtikelRelatieVeranderdDoorReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -2753,7 +2753,7 @@ map:RegelgevendDocArtikelArtikelRelatieVeranderdDoorReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt (reverse van gewijzigd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2761,7 +2761,7 @@ map:RegelgevendDocArtikelArtikelRelatieVeranderdDoorReverse
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieVervangenBijReverse
+map:RechtsbronArtikelArtikelRelatieVervangenBijReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -2781,7 +2781,7 @@ map:RegelgevendDocArtikelArtikelRelatieVervangenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Vervangt (reverse van Vervangen bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2789,7 +2789,7 @@ map:RegelgevendDocArtikelArtikelRelatieVervangenBijReverse
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieIngevoegdBijReverse
+map:RechtsbronArtikelArtikelRelatieIngevoegdBijReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -2809,7 +2809,7 @@ map:RegelgevendDocArtikelArtikelRelatieIngevoegdBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Voegt in (reverse van Ingevoegd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2817,7 +2817,7 @@ map:RegelgevendDocArtikelArtikelRelatieIngevoegdBijReverse
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieOpgehevenBijReverse
+map:RechtsbronArtikelArtikelRelatieOpgehevenBijReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -2837,7 +2837,7 @@ map:RegelgevendDocArtikelArtikelRelatieOpgehevenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Heft op (reverse van Opgeheven bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2845,7 +2845,7 @@ map:RegelgevendDocArtikelArtikelRelatieOpgehevenBijReverse
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBijReverse 
+map:RechtsbronArtikelArtikelRelatieIngetrokkenBijReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -2865,7 +2865,7 @@ map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Trekt in (reverse van Ingetrokken bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2873,7 +2873,7 @@ map:RegelgevendDocArtikelArtikelRelatieIngetrokkenBijReverse
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieBekrachtigdBijReverse 
+map:RechtsbronArtikelArtikelRelatieBekrachtigdBijReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -2893,7 +2893,7 @@ map:RegelgevendDocArtikelArtikelRelatieBekrachtigdBijReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt (reverse van Bekrachtigd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2901,7 +2901,7 @@ map:RegelgevendDocArtikelArtikelRelatieBekrachtigdBijReverse
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieZieOokReverse
+map:RechtsbronArtikelArtikelRelatieZieOokReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -2921,7 +2921,7 @@ map:RegelgevendDocArtikelArtikelRelatieZieOokReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook (reverse van zie ook)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2929,7 +2929,7 @@ map:RegelgevendDocArtikelArtikelRelatieZieOokReverse
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieVerandertReverse
+map:RechtsbronArtikelArtikelRelatieVerandertReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -2949,7 +2949,7 @@ map:RegelgevendDocArtikelArtikelRelatieVerandertReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij (reverse van Wijzigt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2957,7 +2957,7 @@ map:RegelgevendDocArtikelArtikelRelatieVerandertReverse
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieVervangtReverse 
+map:RechtsbronArtikelArtikelRelatieVervangtReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -2977,7 +2977,7 @@ map:RegelgevendDocArtikelArtikelRelatieVervangtReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Vervangen bij (reverse van Vervangt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2985,7 +2985,7 @@ map:RegelgevendDocArtikelArtikelRelatieVervangtReverse
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieVoegtInReverse
+map:RechtsbronArtikelArtikelRelatieVoegtInReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3005,7 +3005,7 @@ map:RegelgevendDocArtikelArtikelRelatieVoegtInReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Ingevoegd bij (reverse van Voegt in)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3013,7 +3013,7 @@ map:RegelgevendDocArtikelArtikelRelatieVoegtInReverse
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieHeftOpReverse
+map:RechtsbronArtikelArtikelRelatieHeftOpReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3033,7 +3033,7 @@ map:RegelgevendDocArtikelArtikelRelatieHeftOpReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Opgeheven bij (reverse van Heft op)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3041,7 +3041,7 @@ map:RegelgevendDocArtikelArtikelRelatieHeftOpReverse
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieBekrachtigtReverse 
+map:RechtsbronArtikelArtikelRelatieBekrachtigtReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3061,7 +3061,7 @@ map:RegelgevendDocArtikelArtikelRelatieBekrachtigtReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij (reverse van Bekrachtigt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3069,7 +3069,7 @@ map:RegelgevendDocArtikelArtikelRelatieBekrachtigtReverse
 		]
 	].
 
-map:RegelgevendDocArtikelArtikelRelatieTrektInReverse
+map:RechtsbronArtikelArtikelRelatieTrektInReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3089,7 +3089,7 @@ map:RegelgevendDocArtikelArtikelRelatieTrektInReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Ingetrokken bij (reverse van Trekt in)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3098,9 +3098,9 @@ map:RegelgevendDocArtikelArtikelRelatieTrektInReverse
 	].
 
 #-----------------------------------------
-#Onderdeel 1.12: Mappings van de Artikel -> Bijlage relaties van RegelgevendDoc(subdivisie)
+#Onderdeel 1.12: Mappings van de Artikel -> Bijlage relaties van Rechtsbron(onderdeel)
 
-map:RegelgevendDocArtikelBijlageRelatieVeranderdDoor 
+map:RechtsbronArtikelBijlageRelatieVeranderdDoor 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3120,7 +3120,7 @@ map:RegelgevendDocArtikelBijlageRelatieVeranderdDoor
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3128,7 +3128,7 @@ map:RegelgevendDocArtikelBijlageRelatieVeranderdDoor
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVervangenBij 
+map:RechtsbronArtikelBijlageRelatieVervangenBij 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3148,7 +3148,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangenBij
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Vervangen bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3156,7 +3156,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangenBij
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieIngevoegdBij 
+map:RechtsbronArtikelBijlageRelatieIngevoegdBij 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3176,7 +3176,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngevoegdBij
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Ingevoegd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3184,7 +3184,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngevoegdBij
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieOpgehevenBij 
+map:RechtsbronArtikelBijlageRelatieOpgehevenBij 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3204,7 +3204,7 @@ map:RegelgevendDocArtikelBijlageRelatieOpgehevenBij
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Opgeheven bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3212,7 +3212,7 @@ map:RegelgevendDocArtikelBijlageRelatieOpgehevenBij
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBij 
+map:RechtsbronArtikelBijlageRelatieIngetrokkenBij 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3232,7 +3232,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBij
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Ingetrokken bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3240,7 +3240,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBij
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBij 
+map:RechtsbronArtikelBijlageRelatieBekrachtigdBij 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3260,7 +3260,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBij
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3268,7 +3268,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBij
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieZieOok 
+map:RechtsbronArtikelBijlageRelatieZieOok 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3288,7 +3288,7 @@ map:RegelgevendDocArtikelBijlageRelatieZieOok
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3296,7 +3296,7 @@ map:RegelgevendDocArtikelBijlageRelatieZieOok
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVerandert 
+map:RechtsbronArtikelBijlageRelatieVerandert 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3316,7 +3316,7 @@ map:RegelgevendDocArtikelBijlageRelatieVerandert
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3324,7 +3324,7 @@ map:RegelgevendDocArtikelBijlageRelatieVerandert
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVervangt 
+map:RechtsbronArtikelBijlageRelatieVervangt 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3344,7 +3344,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangt
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Vervangt
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3352,7 +3352,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangt
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVoegtIn 
+map:RechtsbronArtikelBijlageRelatieVoegtIn 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3372,7 +3372,7 @@ map:RegelgevendDocArtikelBijlageRelatieVoegtIn
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Voegt in
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3380,7 +3380,7 @@ map:RegelgevendDocArtikelBijlageRelatieVoegtIn
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieHeftOp 
+map:RechtsbronArtikelBijlageRelatieHeftOp 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3400,7 +3400,7 @@ map:RegelgevendDocArtikelBijlageRelatieHeftOp
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Heft op
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3408,7 +3408,7 @@ map:RegelgevendDocArtikelBijlageRelatieHeftOp
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieBekrachtigt 
+map:RechtsbronArtikelBijlageRelatieBekrachtigt 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3428,7 +3428,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigt
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3436,7 +3436,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigt
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieTrektIn 
+map:RechtsbronArtikelBijlageRelatieTrektIn 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3456,7 +3456,7 @@ map:RegelgevendDocArtikelBijlageRelatieTrektIn
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Trekt in
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3465,9 +3465,9 @@ map:RegelgevendDocArtikelBijlageRelatieTrektIn
 	].
 
 #-----------------------------------------
-#Onderdeel 1.12.1: Mappings van de Bijlage -> Artikel relaties van RegelgevendDoc(subdivisie) (Reverse mappings uit 1.12)
+#Onderdeel 1.12.1: Mappings van de Bijlage -> Artikel relaties van Rechtsbron(onderdeel) (Reverse mappings uit 1.12)
 
-map:RegelgevendDocArtikelBijlageRelatieVeranderdDoorReverse 
+map:RechtsbronArtikelBijlageRelatieVeranderdDoorReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3487,7 +3487,7 @@ map:RegelgevendDocArtikelBijlageRelatieVeranderdDoorReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt (reverse van gewijzigd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3495,7 +3495,7 @@ map:RegelgevendDocArtikelBijlageRelatieVeranderdDoorReverse
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVervangenBijReverse 
+map:RechtsbronArtikelBijlageRelatieVervangenBijReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3515,7 +3515,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Vervangt (reverse van Vervangen bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3523,7 +3523,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangenBijReverse
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieIngevoegdBijReverse 
+map:RechtsbronArtikelBijlageRelatieIngevoegdBijReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3543,7 +3543,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngevoegdBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Voegt in (reverse van Ingevoegd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3551,7 +3551,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngevoegdBijReverse
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieOpgehevenBijReverse 
+map:RechtsbronArtikelBijlageRelatieOpgehevenBijReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3571,7 +3571,7 @@ map:RegelgevendDocArtikelBijlageRelatieOpgehevenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Heft op (reverse van Opgeheven bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3579,7 +3579,7 @@ map:RegelgevendDocArtikelBijlageRelatieOpgehevenBijReverse
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBijReverse 
+map:RechtsbronArtikelBijlageRelatieIngetrokkenBijReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3599,7 +3599,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Trekt in (reverse van Ingetrokken bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3607,7 +3607,7 @@ map:RegelgevendDocArtikelBijlageRelatieIngetrokkenBijReverse
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBijReverse 
+map:RechtsbronArtikelBijlageRelatieBekrachtigdBijReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3627,7 +3627,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBijReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt (reverse van Bekrachtigd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3635,7 +3635,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigdBijReverse
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieZieOokReverse 
+map:RechtsbronArtikelBijlageRelatieZieOokReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3655,7 +3655,7 @@ map:RegelgevendDocArtikelBijlageRelatieZieOokReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook (reverse van zie ook)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3663,7 +3663,7 @@ map:RegelgevendDocArtikelBijlageRelatieZieOokReverse
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVerandertReverse 
+map:RechtsbronArtikelBijlageRelatieVerandertReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3683,7 +3683,7 @@ map:RegelgevendDocArtikelBijlageRelatieVerandertReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij (reverse van Wijzigt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3691,7 +3691,7 @@ map:RegelgevendDocArtikelBijlageRelatieVerandertReverse
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVervangtReverse 
+map:RechtsbronArtikelBijlageRelatieVervangtReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3711,7 +3711,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangtReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Vervangen bij (reverse van Vervangt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3719,7 +3719,7 @@ map:RegelgevendDocArtikelBijlageRelatieVervangtReverse
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieVoegtInReverse 
+map:RechtsbronArtikelBijlageRelatieVoegtInReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3739,7 +3739,7 @@ map:RegelgevendDocArtikelBijlageRelatieVoegtInReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Ingevoegd bij (reverse van Voegt in)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3747,7 +3747,7 @@ map:RegelgevendDocArtikelBijlageRelatieVoegtInReverse
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieHeftOpReverse 
+map:RechtsbronArtikelBijlageRelatieHeftOpReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3767,7 +3767,7 @@ map:RegelgevendDocArtikelBijlageRelatieHeftOpReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Opgeheven bij (reverse van Heft op)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3775,7 +3775,7 @@ map:RegelgevendDocArtikelBijlageRelatieHeftOpReverse
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieBekrachtigtReverse 
+map:RechtsbronArtikelBijlageRelatieBekrachtigtReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3795,7 +3795,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigtReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij (reverse van Bekrachtigt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3803,7 +3803,7 @@ map:RegelgevendDocArtikelBijlageRelatieBekrachtigtReverse
 		]
 	].
 
-map:RegelgevendDocArtikelBijlageRelatieTrektInReverse 
+map:RechtsbronArtikelBijlageRelatieTrektInReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -3823,7 +3823,7 @@ map:RegelgevendDocArtikelBijlageRelatieTrektInReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Ingetrokken bij (reverse van Trekt in)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3832,9 +3832,9 @@ map:RegelgevendDocArtikelBijlageRelatieTrektInReverse
 	].
 
 #-----------------------------------------
-#Onderdeel 1.13: Mappings van de Bijlage -> Bijlage relaties van RegelgevendDoc(subdivisie)
+#Onderdeel 1.13: Mappings van de Bijlage -> Bijlage relaties van Rechtsbron(onderdeel)
 
-map:RegelgevendDocBijlageBijlageRelatieVeranderdDoor
+map:RechtsbronBijlageBijlageRelatieVeranderdDoor
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3854,7 +3854,7 @@ map:RegelgevendDocBijlageBijlageRelatieVeranderdDoor
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3862,7 +3862,7 @@ map:RegelgevendDocBijlageBijlageRelatieVeranderdDoor
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieVervangenBij
+map:RechtsbronBijlageBijlageRelatieVervangenBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3882,7 +3882,7 @@ map:RegelgevendDocBijlageBijlageRelatieVervangenBij
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Vervangen bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3890,7 +3890,7 @@ map:RegelgevendDocBijlageBijlageRelatieVervangenBij
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieIngevoegdBij
+map:RechtsbronBijlageBijlageRelatieIngevoegdBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3910,7 +3910,7 @@ map:RegelgevendDocBijlageBijlageRelatieIngevoegdBij
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Ingevoegd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3918,7 +3918,7 @@ map:RegelgevendDocBijlageBijlageRelatieIngevoegdBij
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieOpgehevenBij
+map:RechtsbronBijlageBijlageRelatieOpgehevenBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3938,7 +3938,7 @@ map:RegelgevendDocBijlageBijlageRelatieOpgehevenBij
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Opgeheven bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3946,7 +3946,7 @@ map:RegelgevendDocBijlageBijlageRelatieOpgehevenBij
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieIngetrokkenBij 
+map:RechtsbronBijlageBijlageRelatieIngetrokkenBij 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3966,7 +3966,7 @@ map:RegelgevendDocBijlageBijlageRelatieIngetrokkenBij
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Ingetrokken bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3974,7 +3974,7 @@ map:RegelgevendDocBijlageBijlageRelatieIngetrokkenBij
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieBekrachtigdBij 
+map:RechtsbronBijlageBijlageRelatieBekrachtigdBij 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -3994,7 +3994,7 @@ map:RegelgevendDocBijlageBijlageRelatieBekrachtigdBij
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4002,7 +4002,7 @@ map:RegelgevendDocBijlageBijlageRelatieBekrachtigdBij
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieZieOok
+map:RechtsbronBijlageBijlageRelatieZieOok
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -4022,7 +4022,7 @@ map:RegelgevendDocBijlageBijlageRelatieZieOok
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4030,7 +4030,7 @@ map:RegelgevendDocBijlageBijlageRelatieZieOok
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieVerandert
+map:RechtsbronBijlageBijlageRelatieVerandert
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -4050,7 +4050,7 @@ map:RegelgevendDocBijlageBijlageRelatieVerandert
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4058,7 +4058,7 @@ map:RegelgevendDocBijlageBijlageRelatieVerandert
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieVervangt 
+map:RechtsbronBijlageBijlageRelatieVervangt 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -4078,7 +4078,7 @@ map:RegelgevendDocBijlageBijlageRelatieVervangt
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Vervangt
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4086,7 +4086,7 @@ map:RegelgevendDocBijlageBijlageRelatieVervangt
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieVoegtIn
+map:RechtsbronBijlageBijlageRelatieVoegtIn
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -4106,7 +4106,7 @@ map:RegelgevendDocBijlageBijlageRelatieVoegtIn
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Voegt in
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4114,7 +4114,7 @@ map:RegelgevendDocBijlageBijlageRelatieVoegtIn
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieHeftOp
+map:RechtsbronBijlageBijlageRelatieHeftOp
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -4134,7 +4134,7 @@ map:RegelgevendDocBijlageBijlageRelatieHeftOp
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Heft op
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4142,7 +4142,7 @@ map:RegelgevendDocBijlageBijlageRelatieHeftOp
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieBekrachtigt 
+map:RechtsbronBijlageBijlageRelatieBekrachtigt 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -4162,7 +4162,7 @@ map:RegelgevendDocBijlageBijlageRelatieBekrachtigt
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4170,7 +4170,7 @@ map:RegelgevendDocBijlageBijlageRelatieBekrachtigt
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieTrektIn
+map:RechtsbronBijlageBijlageRelatieTrektIn
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
 				ArtikelVersie1.id AS VlacoID
@@ -4190,7 +4190,7 @@ map:RegelgevendDocBijlageBijlageRelatieTrektIn
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Trekt in
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4201,7 +4201,7 @@ map:RegelgevendDocBijlageBijlageRelatieTrektIn
 #-----------------------------------------
 #Onderdeel 1.13.1: Reverse mappings uit 1.13
 
-map:RegelgevendDocBijlageBijlageRelatieVeranderdDoorReverse
+map:RechtsbronBijlageBijlageRelatieVeranderdDoorReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -4221,7 +4221,7 @@ map:RegelgevendDocBijlageBijlageRelatieVeranderdDoorReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt (reverse van gewijzigd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4229,7 +4229,7 @@ map:RegelgevendDocBijlageBijlageRelatieVeranderdDoorReverse
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieVervangenBijReverse
+map:RechtsbronBijlageBijlageRelatieVervangenBijReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -4249,7 +4249,7 @@ map:RegelgevendDocBijlageBijlageRelatieVervangenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Vervangt (reverse van Vervangen bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4257,7 +4257,7 @@ map:RegelgevendDocBijlageBijlageRelatieVervangenBijReverse
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieIngevoegdBijReverse
+map:RechtsbronBijlageBijlageRelatieIngevoegdBijReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -4277,7 +4277,7 @@ map:RegelgevendDocBijlageBijlageRelatieIngevoegdBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Voegt in (reverse van Ingevoegd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4285,7 +4285,7 @@ map:RegelgevendDocBijlageBijlageRelatieIngevoegdBijReverse
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieOpgehevenBijReverse
+map:RechtsbronBijlageBijlageRelatieOpgehevenBijReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -4305,7 +4305,7 @@ map:RegelgevendDocBijlageBijlageRelatieOpgehevenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Heft op (reverse van Opgeheven bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4313,7 +4313,7 @@ map:RegelgevendDocBijlageBijlageRelatieOpgehevenBijReverse
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieIngetrokkenBijReverse 
+map:RechtsbronBijlageBijlageRelatieIngetrokkenBijReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -4333,7 +4333,7 @@ map:RegelgevendDocBijlageBijlageRelatieIngetrokkenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repeals; #Trekt in (reverse van Ingetrokken bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4341,7 +4341,7 @@ map:RegelgevendDocBijlageBijlageRelatieIngetrokkenBijReverse
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieBekrachtigdBijReverse 
+map:RechtsbronBijlageBijlageRelatieBekrachtigdBijReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -4361,7 +4361,7 @@ map:RegelgevendDocBijlageBijlageRelatieBekrachtigdBijReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt (reverse van Bekrachtigd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4369,7 +4369,7 @@ map:RegelgevendDocBijlageBijlageRelatieBekrachtigdBijReverse
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieZieOokReverse
+map:RechtsbronBijlageBijlageRelatieZieOokReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -4389,7 +4389,7 @@ map:RegelgevendDocBijlageBijlageRelatieZieOokReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook (reverse van zie ook)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4397,7 +4397,7 @@ map:RegelgevendDocBijlageBijlageRelatieZieOokReverse
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieVerandertReverse
+map:RechtsbronBijlageBijlageRelatieVerandertReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -4417,7 +4417,7 @@ map:RegelgevendDocBijlageBijlageRelatieVerandertReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij (reverse van Wijzigt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4425,7 +4425,7 @@ map:RegelgevendDocBijlageBijlageRelatieVerandertReverse
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieVervangtReverse 
+map:RechtsbronBijlageBijlageRelatieVervangtReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -4445,7 +4445,7 @@ map:RegelgevendDocBijlageBijlageRelatieVervangtReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Vervangen bij (reverse van Vervangt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4453,7 +4453,7 @@ map:RegelgevendDocBijlageBijlageRelatieVervangtReverse
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieVoegtInReverse
+map:RechtsbronBijlageBijlageRelatieVoegtInReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -4473,7 +4473,7 @@ map:RegelgevendDocBijlageBijlageRelatieVoegtInReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Ingevoegd bij (reverse van Voegt in)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4481,7 +4481,7 @@ map:RegelgevendDocBijlageBijlageRelatieVoegtInReverse
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieHeftOpReverse
+map:RechtsbronBijlageBijlageRelatieHeftOpReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -4501,7 +4501,7 @@ map:RegelgevendDocBijlageBijlageRelatieHeftOpReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Opgeheven bij (reverse van Heft op)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4509,7 +4509,7 @@ map:RegelgevendDocBijlageBijlageRelatieHeftOpReverse
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieBekrachtigtReverse 
+map:RechtsbronBijlageBijlageRelatieBekrachtigtReverse 
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -4529,7 +4529,7 @@ map:RegelgevendDocBijlageBijlageRelatieBekrachtigtReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij (reverse van Bekrachtigt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4537,7 +4537,7 @@ map:RegelgevendDocBijlageBijlageRelatieBekrachtigtReverse
 		]
 	].
 
-map:RegelgevendDocBijlageBijlageRelatieTrektInReverse
+map:RechtsbronBijlageBijlageRelatieTrektInReverse
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
 				ArtikelVersie2.id AS VlacoID
@@ -4557,7 +4557,7 @@ map:RegelgevendDocBijlageBijlageRelatieTrektInReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:repealed_by; #Ingetrokken bij (reverse van Trekt in)
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4629,7 +4629,7 @@ map:VerschijningsvormDocument
 	rr:predicateObjectMap [
 		rr:predicate eli:realizes; #realiseert
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocDocument; 
+			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VlacoID';
 				rr:parent 'id';
@@ -4729,7 +4729,7 @@ map:VerschijningsvormHoofdstuk
 	rr:predicateObjectMap [
 		rr:predicate eli:realizes; #realiseert
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocHoofdstuk; 
+			rr:parentTriplesMap map:RechtsbronHoofdstuk; 
 			rr:joinCondition [
 				rr:child 'HoofdstukID';
 				rr:parent 'ID';
@@ -4765,7 +4765,7 @@ map:VerschijningsvormArtikel
 	rr:predicateObjectMap [
 		rr:predicate eli:realizes; #realiseert
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'VlacoID';
 				rr:parent 'ID';
@@ -4831,7 +4831,7 @@ map:VerschijningsvormBijlage
 	rr:predicateObjectMap [
 		rr:predicate eli:realizes; #realiseert
 		rr:objectMap [
-			rr:parentTriplesMap map:RegelgevendDocBijlage; 
+			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'VlacoID';
 				rr:parent 'ID';
