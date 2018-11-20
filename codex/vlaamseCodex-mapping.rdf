@@ -29,7 +29,7 @@ map:RechtsbronDocument
 	rr:subjectMap [
 		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"ID"}'; 
 		rr:class eli:LegalResource; 
-	]
+	];
 	rr:predicateObjectMap [ 
 		rr:predicate eli:date_document; 
 		rr:objectMap [rr:column '"datumDocumentdatum"'];
