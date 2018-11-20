@@ -29,15 +29,7 @@ map:RechtsbronDocument
 	rr:subjectMap [
 		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"ID"}'; 
 		rr:class eli:LegalResource; 
-	];
-	rr:predicateObjectMap [ 
-		rr:predicate eli:first_date_entry_in_force; 
-		rr:objectMap [rr:column '"inwerkingtreding"'];
-	];
-	rr:predicateObjectMap [ 
-		rr:predicate eli:date_no_longer_in_force; 
-		rr:objectMap [rr:column '"buitenwerkingtreding"'];
-	];
+	]
 	rr:predicateObjectMap [ 
 		rr:predicate eli:date_document; 
 		rr:objectMap [rr:column '"datumDocumentdatum"'];
@@ -243,7 +235,7 @@ map:RechtsbronDocumentDocumentRelaties
 				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 4 THEN Document2.ID END ) AS trekt_in,
 				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 5 THEN Document2.ID END ) AS zie_ook,
 				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 6 THEN Document2.ID END ) AS gewijzigd_bij,
-				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 7 THEN Document2.ID END ) AS opgehoven_bij,
+				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 7 THEN Document2.ID END ) AS opgeheven_bij,
 				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 8 THEN Document2.ID END ) AS bekrachtigd_bij,
 				(CASE WHEN DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 9 THEN Document2.ID END ) AS ingetrokken_bij
 		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRegelgevendDocDocument WITH ( NOEXPAND )
@@ -2069,7 +2061,7 @@ map:RechtsbronBijlageBijlageRelatiesReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
-				rr:child 'gewijzigd_door';
+				rr:child 'gewijzigd_bij';
 				rr:parent 'ID';
 			]
 		]
