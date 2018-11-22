@@ -130,7 +130,7 @@ map:RechtsbronHoofdstuk
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -162,7 +162,7 @@ map:RechtsbronArtikel
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	];
@@ -203,7 +203,7 @@ map:RechtsbronBijlage
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	];
@@ -238,7 +238,7 @@ map:RechtsbronDocumentDocumentRelatieVerandert
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -260,7 +260,7 @@ map:RechtsbronDocumentDocumentRelatieHeftOp
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -282,7 +282,7 @@ map:RechtsbronDocumentDocumentRelatieBekrachtigt
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -304,7 +304,7 @@ map:RechtsbronDocumentDocumentRelatieTrektIn
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -326,7 +326,7 @@ map:RechtsbronDocumentDocumentRelatieZieOok
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -348,7 +348,7 @@ map:RechtsbronDocumentDocumentRelatieVeranderdDoor
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -370,7 +370,7 @@ map:RechtsbronDocumentDocumentRelatieOpgehevenBij
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -392,7 +392,7 @@ map:RechtsbronDocumentDocumentRelatieBekrachtigdBij
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -414,7 +414,7 @@ map:RechtsbronDocumentDocumentRelatieIngetrokkenBij
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -439,7 +439,7 @@ map:RechtsbronDocumentDocumentRelatieVerandertReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -461,7 +461,7 @@ map:RechtsbronDocumentDocumentRelatieHeftOpReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -483,7 +483,7 @@ map:RechtsbronDocumentDocumentRelatieBekrachtigtReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -505,7 +505,7 @@ map:RechtsbronDocumentDocumentRelatieTrektInReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -527,7 +527,7 @@ map:RechtsbronDocumentDocumentRelatieZieOokReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -549,7 +549,7 @@ map:RechtsbronDocumentDocumentRelatieVeranderdDoorReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -571,7 +571,7 @@ map:RechtsbronDocumentDocumentRelatieOpgehevenBijReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -593,7 +593,7 @@ map:RechtsbronDocumentDocumentRelatieBekrachtigdBijReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -615,7 +615,7 @@ map:RechtsbronDocumentDocumentRelatieIngetrokkenBijReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -933,7 +933,7 @@ map:RechtsbronDocumentArtikelRelatieVerandertReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'Identifier';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -956,7 +956,7 @@ map:RechtsbronDocumentArtikelRelatieHeftOpReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:parent 'Identifier';
-				rr:child 'ID';
+				rr:child 'Identifier';
 			]
 		]
 	].
@@ -979,7 +979,7 @@ map:RechtsbronDocumentArtikelRelatieBekrachtigtReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'Identifier';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -1002,7 +1002,7 @@ map:RechtsbronDocumentArtikelRelatieTrektInReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'Identifier';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -1025,7 +1025,7 @@ map:RechtsbronDocumentArtikelRelatieZieOokReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'Identifier';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -1048,7 +1048,7 @@ map:RechtsbronDocumentArtikelRelatieVeranderdDoorReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'Identifier';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -1071,7 +1071,7 @@ map:RechtsbronDocumentArtikelRelatieOpgehevenBijReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'Identifier';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -1094,7 +1094,7 @@ map:RechtsbronDocumentArtikelRelatieBekrachtigdBijReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'Identifier';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
@@ -1117,7 +1117,7 @@ map:RechtsbronDocumentArtikelRelatieIngetrokkenBijReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'Identifier';
-				rr:parent 'ID';
+				rr:parent 'Identifier';
 			]
 		]
 	].
