@@ -40,7 +40,7 @@ map:RechtsbronDocument
 			rr:parentTriplesMap map:VerschijningsvormDocument; 
 			rr:joinCondition [
 				rr:child 'RGDID';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -130,7 +130,7 @@ map:RechtsbronHoofdstuk
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -162,7 +162,7 @@ map:RechtsbronArtikel
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	];
@@ -203,7 +203,7 @@ map:RechtsbronBijlage
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VerbondenDocument';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	];
@@ -223,18 +223,9 @@ map:RechtsbronBijlage
 
 map:RechtsbronDocumentDocumentRelatieVerandert
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				Document2.ID AS DocumentRelatie
-		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
-		AND vwRechtsbronDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
-		AND Document2.Id = DocumentDocumentRelatie.WetgevingDocumentPassiefId
-		AND DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 1
+		SELECT *
+		FROM vwRechtsbronDocumentDocumentRelaties
+		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 1
 	"""
 	];
 	rr:subjectMap [
@@ -247,25 +238,16 @@ map:RechtsbronDocumentDocumentRelatieVerandert
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentDocumentRelatieHeftOp 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				Document2.ID AS DocumentRelatie
-		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
-		AND vwRechtsbronDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
-		AND Document2.Id = DocumentDocumentRelatie.WetgevingDocumentPassiefId
-		AND DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 2
+		SELECT *
+		FROM vwRechtsbronDocumentDocumentRelaties
+		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 2
 	"""
 	];
 	rr:subjectMap [
@@ -278,25 +260,16 @@ map:RechtsbronDocumentDocumentRelatieHeftOp
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentDocumentRelatieBekrachtigt 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				Document2.ID AS DocumentRelatie
-		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
-		AND vwRechtsbronDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
-		AND Document2.Id = DocumentDocumentRelatie.WetgevingDocumentPassiefId
-		AND DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 3
+		SELECT *
+		FROM vwRechtsbronDocumentDocumentRelaties
+		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 3
 	"""
 	];
 	rr:subjectMap [
@@ -309,25 +282,16 @@ map:RechtsbronDocumentDocumentRelatieBekrachtigt
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentDocumentRelatieTrektIn 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				Document2.ID AS DocumentRelatie
-		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
-		AND vwRechtsbronDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
-		AND Document2.Id = DocumentDocumentRelatie.WetgevingDocumentPassiefId
-		AND DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 4
+		SELECT *
+		FROM vwRechtsbronDocumentDocumentRelaties
+		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId =4
 	"""
 	];
 	rr:subjectMap [
@@ -340,25 +304,16 @@ map:RechtsbronDocumentDocumentRelatieTrektIn
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentDocumentRelatieZieOok
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				Document2.ID AS DocumentRelatie
-		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
-		AND vwRechtsbronDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
-		AND Document2.Id = DocumentDocumentRelatie.WetgevingDocumentPassiefId
-		AND DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 5
+		SELECT *
+		FROM vwRechtsbronDocumentDocumentRelaties
+		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 5
 	"""
 	];
 	rr:subjectMap [
@@ -371,25 +326,16 @@ map:RechtsbronDocumentDocumentRelatieZieOok
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentDocumentRelatieVeranderdDoor 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				Document2.ID AS DocumentRelatie
-		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
-		AND vwRechtsbronDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
-		AND Document2.Id = DocumentDocumentRelatie.WetgevingDocumentPassiefId
-		AND DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 6
+		SELECT *
+		FROM vwRechtsbronDocumentDocumentRelaties
+		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 6
 	"""
 	];
 	rr:subjectMap [
@@ -402,25 +348,16 @@ map:RechtsbronDocumentDocumentRelatieVeranderdDoor
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentDocumentRelatieOpgehevenBij
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				Document2.ID AS DocumentRelatie
-		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
-		AND vwRechtsbronDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
-		AND Document2.Id = DocumentDocumentRelatie.WetgevingDocumentPassiefId
-		AND DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 7
+		SELECT *
+		FROM vwRechtsbronDocumentDocumentRelaties
+		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 7
 	"""
 	];
 	rr:subjectMap [
@@ -433,25 +370,16 @@ map:RechtsbronDocumentDocumentRelatieOpgehevenBij
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentDocumentRelatieBekrachtigdBij
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				Document2.ID AS DocumentRelatie
-		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
-		AND vwRechtsbronDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
-		AND Document2.Id = DocumentDocumentRelatie.WetgevingDocumentPassiefId
-		AND DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 8
+		SELECT *
+		FROM vwRechtsbronDocumentDocumentRelaties
+		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 8
 	"""
 	];
 	rr:subjectMap [
@@ -464,25 +392,16 @@ map:RechtsbronDocumentDocumentRelatieBekrachtigdBij
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentDocumentRelatieIngetrokkenBij 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				Document2.ID AS DocumentRelatie
-		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
-		AND vwRechtsbronDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
-		AND Document2.Id = DocumentDocumentRelatie.WetgevingDocumentPassiefId
-		AND DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 9
+		SELECT *
+		FROM vwRechtsbronDocumentDocumentRelaties
+		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 9
 	"""
 	];
 	rr:subjectMap [
@@ -495,7 +414,7 @@ map:RechtsbronDocumentDocumentRelatieIngetrokkenBij
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -505,18 +424,9 @@ map:RechtsbronDocumentDocumentRelatieIngetrokkenBij
 
 map:RechtsbronDocumentDocumentRelatieVerandertReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				vwRechtsbronDocument.RGDID AS DocumentRelatie
-		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
-		AND vwRechtsbronDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
-		AND Document2.Id = DocumentDocumentRelatie.WetgevingDocumentPassiefId
-		AND DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 1
+		SELECT *
+		FROM vwRechtsbronDocumentDocumentRelaties
+		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 1
 	"""
 	];
 	rr:subjectMap [
@@ -529,25 +439,16 @@ map:RechtsbronDocumentDocumentRelatieVerandertReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentDocumentRelatieHeftOpReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				vwRechtsbronDocument.RGDID AS DocumentRelatie
-		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
-		AND vwRechtsbronDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
-		AND Document2.Id = DocumentDocumentRelatie.WetgevingDocumentPassiefId
-		AND DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 2
+		SELECT *
+		FROM vwRechtsbronDocumentDocumentRelaties
+		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 2
 	"""
 	];
 	rr:subjectMap [
@@ -560,25 +461,16 @@ map:RechtsbronDocumentDocumentRelatieHeftOpReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentDocumentRelatieBekrachtigtReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				vwRechtsbronDocument.RGDID AS DocumentRelatie
-		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
-		AND vwRechtsbronDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
-		AND Document2.Id = DocumentDocumentRelatie.WetgevingDocumentPassiefId
-		AND DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 3
+		SELECT *
+		FROM vwRechtsbronDocumentDocumentRelaties
+		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 3
 	"""
 	];
 	rr:subjectMap [
@@ -591,25 +483,16 @@ map:RechtsbronDocumentDocumentRelatieBekrachtigtReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentDocumentRelatieTrektInReverse 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				vwRechtsbronDocument.RGDID AS DocumentRelatie
-		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
-		AND vwRechtsbronDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
-		AND Document2.Id = DocumentDocumentRelatie.WetgevingDocumentPassiefId
-		AND DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 4
+		SELECT *
+		FROM vwRechtsbronDocumentDocumentRelaties
+		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 4
 	"""
 	];
 	rr:subjectMap [
@@ -622,25 +505,16 @@ map:RechtsbronDocumentDocumentRelatieTrektInReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentDocumentRelatieZieOokReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				vwRechtsbronDocument.RGDID AS DocumentRelatie
-		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
-		AND vwRechtsbronDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
-		AND Document2.Id = DocumentDocumentRelatie.WetgevingDocumentPassiefId
-		AND DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 5
+		SELECT *
+		FROM vwRechtsbronDocumentDocumentRelaties
+		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 5
 	"""
 	];
 	rr:subjectMap [
@@ -653,25 +527,16 @@ map:RechtsbronDocumentDocumentRelatieZieOokReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentDocumentRelatieVeranderdDoorReverse 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				vwRechtsbronDocument.RGDID AS DocumentRelatie
-		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
-		AND vwRechtsbronDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
-		AND Document2.Id = DocumentDocumentRelatie.WetgevingDocumentPassiefId
-		AND DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 6
+		SELECT *
+		FROM vwRechtsbronDocumentDocumentRelaties
+		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 6
 	"""
 	];
 	rr:subjectMap [
@@ -684,25 +549,16 @@ map:RechtsbronDocumentDocumentRelatieVeranderdDoorReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentDocumentRelatieOpgehevenBijReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				vwRechtsbronDocument.RGDID AS DocumentRelatie
-		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
-		AND vwRechtsbronDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
-		AND Document2.Id = DocumentDocumentRelatie.WetgevingDocumentPassiefId
-		AND DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 7
+		SELECT *
+		FROM vwRechtsbronDocumentDocumentRelaties
+		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 7
 	"""
 	];
 	rr:subjectMap [
@@ -715,25 +571,16 @@ map:RechtsbronDocumentDocumentRelatieOpgehevenBijReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentDocumentRelatieBekrachtigdBijReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				vwRechtsbronDocument.RGDID AS DocumentRelatie
-		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
-		AND vwRechtsbronDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
-		AND Document2.Id = DocumentDocumentRelatie.WetgevingDocumentPassiefId
-		AND DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 8
+		SELECT *
+		FROM vwRechtsbronDocumentDocumentRelaties
+		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 8
 	"""
 	];
 	rr:subjectMap [
@@ -746,25 +593,16 @@ map:RechtsbronDocumentDocumentRelatieBekrachtigdBijReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentDocumentRelatieIngetrokkenBijReverse 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				vwRechtsbronDocument.RGDID AS DocumentRelatie
-		FROM WetgevingDocument as Document2, WetgevingDocumentDocumentRelatie as DocumentDocumentRelatie, WetgevingDocumentDocumentRelatieType as DocumentDocumentRelatieType, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentDocumentRelatieType.Id = DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId
-		AND vwRechtsbronDocument.RGDID = DocumentDocumentRelatie.WetgevingDocumentActiefId
-		AND Document2.Id = DocumentDocumentRelatie.WetgevingDocumentPassiefId
-		AND DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId = 9
+		SELECT *
+		FROM vwRechtsbronDocumentDocumentRelaties
+		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 9
 	"""
 	];
 	rr:subjectMap [
@@ -777,7 +615,7 @@ map:RechtsbronDocumentDocumentRelatieIngetrokkenBijReverse
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'DocumentRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -808,7 +646,7 @@ map:RechtsbronDocumentHoofdstukRelatieHeeftOnderdeel
 			rr:parentTriplesMap map:RechtsbronHoofdstuk; 
 			rr:joinCondition [
 				rr:child 'HoofdstukID';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -839,7 +677,7 @@ map:RechtsbronDocumentArtikelRelatieHeeftOnderdeel
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelID';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -868,7 +706,7 @@ map:RechtsbronDocumentBijlageRelatieHeeftOnderdeel
 			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -878,19 +716,9 @@ map:RechtsbronDocumentBijlageRelatieHeeftOnderdeel
 
 map:RechtsbronDocumentArtikelRelatieVerandert 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				WetgevingArtikelVersie.ID AS ArtikelRelatie
-		FROM WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND vwRechtsbronDocument.Identifier = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 1
-		AND NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+		SELECT *
+		FROM vwRechtsbronDocumentArtikelRelaties
+		WHERE vwRechtsbronDocumentArtikelRelaties.RelatieTypeId = 1
 	"""
 	];
 	rr:subjectMap [
@@ -903,26 +731,16 @@ map:RechtsbronDocumentArtikelRelatieVerandert
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentArtikelRelatieHeftOp 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				WetgevingArtikelVersie.ID AS ArtikelRelatie
-		FROM WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND vwRechtsbronDocument.Identifier = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 2
-		AND NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+		SELECT *
+		FROM vwRechtsbronDocumentArtikelRelaties
+		WHERE vwRechtsbronDocumentArtikelRelaties.RelatieTypeId = 2
 	"""
 	];
 	rr:subjectMap [
@@ -935,26 +753,16 @@ map:RechtsbronDocumentArtikelRelatieHeftOp
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentArtikelRelatieBekrachtigt 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				WetgevingArtikelVersie.ID AS ArtikelRelatie
-		FROM WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND vwRechtsbronDocument.Identifier = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 3
-		AND NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+		SELECT *
+		FROM vwRechtsbronDocumentArtikelRelaties
+		WHERE vwRechtsbronDocumentArtikelRelaties.RelatieTypeId = 3
 	"""
 	];
 	rr:subjectMap [
@@ -967,26 +775,16 @@ map:RechtsbronDocumentArtikelRelatieBekrachtigt
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentArtikelRelatieTrektIn 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				WetgevingArtikelVersie.ID AS ArtikelRelatie
-		FROM WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND vwRechtsbronDocument.Identifier = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 4
-		AND NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+		SELECT *
+		FROM vwRechtsbronDocumentArtikelRelaties
+		WHERE vwRechtsbronDocumentArtikelRelaties.RelatieTypeId = 4
 	"""
 	];
 	rr:subjectMap [
@@ -999,26 +797,16 @@ map:RechtsbronDocumentArtikelRelatieTrektIn
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentArtikelRelatieZieOok
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				WetgevingArtikelVersie.ID AS ArtikelRelatie
-		FROM WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND vwRechtsbronDocument.Identifier = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 5
-		AND NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+		SELECT *
+		FROM vwRechtsbronDocumentArtikelRelaties
+		WHERE vwRechtsbronDocumentArtikelRelaties.RelatieTypeId = 5
 	"""
 	];
 	rr:subjectMap [
@@ -1031,26 +819,16 @@ map:RechtsbronDocumentArtikelRelatieZieOok
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentArtikelRelatieVeranderdDoor 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				WetgevingArtikelVersie.ID AS ArtikelRelatie
-		FROM WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND vwRechtsbronDocument.Identifier = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 6
-		AND NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+		SELECT *
+		FROM vwRechtsbronDocumentArtikelRelaties
+		WHERE vwRechtsbronDocumentArtikelRelaties.RelatieTypeId = 6
 	"""
 	];
 	rr:subjectMap [
@@ -1063,26 +841,16 @@ map:RechtsbronDocumentArtikelRelatieVeranderdDoor
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentArtikelRelatieOpgehevenBij
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				WetgevingArtikelVersie.ID AS ArtikelRelatie
-		FROM WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND vwRechtsbronDocument.Identifier = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 7
-		AND NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+		SELECT *
+		FROM vwRechtsbronDocumentArtikelRelaties
+		WHERE vwRechtsbronDocumentArtikelRelaties.RelatieTypeId = 7
 	"""
 	];
 	rr:subjectMap [
@@ -1095,26 +863,16 @@ map:RechtsbronDocumentArtikelRelatieOpgehevenBij
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentArtikelRelatieBekrachtigdBij
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				WetgevingArtikelVersie.ID AS ArtikelRelatie
-		FROM WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND vwRechtsbronDocument.Identifier = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 8
-		AND NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+		SELECT *
+		FROM vwRechtsbronDocumentArtikelRelaties
+		WHERE vwRechtsbronDocumentArtikelRelaties.RelatieTypeId = 8
 	"""
 	];
 	rr:subjectMap [
@@ -1127,26 +885,16 @@ map:RechtsbronDocumentArtikelRelatieBekrachtigdBij
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentArtikelRelatieIngetrokkenBij 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				WetgevingArtikelVersie.ID AS ArtikelRelatie
-		FROM WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND vwRechtsbronDocument.Identifier = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 9
-		AND NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+		SELECT *
+		FROM vwRechtsbronDocumentArtikelRelaties
+		WHERE vwRechtsbronDocumentArtikelRelaties.RelatieTypeId = 9
 	"""
 	];
 	rr:subjectMap [
@@ -1159,7 +907,7 @@ map:RechtsbronDocumentArtikelRelatieIngetrokkenBij
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -1169,18 +917,14 @@ map:RechtsbronDocumentArtikelRelatieIngetrokkenBij
 
 map:RechtsbronDocumentArtikelRelatieVerandertReverse 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
-				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
-		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 1
-		AND NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+		SELECT 	Identifier,
+				ArtikelRelatie
+		FROM vwRechtsbronDocumentArtikelRelaties
+		WHERE vwRechtsbronDocumentArtikelRelaties.RelatieTypeId = 1
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"ArtikelRelatie"}'; 
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
@@ -1188,7 +932,7 @@ map:RechtsbronDocumentArtikelRelatieVerandertReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
-				rr:child 'VerbondenDocument';
+				rr:child 'Identifier';
 				rr:parent 'ID';
 			]
 		]
@@ -1196,18 +940,14 @@ map:RechtsbronDocumentArtikelRelatieVerandertReverse
 
 map:RechtsbronDocumentArtikelRelatieHeftOpReverse 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
-				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
-		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 2
-		AND NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+		SELECT 	Identifier,
+				ArtikelRelatie
+		FROM vwRechtsbronDocumentArtikelRelaties
+		WHERE vwRechtsbronDocumentArtikelRelaties.RelatieTypeId = 2
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"ArtikelRelatie"}'; 
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
@@ -1215,26 +955,22 @@ map:RechtsbronDocumentArtikelRelatieHeftOpReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
-				rr:child 'VerbondenDocument';
 				rr:parent 'Identifier';
+				rr:child 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentArtikelRelatieBekrachtigtReverse 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
-				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
-		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 3
-		AND NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+		SELECT 	Identifier,
+				ArtikelRelatie
+		FROM vwRechtsbronDocumentArtikelRelaties
+		WHERE vwRechtsbronDocumentArtikelRelaties.RelatieTypeId = 3
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"ArtikelRelatie"}'; 
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
@@ -1242,26 +978,22 @@ map:RechtsbronDocumentArtikelRelatieBekrachtigtReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
-				rr:child 'VerbondenDocument';
-				rr:parent 'Identifier';
+				rr:child 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentArtikelRelatieTrektInReverse 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
-				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
-		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 4
-		AND NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+		SELECT 	Identifier,
+				ArtikelRelatie
+		FROM vwRechtsbronDocumentArtikelRelaties
+		WHERE vwRechtsbronDocumentArtikelRelaties.RelatieTypeId = 4
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"ArtikelRelatie"}'; 
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
@@ -1269,26 +1001,22 @@ map:RechtsbronDocumentArtikelRelatieTrektInReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
-				rr:child 'VerbondenDocument';
-				rr:parent 'Identifier';
+				rr:child 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentArtikelRelatieZieOokReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
-				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
-		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 5
-		AND NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+		SELECT 	Identifier,
+				ArtikelRelatie
+		FROM vwRechtsbronDocumentArtikelRelaties
+		WHERE vwRechtsbronDocumentArtikelRelaties.RelatieTypeId = 5
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"ArtikelRelatie"}'; 
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
@@ -1296,26 +1024,22 @@ map:RechtsbronDocumentArtikelRelatieZieOokReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
-				rr:child 'VerbondenDocument';
-				rr:parent 'Identifier';
+				rr:child 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentArtikelRelatieVeranderdDoorReverse 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
-				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
-		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 6
-		AND NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+		SELECT 	Identifier,
+				ArtikelRelatie
+		FROM vwRechtsbronDocumentArtikelRelaties
+		WHERE vwRechtsbronDocumentArtikelRelaties.RelatieTypeId = 6
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"ArtikelRelatie"}'; 
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
@@ -1323,26 +1047,22 @@ map:RechtsbronDocumentArtikelRelatieVeranderdDoorReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
-				rr:child 'VerbondenDocument';
-				rr:parent 'Identifier';
+				rr:child 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentArtikelRelatieOpgehevenBijReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
-				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
-		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 7
-		AND NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+		SELECT 	Identifier,
+				ArtikelRelatie
+		FROM vwRechtsbronDocumentArtikelRelaties
+		WHERE vwRechtsbronDocumentArtikelRelaties.RelatieTypeId = 7
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"ArtikelRelatie"}'; 
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
@@ -1350,26 +1070,22 @@ map:RechtsbronDocumentArtikelRelatieOpgehevenBijReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
-				rr:child 'VerbondenDocument';
-				rr:parent 'Identifier';
+				rr:child 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentArtikelRelatieBekrachtigdBijReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
-				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
-		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 8
-		AND NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+		SELECT 	Identifier,
+				ArtikelRelatie
+		FROM vwRechtsbronDocumentArtikelRelaties
+		WHERE vwRechtsbronDocumentArtikelRelaties.RelatieTypeId = 8
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"ArtikelRelatie"}'; 
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
@@ -1377,26 +1093,22 @@ map:RechtsbronDocumentArtikelRelatieBekrachtigdBijReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
-				rr:child 'VerbondenDocument';
-				rr:parent 'Identifier';
+				rr:child 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
 
 map:RechtsbronDocumentArtikelRelatieIngetrokkenBijReverse 
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	WetgevingArtikelVersie.ID AS VlacoID,
-				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN Document.ID ELSE Document.Numac END) AS VerbondenDocument
-		FROM WetgevingDocument as Document, WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, WetgevingArtikelVersie
-		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
-		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
-		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
-		AND DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId = 9
-		AND NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+		SELECT 	Identifier,
+				ArtikelRelatie
+		FROM vwRechtsbronDocumentArtikelRelaties
+		WHERE vwRechtsbronDocumentArtikelRelaties.RelatieTypeId = 9
 	"""
 	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"ArtikelRelatie"}'; 
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
@@ -1404,8 +1116,8 @@ map:RechtsbronDocumentArtikelRelatieIngetrokkenBijReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
-				rr:child 'VerbondenDocument';
-				rr:parent 'Identifier';
+				rr:child 'Identifier';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -1433,7 +1145,7 @@ map:RechtsbronDocumentBijlageRelatieVerandert
 	"""
 	];
 	rr:subjectMap [
-		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"ID"}'; 
+		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"Identifier"}'; 
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1465,7 +1177,7 @@ map:RechtsbronDocumentBijlageRelatieHeftOp
 	"""
 	];
 	rr:subjectMap [
-		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"ID"}'; 
+		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"Identifier"}'; 
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1497,7 +1209,7 @@ map:RechtsbronDocumentBijlageRelatieBekrachtigt
 	"""
 	];
 	rr:subjectMap [
-		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"ID"}'; 
+		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"Identifier"}'; 
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1529,7 +1241,7 @@ map:RechtsbronDocumentBijlageRelatieTrektIn
 	"""
 	];
 	rr:subjectMap [
-		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"ID"}'; 
+		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"Identifier"}'; 
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1561,7 +1273,7 @@ map:RechtsbronDocumentBijlageRelatieZieOok
 	"""
 	];
 	rr:subjectMap [
-		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"ID"}'; 
+		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"Identifier"}'; 
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1593,7 +1305,7 @@ map:RechtsbronDocumentBijlageRelatieVeranderdDoor
 	"""
 	];
 	rr:subjectMap [
-		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"ID"}'; 
+		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"Identifier"}'; 
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1625,7 +1337,7 @@ map:RechtsbronDocumentBijlageRelatieOpgehevenBij
 	"""
 	];
 	rr:subjectMap [
-		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"ID"}'; 
+		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"Identifier"}'; 
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1657,7 +1369,7 @@ map:RechtsbronDocumentBijlageRelatieBekrachtigdBij
 	"""
 	];
 	rr:subjectMap [
-		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"ID"}'; 
+		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"Identifier"}'; 
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
@@ -1689,7 +1401,7 @@ map:RechtsbronDocumentBijlageRelatieIngetrokkenBij
 	"""
 	];
 	rr:subjectMap [
-		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"ID"}'; 
+		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"Identifier"}'; 
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
