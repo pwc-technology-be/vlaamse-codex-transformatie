@@ -826,7 +826,7 @@ map:RechtsbronDocumentArtikelRelatieVerandert
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	URLpart1,
 				Identifier,
-				datumDocumentDag,
+				datumDocumentJaar,
 				datumDocumentMaand,
 				datumDocumentDag,
 				typeDocumentURI,
@@ -854,7 +854,7 @@ map:RechtsbronDocumentArtikelRelatieHeftOp
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	URLpart1,
 				Identifier,
-				datumDocumentDag,
+				datumDocumentJaar,
 				datumDocumentMaand,
 				datumDocumentDag,
 				typeDocumentURI,
@@ -882,7 +882,7 @@ map:RechtsbronDocumentArtikelRelatieBekrachtigt
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	URLpart1,
 				Identifier,
-				datumDocumentDag,
+				datumDocumentJaar,
 				datumDocumentMaand,
 				datumDocumentDag,
 				typeDocumentURI,
@@ -910,7 +910,7 @@ map:RechtsbronDocumentArtikelRelatieTrektIn
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	URLpart1,
 				Identifier,
-				datumDocumentDag,
+				datumDocumentJaar,
 				datumDocumentMaand,
 				datumDocumentDag,
 				typeDocumentURI,
@@ -938,7 +938,7 @@ map:RechtsbronDocumentArtikelRelatieZieOok
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	URLpart1,
 				Identifier,
-				datumDocumentDag,
+				datumDocumentJaar,
 				datumDocumentMaand,
 				datumDocumentDag,
 				typeDocumentURI,
@@ -966,7 +966,7 @@ map:RechtsbronDocumentArtikelRelatieVeranderdDoor
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	URLpart1,
 				Identifier,
-				datumDocumentDag,
+				datumDocumentJaar,
 				datumDocumentMaand,
 				datumDocumentDag,
 				typeDocumentURI,
@@ -994,7 +994,7 @@ map:RechtsbronDocumentArtikelRelatieOpgehevenBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	URLpart1,
 				Identifier,
-				datumDocumentDag,
+				datumDocumentJaar,
 				datumDocumentMaand,
 				datumDocumentDag,
 				typeDocumentURI,
@@ -1022,7 +1022,7 @@ map:RechtsbronDocumentArtikelRelatieBekrachtigdBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	URLpart1,
 				Identifier,
-				datumDocumentDag,
+				datumDocumentJaar,
 				datumDocumentMaand,
 				datumDocumentDag,
 				typeDocumentURI,
@@ -1050,7 +1050,7 @@ map:RechtsbronDocumentArtikelRelatieIngetrokkenBij
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	URLpart1,
 				Identifier,
-				datumDocumentDag,
+				datumDocumentJaar,
 				datumDocumentMaand,
 				datumDocumentDag,
 				typeDocumentURI,
