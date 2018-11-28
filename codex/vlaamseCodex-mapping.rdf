@@ -230,8 +230,8 @@ map:RechtsbronDocumentDocumentRelatieVerandert
 				datumDocumentDag,
 				typeDocumentURI,
 				DocumentRelatie
-		FROM vwRechtsbronDocumentDocumentRelaties
-		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 1
+		FROM vwRechtsbronDocumentDocumentRelatiesA
+		WHERE RelatieTypeId = 1
 	"""
 	];
 	rr:subjectMap [
@@ -258,8 +258,8 @@ map:RechtsbronDocumentDocumentRelatieHeftOp
 				datumDocumentDag,
 				typeDocumentURI,
 				DocumentRelatie
-		FROM vwRechtsbronDocumentDocumentRelaties
-		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 2
+		FROM vwRechtsbronDocumentDocumentRelatiesA
+		WHERE RelatieTypeId = 2
 	"""
 	];
 	rr:subjectMap [
@@ -286,8 +286,8 @@ map:RechtsbronDocumentDocumentRelatieBekrachtigt
 				datumDocumentDag,
 				typeDocumentURI,
 				DocumentRelatie
-		FROM vwRechtsbronDocumentDocumentRelaties
-		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 3
+		FROM vwRechtsbronDocumentDocumentRelatiesA
+		WHERE RelatieTypeId = 3
 	"""
 	];
 	rr:subjectMap [
@@ -314,8 +314,8 @@ map:RechtsbronDocumentDocumentRelatieTrektIn
 				datumDocumentDag,
 				typeDocumentURI,
 				DocumentRelatie
-		FROM vwRechtsbronDocumentDocumentRelaties
-		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId =4
+		FROM vwRechtsbronDocumentDocumentRelatiesA
+		WHERE RelatieTypeId =4
 	"""
 	];
 	rr:subjectMap [
@@ -342,8 +342,8 @@ map:RechtsbronDocumentDocumentRelatieZieOok
 				datumDocumentDag,
 				typeDocumentURI,
 				DocumentRelatie
-		FROM vwRechtsbronDocumentDocumentRelaties
-		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 5
+		FROM vwRechtsbronDocumentDocumentRelatiesA
+		WHERE RelatieTypeId = 5
 	"""
 	];
 	rr:subjectMap [
@@ -370,8 +370,8 @@ map:RechtsbronDocumentDocumentRelatieVeranderdDoor
 				datumDocumentDag,
 				typeDocumentURI,
 				DocumentRelatie
-		FROM vwRechtsbronDocumentDocumentRelaties
-		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 6
+		FROM vwRechtsbronDocumentDocumentRelatiesA
+		WHERE RelatieTypeId = 6
 	"""
 	];
 	rr:subjectMap [
@@ -398,8 +398,8 @@ map:RechtsbronDocumentDocumentRelatieOpgehevenBij
 				datumDocumentDag,
 				typeDocumentURI,
 				DocumentRelatie
-		FROM vwRechtsbronDocumentDocumentRelaties
-		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 7
+		FROM vwRechtsbronDocumentDocumentRelatiesA
+		WHERE RelatieTypeId = 7
 	"""
 	];
 	rr:subjectMap [
@@ -426,8 +426,8 @@ map:RechtsbronDocumentDocumentRelatieBekrachtigdBij
 				datumDocumentDag,
 				typeDocumentURI,
 				DocumentRelatie
-		FROM vwRechtsbronDocumentDocumentRelaties
-		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 8
+		FROM vwRechtsbronDocumentDocumentRelatiesA
+		WHERE RelatieTypeId = 8
 	"""
 	];
 	rr:subjectMap [
@@ -454,8 +454,8 @@ map:RechtsbronDocumentDocumentRelatieIngetrokkenBij
 				datumDocumentDag,
 				typeDocumentURI,
 				DocumentRelatie
-		FROM vwRechtsbronDocumentDocumentRelaties
-		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 9
+		FROM vwRechtsbronDocumentDocumentRelatiesA
+		WHERE RelatieTypeId = 9
 	"""
 	];
 	rr:subjectMap [
@@ -485,8 +485,8 @@ map:RechtsbronDocumentDocumentRelatieVerandertReverse
 				datumDocumentDag,
 				typeDocumentURI,
 				DocumentRelatieReverse
-		FROM vwRechtsbronDocumentDocumentRelaties
-		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 1
+		FROM vwRechtsbronDocumentDocumentRelatiesP
+		WHERE RelatieTypeId = 1
 	"""
 	];
 	rr:subjectMap [
@@ -513,8 +513,8 @@ map:RechtsbronDocumentDocumentRelatieHeftOpReverse
 				datumDocumentDag,
 				typeDocumentURI,
 				DocumentRelatieReverse
-		FROM vwRechtsbronDocumentDocumentRelaties
-		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 2
+		FROM vwRechtsbronDocumentDocumentRelatiesP
+		WHERE RelatieTypeId = 2
 	"""
 	];
 	rr:subjectMap [
@@ -541,8 +541,8 @@ map:RechtsbronDocumentDocumentRelatieBekrachtigtReverse
 				datumDocumentDag,
 				typeDocumentURI,
 				DocumentRelatieReverse
-		FROM vwRechtsbronDocumentDocumentRelaties
-		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 3
+		FROM vwRechtsbronDocumentDocumentRelatiesP
+		WHERE RelatieTypeId = 3
 	"""
 	];
 	rr:subjectMap [
@@ -569,8 +569,8 @@ map:RechtsbronDocumentDocumentRelatieTrektInReverse
 				datumDocumentDag,
 				typeDocumentURI,
 				DocumentRelatieReverse
-		FROM vwRechtsbronDocumentDocumentRelaties
-		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 4
+		FROM vwRechtsbronDocumentDocumentRelatiesP
+		WHERE RelatieTypeId = 4
 	"""
 	];
 	rr:subjectMap [
@@ -597,8 +597,8 @@ map:RechtsbronDocumentDocumentRelatieZieOokReverse
 				datumDocumentDag,
 				typeDocumentURI,
 				DocumentRelatieReverse
-		FROM vwRechtsbronDocumentDocumentRelaties
-		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 5
+		FROM vwRechtsbronDocumentDocumentRelatiesP
+		WHERE RelatieTypeId = 5
 	"""
 	];
 	rr:subjectMap [
@@ -625,8 +625,8 @@ map:RechtsbronDocumentDocumentRelatieVeranderdDoorReverse
 				datumDocumentDag,
 				typeDocumentURI,
 				DocumentRelatieReverse
-		FROM vwRechtsbronDocumentDocumentRelaties
-		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 6
+		FROM vwRechtsbronDocumentDocumentRelatiesP
+		WHERE RelatieTypeId = 6
 	"""
 	];
 	rr:subjectMap [
@@ -653,8 +653,8 @@ map:RechtsbronDocumentDocumentRelatieOpgehevenBijReverse
 				datumDocumentDag,
 				typeDocumentURI,
 				DocumentRelatieReverse
-		FROM vwRechtsbronDocumentDocumentRelaties
-		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 7
+		FROM vwRechtsbronDocumentDocumentRelatiesP
+		WHERE RelatieTypeId = 7
 	"""
 	];
 	rr:subjectMap [
@@ -681,8 +681,8 @@ map:RechtsbronDocumentDocumentRelatieBekrachtigdBijReverse
 				datumDocumentDag,
 				typeDocumentURI,
 				DocumentRelatieReverse
-		FROM vwRechtsbronDocumentDocumentRelaties
-		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 8
+		FROM vwRechtsbronDocumentDocumentRelatiesP
+		WHERE RelatieTypeId = 8
 	"""
 	];
 	rr:subjectMap [
@@ -709,8 +709,8 @@ map:RechtsbronDocumentDocumentRelatieIngetrokkenBijReverse
 				datumDocumentDag,
 				typeDocumentURI,
 				DocumentRelatieReverse
-		FROM vwRechtsbronDocumentDocumentRelaties
-		WHERE vwRechtsbronDocumentDocumentRelaties.RelatieTypeId = 9
+		FROM vwRechtsbronDocumentDocumentRelatiesP
+		WHERE RelatieTypeId = 9
 	"""
 	];
 	rr:subjectMap [
