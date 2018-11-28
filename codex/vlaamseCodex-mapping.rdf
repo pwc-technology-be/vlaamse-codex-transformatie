@@ -1280,23 +1280,19 @@ map:RechtsbronArtikelEnBijlageHoofdstukRelatieIsDeelVan #Reverse van RechtsbronH
 	].
 
 #-----------------------------------------
-#Onderdeel 1.11: Mappings van de Artikel -> Artikel relaties van Rechtsbrononderdelen
+#Onderdeel 1.11: Mappings van de Artikel -> Artikel & Artikel -> Bijlage en Bijlage -> Bijlage relaties van Rechtsbrononderdelen
 
-map:RechtsbronArtikelArtikelRelatieVeranderdDoor
+map:RechtsbronArtikelEnBijlageRelatieGewijzigdBij
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel1Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 1
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel1Type"}/{"Artikel1ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -1304,27 +1300,23 @@ map:RechtsbronArtikelArtikelRelatieVeranderdDoor
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel2ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronArtikelArtikelRelatieVervangenBij
+map:RechtsbronArtikelEnBijlageRelatieVervangenBij
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel1Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 2
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel1Type"}/{"Artikel1ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -1332,27 +1324,23 @@ map:RechtsbronArtikelArtikelRelatieVervangenBij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel2ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronArtikelArtikelRelatieIngevoegdBij
+map:RechtsbronArtikelEnBijlageRelatieIngevoegdBij
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel1Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 3
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel1Type"}/{"Artikel1ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -1360,27 +1348,23 @@ map:RechtsbronArtikelArtikelRelatieIngevoegdBij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel2ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronArtikelArtikelRelatieOpgehevenBij
+map:RechtsbronArtikelEnBijlageRelatieOpgehevenBij
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel1Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 4
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel1Type"}/{"Artikel1ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -1388,27 +1372,23 @@ map:RechtsbronArtikelArtikelRelatieOpgehevenBij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel2ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronArtikelArtikelRelatieIngetrokkenBij
+map:RechtsbronArtikelEnBijlageRelatieIngetrokkenBij
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel1Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 5
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel1Type"}/{"Artikel1ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -1416,27 +1396,23 @@ map:RechtsbronArtikelArtikelRelatieIngetrokkenBij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel2ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronArtikelArtikelRelatieBekrachtigdBij
+map:RechtsbronArtikelEnBijlageRelatieBekrachtigdBij
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel1Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 6
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel1Type"}/{"Artikel1ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -1444,27 +1420,23 @@ map:RechtsbronArtikelArtikelRelatieBekrachtigdBij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel2ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronArtikelArtikelRelatieZieOok
+map:RechtsbronArtikelEnBijlageRelatieZieOok
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel1Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 7
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel1Type"}/{"Artikel1ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -1472,27 +1444,23 @@ map:RechtsbronArtikelArtikelRelatieZieOok
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel2ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronArtikelArtikelRelatieVerandert
+map:RechtsbronArtikelEnBijlageRelatieWijzigt
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel1Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 8
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel1Type"}/{"Artikel1ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -1500,27 +1468,23 @@ map:RechtsbronArtikelArtikelRelatieVerandert
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel2ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronArtikelArtikelRelatieVervangt
+map:RechtsbronArtikelEnBijlageRelatieVervangt
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel1Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 9
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel1Type"}/{"Artikel1ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -1528,27 +1492,23 @@ map:RechtsbronArtikelArtikelRelatieVervangt
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel2ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronArtikelArtikelRelatieVoegtIn
+map:RechtsbronArtikelEnBijlageRelatieVoegtIn
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel1Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 10
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel1Type"}/{"Artikel1ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -1556,27 +1516,23 @@ map:RechtsbronArtikelArtikelRelatieVoegtIn
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel2ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronArtikelArtikelRelatieHeftOp
+map:RechtsbronArtikelEnBijlageRelatieHeftOp
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel1Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 11
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel1Type"}/{"Artikel1ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -1584,27 +1540,23 @@ map:RechtsbronArtikelArtikelRelatieHeftOp
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel2ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronArtikelArtikelRelatieBekrachtigt 
+map:RechtsbronArtikelEnBijlageRelatieBekrachtigt
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel1Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 12
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel1Type"}/{"Artikel1ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -1612,27 +1564,23 @@ map:RechtsbronArtikelArtikelRelatieBekrachtigt
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel2ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronArtikelArtikelRelatieTrektIn
+map:RechtsbronArtikelEnBijlageRelatieTrektIn
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel1Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 13
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel1Type"}/{"Artikel1ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -1640,7 +1588,7 @@ map:RechtsbronArtikelArtikelRelatieTrektIn
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel2ID';
 				rr:parent 'ID';
 			]
 		]
@@ -1649,21 +1597,17 @@ map:RechtsbronArtikelArtikelRelatieTrektIn
 #-----------------------------------------
 #Onderdeel 1.11.1: Reverse mappings uit 1.11
 
-map:RechtsbronArtikelArtikelRelatieVeranderdDoorReverse
+map:RechtsbronArtikelEnBijlageRelatieGewijzigdBijReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel2Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 1
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel2Type"}/{"Artikel2ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -1671,27 +1615,23 @@ map:RechtsbronArtikelArtikelRelatieVeranderdDoorReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel1ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronArtikelArtikelRelatieVervangenBijReverse
+map:RechtsbronArtikelEnBijlageRelatieVervangenBijReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel2Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 2
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel2Type"}/{"Artikel2ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -1699,1475 +1639,7 @@ map:RechtsbronArtikelArtikelRelatieVervangenBijReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelArtikelRelatieIngevoegdBijReverse
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:amends; #Voegt in (reverse van Ingevoegd bij)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelArtikelRelatieOpgehevenBijReverse
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:heft_op; #Heft op (reverse van Opgeheven bij)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelArtikelRelatieIngetrokkenBijReverse 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:trektIn; #Trekt in (reverse van Ingetrokken bij)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelArtikelRelatieBekrachtigdBijReverse 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigt; #Bekrachtigt (reverse van Bekrachtigd bij)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelArtikelRelatieZieOokReverse
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:related_to; #zie ook (reverse van zie ook)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelArtikelRelatieVerandertReverse
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:amended_by; #Gewijzigd bij (reverse van Wijzigt)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelArtikelRelatieVervangtReverse 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:vervangenBij; #Vervangen bij (reverse van Vervangt)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelArtikelRelatieVoegtInReverse
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:amended_by; #Ingevoegd bij (reverse van Voegt in)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelArtikelRelatieHeftOpReverse
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:opgehevenBij; #Opgeheven bij (reverse van Heft op)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelArtikelRelatieBekrachtigtReverse 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij (reverse van Bekrachtigt)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelArtikelRelatieTrektInReverse
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND NOT ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij (reverse van Trekt in)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-#-----------------------------------------
-#Onderdeel 1.12: Mappings van de Artikel -> Bijlage relaties van Rechtsbron(onderdeel)
-
-map:RechtsbronArtikelBijlageRelatieVeranderdDoor 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:amended_by; #Gewijzigd bij
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieVervangenBij 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:vervangenBij; #Vervangen bij
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieIngevoegdBij 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:amended_by; #Ingevoegd bij
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieOpgehevenBij 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:opgehevenBij; #Opgeheven bij
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieIngetrokkenBij 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieBekrachtigdBij 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieZieOok 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:related_to; #zie ook
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieVerandert 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:amends; #Wijzigt
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieVervangt 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:vervangt; #Vervangt
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieVoegtIn 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:amends; #Voegt in
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieHeftOp 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:heft_op; #Heft op
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieBekrachtigt 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigt; #Bekrachtigt
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieTrektIn 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:trektIn; #Trekt in
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-#-----------------------------------------
-#Onderdeel 1.12.1: Mappings van de Bijlage -> Artikel relaties van Rechtsbron(onderdeel) (Reverse mappings uit 1.12)
-
-map:RechtsbronArtikelBijlageRelatieVeranderdDoorReverse 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:amends; #Wijzigt (reverse van gewijzigd bij)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieVervangenBijReverse 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:vervangt; #Vervangt (reverse van Vervangen bij)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieIngevoegdBijReverse 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:amends; #Voegt in (reverse van Ingevoegd bij)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieOpgehevenBijReverse 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:heft_op; #Heft op (reverse van Opgeheven bij)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieIngetrokkenBijReverse 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:trektIn; #Trekt in (reverse van Ingetrokken bij)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieBekrachtigdBijReverse 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigt; #Bekrachtigt (reverse van Bekrachtigd bij)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieZieOokReverse 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:related_to; #zie ook (reverse van zie ook)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieVerandertReverse 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:amended_by; #Gewijzigd bij (reverse van Wijzigt)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieVervangtReverse 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:vervangenBij; #Vervangen bij (reverse van Vervangt)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieVoegtInReverse 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:amended_by; #Ingevoegd bij (reverse van Voegt in)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieHeftOpReverse 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:opgehevenBij; #Opgeheven bij (reverse van Heft op)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieBekrachtigtReverse 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij (reverse van Bekrachtigt)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronArtikelBijlageRelatieTrektInReverse 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13
-		AND NOT ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij (reverse van Trekt in)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-#-----------------------------------------
-#Onderdeel 1.13: Mappings van de Bijlage -> Bijlage relaties van Rechtsbron(onderdeel)
-
-map:RechtsbronBijlageBijlageRelatieVeranderdDoor
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:amended_by; #Gewijzigd bij
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronBijlageBijlageRelatieVervangenBij
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:vervangenBij; #Vervangen bij
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronBijlageBijlageRelatieIngevoegdBij
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:amended_by; #Ingevoegd bij
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronBijlageBijlageRelatieOpgehevenBij
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:opgehevenBij; #Opgeheven bij
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronBijlageBijlageRelatieIngetrokkenBij 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronBijlageBijlageRelatieBekrachtigdBij 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronBijlageBijlageRelatieZieOok
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:related_to; #zie ook
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronBijlageBijlageRelatieVerandert
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:amends; #Wijzigt
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronBijlageBijlageRelatieVervangt 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:vervangt; #Vervangt
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronBijlageBijlageRelatieVoegtIn
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:amends; #Voegt in
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronBijlageBijlageRelatieHeftOp
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:heft_op; #Heft op
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronBijlageBijlageRelatieBekrachtigt 
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigt; #Bekrachtigt
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronBijlageBijlageRelatieTrektIn
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie2.Id AS ArtikelRelatie,
-				ArtikelVersie1.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:trektIn; #Trekt in
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-#-----------------------------------------
-#Onderdeel 1.13.1: Reverse mappings uit 1.13
-
-map:RechtsbronBijlageBijlageRelatieVeranderdDoorReverse
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 1
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:amends; #Wijzigt (reverse van gewijzigd bij)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronBijlageBijlageRelatieVervangenBijReverse
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 2
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
-	"""
-	]; 
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate codex:vervangt; #Vervangt (reverse van Vervangen bij)
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel1ID';
 				rr:parent 'ID';
 			]
 		]
@@ -3175,19 +1647,15 @@ map:RechtsbronBijlageBijlageRelatieVervangenBijReverse
 
 map:RechtsbronBijlageBijlageRelatieIngevoegdBijReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 3
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel2Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 3
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel2Type"}/{"Artikel2ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3195,27 +1663,23 @@ map:RechtsbronBijlageBijlageRelatieIngevoegdBijReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel1ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronBijlageBijlageRelatieOpgehevenBijReverse
+map:RechtsbronArtikelEnBijlageRelatieOpgehevenBijReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 4
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel2Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 4
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel2Type"}/{"Artikel2ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3223,27 +1687,23 @@ map:RechtsbronBijlageBijlageRelatieOpgehevenBijReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel1ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronBijlageBijlageRelatieIngetrokkenBijReverse 
+map:RechtsbronArtikelEnBijlageRelatieIngetrokkenBijReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 5
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel2Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 5
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel2Type"}/{"Artikel2ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3251,27 +1711,23 @@ map:RechtsbronBijlageBijlageRelatieIngetrokkenBijReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel1ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronBijlageBijlageRelatieBekrachtigdBijReverse 
+map:RechtsbronArtikelEnBijlageRelatieBekrachtigdBijReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 6
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel2Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 6
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel2Type"}/{"Artikel2ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3279,27 +1735,23 @@ map:RechtsbronBijlageBijlageRelatieBekrachtigdBijReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel1ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronBijlageBijlageRelatieZieOokReverse
+map:RechtsbronArtikelEnBijlageRelatiZieOokReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 7
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel2Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 7
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel2Type"}/{"Artikel2ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3307,27 +1759,23 @@ map:RechtsbronBijlageBijlageRelatieZieOokReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel1ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronBijlageBijlageRelatieVerandertReverse
+map:RechtsbronArtikelEnBijlageRelatieWijzigtReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 8
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel2Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 8
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel2Type"}/{"Artikel2ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3335,27 +1783,23 @@ map:RechtsbronBijlageBijlageRelatieVerandertReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel1ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronBijlageBijlageRelatieVervangtReverse 
+map:RechtsbronArtikelEnBijlageRelatieVervangtReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 9
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel2Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 9
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel2Type"}/{"Artikel2ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3363,27 +1807,23 @@ map:RechtsbronBijlageBijlageRelatieVervangtReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel1ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronBijlageBijlageRelatieVoegtInReverse
+map:RechtsbronArtikelEnBijlageRelatieVoegtInReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 10
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel2Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 10
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel2Type"}/{"Artikel2ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3391,27 +1831,23 @@ map:RechtsbronBijlageBijlageRelatieVoegtInReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel1ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronBijlageBijlageRelatieHeftOpReverse
+map:RechtsbronArtikelEnBijlageRelatieHeftOpReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 11
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel2Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 11
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel2Type"}/{"Artikel2ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3419,27 +1855,23 @@ map:RechtsbronBijlageBijlageRelatieHeftOpReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel1ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronBijlageBijlageRelatieBekrachtigtReverse 
+map:RechtsbronArtikelEnBijlageRelatieBekrachtigdReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 12
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel2Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 12
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel2Type"}/{"Artikel2ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3447,27 +1879,23 @@ map:RechtsbronBijlageBijlageRelatieBekrachtigtReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel1ID';
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronBijlageBijlageRelatieTrektInReverse
+map:RechtsbronArtikelEnBijlageRelatieTrektInReverse
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	ArtikelVersie1.Id AS ArtikelRelatie,
-				ArtikelVersie2.id AS VlacoID
-		FROM WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, WetgevingArtikelVersie as ArtikelVersie1, WetgevingArtikelVersie as ArtikelVersie2
-		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
-		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
-		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId = 13
-		AND ArtikelVersie1.ArtikelType = 'BIJLAGE'
-		AND ArtikelVersie2.ArtikelType = 'BIJLAGE'
+		SELECT 	Artikel1ID,
+				Artikel2ID,
+				Artikel2Type
+		FROM vwRechtsbronArtikelEnBijlageRelaties
+		WHERE RelatieTypeID = 13
 	"""
 	]; 
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"Artikel2Type"}/{"Artikel2ID"}'; 
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
@@ -3475,7 +1903,7 @@ map:RechtsbronBijlageBijlageRelatieTrektInReverse
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
+				rr:child 'Artikel1ID';
 				rr:parent 'ID';
 			]
 		]
