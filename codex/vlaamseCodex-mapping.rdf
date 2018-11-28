@@ -138,22 +138,24 @@ map:RechtsbronHoofdstuk
 #-----------------------------------------
 #Onderdeel 1.3: Mapping van RechtsbronArtikel
 
-map:RechtsbronArtikel
+map:RechtsbronArtikelEnBijlage
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	ArtikelVersie.WetgevingArtikelId AS ArtikelID,
 				ArtikelVersie.ID AS VlacoID,
-				ArtikelVersie.WetgevingDocumentId AS VerbondenDocument
+				ArtikelVersie.WetgevingDocumentId AS VerbondenDocument,
+				(CASE ArtikelVersie.ArtikelType WHEN 'ART' THEN 'artikel' WHEN 'ART.' THEN 'artikel' ELSE 'bijlage' END) as ArtikelType1,
+				(CASE ArtikelVersie.ArtikelType WHEN 'ART' THEN 'artikel' WHEN 'ART.' THEN 'Artikel' ELSE 'Bijlage' END) as ArtikelType2
 		FROM WetgevingArtikelVersie as ArtikelVersie
-		WHERE NOT ArtikelVersie.ArtikelType = 'BIJLAGE'
+		WHERE NOT ArtikelVersie.ArtikelType = ''
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"ArtikelID"}'; 
+		rr:template 'https://codex.vlaanderen.be/id/{"ArtikelType1"}/{"ArtikelID"}'; 
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate dcterms:type; 
-		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRechtsbrononderdeel/Artikel';
+		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRechtsbrononderdeel/{"ArtikelType2"}';
 						rr:termType rr:IRI ];
 	];
 	rr:predicateObjectMap [
@@ -169,48 +171,7 @@ map:RechtsbronArtikel
 	rr:predicateObjectMap [
 		rr:predicate eli:is_realized_by; #is gerealiseerd door
 		rr:objectMap [
-			rr:parentTriplesMap map:VerschijningsvormArtikel; 
-			rr:joinCondition [
-				rr:child 'VlacoID';
-				rr:parent 'ID';
-				]
-		]
-	].
-
-#-----------------------------------------
-#Onderdeel 1.4: Mapping van RechtsbronBijlage
-
-map:RechtsbronBijlage
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT	ArtikelVersie.ID AS VlacoID,
-				ArtikelVersie.WetgevingDocumentId AS VerbondenDocument
-		FROM WetgevingArtikelVersie as ArtikelVersie
-		WHERE ArtikelVersie.ArtikelType = 'BIJLAGE'
-	""" 
-	];
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/bijlage/{"VlacoID"}'; 
-		rr:class eli:LegalResourceSubdivision;
-	];
-	rr:predicateObjectMap [ 
-		rr:predicate dcterms:type; 
-		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRechtsbrononderdeel/Bijlage';
-						rr:termType rr:IRI ];
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:is_part_of; #is deel van
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronDocument; 
-			rr:joinCondition [
-				rr:child 'VerbondenDocument';
-				rr:parent 'RGDID';
-			]
-		]
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:is_realized_by; #is gerealiseerd door
-		rr:objectMap [
-			rr:parentTriplesMap map:VerschijningsvormBijlage; 
+			rr:parentTriplesMap map:VerschijningsvormArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'VlacoID';
 				rr:parent 'ID';
@@ -782,7 +743,7 @@ map:RechtsbronDocumentArtikelRelatieHeeftOnderdeel
 	rr:predicateObjectMap [
 		rr:predicate eli:has_part; #heeft onderdeel
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelID';
 				rr:parent 'ID';
@@ -811,7 +772,7 @@ map:RechtsbronDocumentBijlageRelatieHeeftOnderdeel
 	rr:predicateObjectMap [
 		rr:predicate eli:has_part; #heeft onderdeel
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -842,7 +803,7 @@ map:RechtsbronDocumentArtikelRelatieVerandert
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -870,7 +831,7 @@ map:RechtsbronDocumentArtikelRelatieHeftOp
 	rr:predicateObjectMap [
 		rr:predicate codex:heft_op; #Heft op
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -898,7 +859,7 @@ map:RechtsbronDocumentArtikelRelatieBekrachtigt
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -926,7 +887,7 @@ map:RechtsbronDocumentArtikelRelatieTrektIn
 	rr:predicateObjectMap [
 		rr:predicate codex:trektIn; #Trekt in
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -954,7 +915,7 @@ map:RechtsbronDocumentArtikelRelatieZieOok
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -982,7 +943,7 @@ map:RechtsbronDocumentArtikelRelatieVeranderdDoor
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1010,7 +971,7 @@ map:RechtsbronDocumentArtikelRelatieOpgehevenBij
 	rr:predicateObjectMap [
 		rr:predicate codex:opgehevenBij; #Opgeheven bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1038,7 +999,7 @@ map:RechtsbronDocumentArtikelRelatieBekrachtigdBij
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1066,7 +1027,7 @@ map:RechtsbronDocumentArtikelRelatieIngetrokkenBij
 	rr:predicateObjectMap [
 		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1313,7 +1274,7 @@ map:RechtsbronDocumentBijlageRelatieVerandert
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1345,7 +1306,7 @@ map:RechtsbronDocumentBijlageRelatieHeftOp
 	rr:predicateObjectMap [
 		rr:predicate codex:heft_op; #Heft op
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1377,7 +1338,7 @@ map:RechtsbronDocumentBijlageRelatieBekrachtigt
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1409,7 +1370,7 @@ map:RechtsbronDocumentBijlageRelatieTrektIn
 	rr:predicateObjectMap [
 		rr:predicate codex:trektIn; #Trekt in
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1441,7 +1402,7 @@ map:RechtsbronDocumentBijlageRelatieZieOok
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1473,7 +1434,7 @@ map:RechtsbronDocumentBijlageRelatieVeranderdDoor
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1505,7 +1466,7 @@ map:RechtsbronDocumentBijlageRelatieOpgehevenBij
 	rr:predicateObjectMap [
 		rr:predicate codex:opgehevenBij; #Opgeheven bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1537,7 +1498,7 @@ map:RechtsbronDocumentBijlageRelatieBekrachtigdBij
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1569,7 +1530,7 @@ map:RechtsbronDocumentBijlageRelatieIngetrokkenBij
 	rr:predicateObjectMap [
 		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1845,7 +1806,7 @@ map:RechtsbronHoofdstukArtikelRelatieHeeftOnderdeel
 	rr:predicateObjectMap [
 		rr:predicate eli:has_part; #heeft onderdeel
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelVersieID'; #ArtikelVersieID is de VlacoID in RechtsbronArtikel
 				rr:parent 'ID';
@@ -1902,7 +1863,7 @@ map:RechtsbronHoofdstukBijlageRelatieHeeftOnderdeel
 	rr:predicateObjectMap [
 		rr:predicate eli:has_part; #heeft onderdeel
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelVersieID'; #ArtikelVersieID is de VlacoID in RechtsbronArtikel
 				rr:parent 'ID';
@@ -1960,7 +1921,7 @@ map:RechtsbronArtikelArtikelRelatieVeranderdDoor
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -1988,7 +1949,7 @@ map:RechtsbronArtikelArtikelRelatieVervangenBij
 	rr:predicateObjectMap [
 		rr:predicate codex:vervangenBij; #Vervangen bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2016,7 +1977,7 @@ map:RechtsbronArtikelArtikelRelatieIngevoegdBij
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Ingevoegd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2044,7 +2005,7 @@ map:RechtsbronArtikelArtikelRelatieOpgehevenBij
 	rr:predicateObjectMap [
 		rr:predicate codex:opgehevenBij; #Opgeheven bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2072,7 +2033,7 @@ map:RechtsbronArtikelArtikelRelatieIngetrokkenBij
 	rr:predicateObjectMap [
 		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2100,7 +2061,7 @@ map:RechtsbronArtikelArtikelRelatieBekrachtigdBij
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2128,7 +2089,7 @@ map:RechtsbronArtikelArtikelRelatieZieOok
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2156,7 +2117,7 @@ map:RechtsbronArtikelArtikelRelatieVerandert
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2184,7 +2145,7 @@ map:RechtsbronArtikelArtikelRelatieVervangt
 	rr:predicateObjectMap [
 		rr:predicate codex:vervangt; #Vervangt
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2212,7 +2173,7 @@ map:RechtsbronArtikelArtikelRelatieVoegtIn
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Voegt in
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2240,7 +2201,7 @@ map:RechtsbronArtikelArtikelRelatieHeftOp
 	rr:predicateObjectMap [
 		rr:predicate codex:heft_op; #Heft op
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2268,7 +2229,7 @@ map:RechtsbronArtikelArtikelRelatieBekrachtigt
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2296,7 +2257,7 @@ map:RechtsbronArtikelArtikelRelatieTrektIn
 	rr:predicateObjectMap [
 		rr:predicate codex:trektIn; #Trekt in
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2327,7 +2288,7 @@ map:RechtsbronArtikelArtikelRelatieVeranderdDoorReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt (reverse van gewijzigd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2355,7 +2316,7 @@ map:RechtsbronArtikelArtikelRelatieVervangenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:vervangt; #Vervangt (reverse van Vervangen bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2383,7 +2344,7 @@ map:RechtsbronArtikelArtikelRelatieIngevoegdBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Voegt in (reverse van Ingevoegd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2411,7 +2372,7 @@ map:RechtsbronArtikelArtikelRelatieOpgehevenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:heft_op; #Heft op (reverse van Opgeheven bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2439,7 +2400,7 @@ map:RechtsbronArtikelArtikelRelatieIngetrokkenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:trektIn; #Trekt in (reverse van Ingetrokken bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2467,7 +2428,7 @@ map:RechtsbronArtikelArtikelRelatieBekrachtigdBijReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt (reverse van Bekrachtigd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2495,7 +2456,7 @@ map:RechtsbronArtikelArtikelRelatieZieOokReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook (reverse van zie ook)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2523,7 +2484,7 @@ map:RechtsbronArtikelArtikelRelatieVerandertReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij (reverse van Wijzigt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2551,7 +2512,7 @@ map:RechtsbronArtikelArtikelRelatieVervangtReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:vervangenBij; #Vervangen bij (reverse van Vervangt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2579,7 +2540,7 @@ map:RechtsbronArtikelArtikelRelatieVoegtInReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Ingevoegd bij (reverse van Voegt in)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2607,7 +2568,7 @@ map:RechtsbronArtikelArtikelRelatieHeftOpReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:opgehevenBij; #Opgeheven bij (reverse van Heft op)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2635,7 +2596,7 @@ map:RechtsbronArtikelArtikelRelatieBekrachtigtReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij (reverse van Bekrachtigt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2663,7 +2624,7 @@ map:RechtsbronArtikelArtikelRelatieTrektInReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij (reverse van Trekt in)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2694,7 +2655,7 @@ map:RechtsbronArtikelBijlageRelatieVeranderdDoor
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2722,7 +2683,7 @@ map:RechtsbronArtikelBijlageRelatieVervangenBij
 	rr:predicateObjectMap [
 		rr:predicate codex:vervangenBij; #Vervangen bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2750,7 +2711,7 @@ map:RechtsbronArtikelBijlageRelatieIngevoegdBij
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Ingevoegd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2778,7 +2739,7 @@ map:RechtsbronArtikelBijlageRelatieOpgehevenBij
 	rr:predicateObjectMap [
 		rr:predicate codex:opgehevenBij; #Opgeheven bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2806,7 +2767,7 @@ map:RechtsbronArtikelBijlageRelatieIngetrokkenBij
 	rr:predicateObjectMap [
 		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2834,7 +2795,7 @@ map:RechtsbronArtikelBijlageRelatieBekrachtigdBij
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2862,7 +2823,7 @@ map:RechtsbronArtikelBijlageRelatieZieOok
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2890,7 +2851,7 @@ map:RechtsbronArtikelBijlageRelatieVerandert
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2918,7 +2879,7 @@ map:RechtsbronArtikelBijlageRelatieVervangt
 	rr:predicateObjectMap [
 		rr:predicate codex:vervangt; #Vervangt
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2946,7 +2907,7 @@ map:RechtsbronArtikelBijlageRelatieVoegtIn
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Voegt in
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -2974,7 +2935,7 @@ map:RechtsbronArtikelBijlageRelatieHeftOp
 	rr:predicateObjectMap [
 		rr:predicate codex:heft_op; #Heft op
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3002,7 +2963,7 @@ map:RechtsbronArtikelBijlageRelatieBekrachtigt
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3030,7 +2991,7 @@ map:RechtsbronArtikelBijlageRelatieTrektIn
 	rr:predicateObjectMap [
 		rr:predicate codex:trektIn; #Trekt in
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3061,7 +3022,7 @@ map:RechtsbronArtikelBijlageRelatieVeranderdDoorReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt (reverse van gewijzigd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3089,7 +3050,7 @@ map:RechtsbronArtikelBijlageRelatieVervangenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:vervangt; #Vervangt (reverse van Vervangen bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3117,7 +3078,7 @@ map:RechtsbronArtikelBijlageRelatieIngevoegdBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Voegt in (reverse van Ingevoegd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3145,7 +3106,7 @@ map:RechtsbronArtikelBijlageRelatieOpgehevenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:heft_op; #Heft op (reverse van Opgeheven bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3173,7 +3134,7 @@ map:RechtsbronArtikelBijlageRelatieIngetrokkenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:trektIn; #Trekt in (reverse van Ingetrokken bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3201,7 +3162,7 @@ map:RechtsbronArtikelBijlageRelatieBekrachtigdBijReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt (reverse van Bekrachtigd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3229,7 +3190,7 @@ map:RechtsbronArtikelBijlageRelatieZieOokReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook (reverse van zie ook)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3257,7 +3218,7 @@ map:RechtsbronArtikelBijlageRelatieVerandertReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij (reverse van Wijzigt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3285,7 +3246,7 @@ map:RechtsbronArtikelBijlageRelatieVervangtReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:vervangenBij; #Vervangen bij (reverse van Vervangt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3313,7 +3274,7 @@ map:RechtsbronArtikelBijlageRelatieVoegtInReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Ingevoegd bij (reverse van Voegt in)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3341,7 +3302,7 @@ map:RechtsbronArtikelBijlageRelatieHeftOpReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:opgehevenBij; #Opgeheven bij (reverse van Heft op)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3369,7 +3330,7 @@ map:RechtsbronArtikelBijlageRelatieBekrachtigtReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij (reverse van Bekrachtigt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3397,7 +3358,7 @@ map:RechtsbronArtikelBijlageRelatieTrektInReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij (reverse van Trekt in)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3428,7 +3389,7 @@ map:RechtsbronBijlageBijlageRelatieVeranderdDoor
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3456,7 +3417,7 @@ map:RechtsbronBijlageBijlageRelatieVervangenBij
 	rr:predicateObjectMap [
 		rr:predicate codex:vervangenBij; #Vervangen bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3484,7 +3445,7 @@ map:RechtsbronBijlageBijlageRelatieIngevoegdBij
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Ingevoegd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3512,7 +3473,7 @@ map:RechtsbronBijlageBijlageRelatieOpgehevenBij
 	rr:predicateObjectMap [
 		rr:predicate codex:opgehevenBij; #Opgeheven bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3540,7 +3501,7 @@ map:RechtsbronBijlageBijlageRelatieIngetrokkenBij
 	rr:predicateObjectMap [
 		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3568,7 +3529,7 @@ map:RechtsbronBijlageBijlageRelatieBekrachtigdBij
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3596,7 +3557,7 @@ map:RechtsbronBijlageBijlageRelatieZieOok
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3624,7 +3585,7 @@ map:RechtsbronBijlageBijlageRelatieVerandert
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3652,7 +3613,7 @@ map:RechtsbronBijlageBijlageRelatieVervangt
 	rr:predicateObjectMap [
 		rr:predicate codex:vervangt; #Vervangt
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3680,7 +3641,7 @@ map:RechtsbronBijlageBijlageRelatieVoegtIn
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Voegt in
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3708,7 +3669,7 @@ map:RechtsbronBijlageBijlageRelatieHeftOp
 	rr:predicateObjectMap [
 		rr:predicate codex:heft_op; #Heft op
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3736,7 +3697,7 @@ map:RechtsbronBijlageBijlageRelatieBekrachtigt
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3764,7 +3725,7 @@ map:RechtsbronBijlageBijlageRelatieTrektIn
 	rr:predicateObjectMap [
 		rr:predicate codex:trektIn; #Trekt in
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3795,7 +3756,7 @@ map:RechtsbronBijlageBijlageRelatieVeranderdDoorReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Wijzigt (reverse van gewijzigd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3823,7 +3784,7 @@ map:RechtsbronBijlageBijlageRelatieVervangenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:vervangt; #Vervangt (reverse van Vervangen bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3851,7 +3812,7 @@ map:RechtsbronBijlageBijlageRelatieIngevoegdBijReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amends; #Voegt in (reverse van Ingevoegd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3879,7 +3840,7 @@ map:RechtsbronBijlageBijlageRelatieOpgehevenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:heft_op; #Heft op (reverse van Opgeheven bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3907,7 +3868,7 @@ map:RechtsbronBijlageBijlageRelatieIngetrokkenBijReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:trektIn; #Trekt in (reverse van Ingetrokken bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3935,7 +3896,7 @@ map:RechtsbronBijlageBijlageRelatieBekrachtigdBijReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigt; #Bekrachtigt (reverse van Bekrachtigd bij)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3963,7 +3924,7 @@ map:RechtsbronBijlageBijlageRelatieZieOokReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:related_to; #zie ook (reverse van zie ook)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -3991,7 +3952,7 @@ map:RechtsbronBijlageBijlageRelatieVerandertReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Gewijzigd bij (reverse van Wijzigt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4019,7 +3980,7 @@ map:RechtsbronBijlageBijlageRelatieVervangtReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:vervangenBij; #Vervangen bij (reverse van Vervangt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4047,7 +4008,7 @@ map:RechtsbronBijlageBijlageRelatieVoegtInReverse
 	rr:predicateObjectMap [
 		rr:predicate eli:amended_by; #Ingevoegd bij (reverse van Voegt in)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4075,7 +4036,7 @@ map:RechtsbronBijlageBijlageRelatieHeftOpReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:opgehevenBij; #Opgeheven bij (reverse van Heft op)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4103,7 +4064,7 @@ map:RechtsbronBijlageBijlageRelatieBekrachtigtReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij (reverse van Bekrachtigt)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4131,7 +4092,7 @@ map:RechtsbronBijlageBijlageRelatieTrektInReverse
 	rr:predicateObjectMap [
 		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij (reverse van Trekt in)
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
@@ -4351,7 +4312,7 @@ map:VerschijningsvormArtikelEnBijlage
 	rr:predicateObjectMap [
 		rr:predicate eli:realizes; #realiseert
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlageEnBijlage; 
 			rr:joinCondition [
 				rr:child 'VlacoID';
 				rr:parent 'ID';
