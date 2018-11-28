@@ -267,7 +267,7 @@ map:RechtsbronDocumentDocumentRelatieHeftOp
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Heft op
+		rr:predicate codex:heft_op; #Heft op
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -323,7 +323,7 @@ map:RechtsbronDocumentDocumentRelatieTrektIn
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Trekt in
+		rr:predicate codex:trektIn; #Trekt in
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -407,7 +407,7 @@ map:RechtsbronDocumentDocumentRelatieOpgehevenBij
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Opgeheven bij
+		rr:predicate codex:opgehevenBij; #Opgeheven bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -435,7 +435,7 @@ map:RechtsbronDocumentDocumentRelatieBekrachtigdBij
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij
+		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -463,7 +463,7 @@ map:RechtsbronDocumentDocumentRelatieIngetrokkenBij
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Ingetrokken bij
+		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -522,7 +522,7 @@ map:RechtsbronDocumentDocumentRelatieHeftOpReverse
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Opgeheven bij (reverse van heft op)
+		rr:predicate codex:opgehevenBij; #Opgeheven bij (reverse van heft op)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -550,7 +550,7 @@ map:RechtsbronDocumentDocumentRelatieBekrachtigtReverse
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij (reverse van bekrachtigt)
+		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij (reverse van bekrachtigt)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -578,7 +578,7 @@ map:RechtsbronDocumentDocumentRelatieTrektInReverse
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Ingetrokken bij (reverse van trekt in)
+		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij (reverse van trekt in)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -662,7 +662,7 @@ map:RechtsbronDocumentDocumentRelatieOpgehevenBijReverse
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Heft op (reverse van opgeheven bij)
+		rr:predicate codex:heft_op; #Heft op (reverse van opgeheven bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -718,7 +718,7 @@ map:RechtsbronDocumentDocumentRelatieIngetrokkenBijReverse
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Trekt in (reverse van ingetrokken bij)
+		rr:predicate codex:trektIn; #Trekt in (reverse van ingetrokken bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -868,7 +868,7 @@ map:RechtsbronDocumentArtikelRelatieHeftOp
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Heft op
+		rr:predicate codex:heft_op; #Heft op
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -924,7 +924,7 @@ map:RechtsbronDocumentArtikelRelatieTrektIn
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Trekt in
+		rr:predicate codex:trektIn; #Trekt in
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -1008,7 +1008,7 @@ map:RechtsbronDocumentArtikelRelatieOpgehevenBij
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Opgeheven bij
+		rr:predicate codex:opgehevenBij; #Opgeheven bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -1036,7 +1036,7 @@ map:RechtsbronDocumentArtikelRelatieBekrachtigdBij
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij
+		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -1064,7 +1064,7 @@ map:RechtsbronDocumentArtikelRelatieIngetrokkenBij
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Ingetrokken bij
+		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -1113,7 +1113,7 @@ map:RechtsbronDocumentArtikelRelatieHeftOpReverse
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Opgeheven bij (reverse van heft op)
+		rr:predicate codex:opgehevenBij; #Opgeheven bij (reverse van heft op)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -1136,7 +1136,7 @@ map:RechtsbronDocumentArtikelRelatieBekrachtigtReverse
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij (reverse van bekrachtigt)
+		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij (reverse van bekrachtigt)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -1159,7 +1159,7 @@ map:RechtsbronDocumentArtikelRelatieTrektInReverse
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Ingetrokken bij (reverse van trekt in)
+		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij (reverse van trekt in)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -1228,7 +1228,7 @@ map:RechtsbronDocumentArtikelRelatieOpgehevenBijReverse
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Heft op (reverse van opgeheven bij)
+		rr:predicate codex:heft_op; #Heft op (reverse van opgeheven bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -1274,7 +1274,7 @@ map:RechtsbronDocumentArtikelRelatieIngetrokkenBijReverse
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Trekt in (reverse van ingetrokken bij)
+		rr:predicate codex:trektIn; #Trekt in (reverse van ingetrokken bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -1343,7 +1343,7 @@ map:RechtsbronDocumentBijlageRelatieHeftOp
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Heft op
+		rr:predicate codex:heft_op; #Heft op
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
@@ -1407,7 +1407,7 @@ map:RechtsbronDocumentBijlageRelatieTrektIn
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Trekt in
+		rr:predicate codex:trektIn; #Trekt in
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
@@ -1503,7 +1503,7 @@ map:RechtsbronDocumentBijlageRelatieOpgehevenBij
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Opgeheven bij
+		rr:predicate codex:opgehevenBij; #Opgeheven bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
@@ -1535,7 +1535,7 @@ map:RechtsbronDocumentBijlageRelatieBekrachtigdBij
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij
+		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
@@ -1567,7 +1567,7 @@ map:RechtsbronDocumentBijlageRelatieIngetrokkenBij
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Ingetrokken bij
+		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
@@ -1624,7 +1624,7 @@ map:RechtsbronDocumentBijlageRelatieHeftOpReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Opgeheven bij (reverse van Heft op)
+		rr:predicate codex:opgehevenBij; #Opgeheven bij (reverse van Heft op)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -1651,7 +1651,7 @@ map:RechtsbronDocumentBijlageRelatieBekrachtigtReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij (reverse van Bekrachtigt)
+		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij (reverse van Bekrachtigt)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -1678,7 +1678,7 @@ map:RechtsbronDocumentBijlageRelatieTrektInReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Ingetrokken bij (reverse van Trekt in)
+		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij (reverse van Trekt in)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -1759,7 +1759,7 @@ map:RechtsbronDocumentBijlageRelatieOpgehevenBijReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Heft op (reverse van Opgeheven bij)
+		rr:predicate codex:heft_op; #Heft op (reverse van Opgeheven bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -1813,7 +1813,7 @@ map:RechtsbronDocumentBijlageRelatieIngetrokkenBijReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Trekt in (reverse van Ingetrokken bij)
+		rr:predicate codex:trektIn; #Trekt in (reverse van Ingetrokken bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -1986,7 +1986,7 @@ map:RechtsbronArtikelArtikelRelatieVervangenBij
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Vervangen bij
+		rr:predicate codex:vervangenBij; #Vervangen bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -2042,7 +2042,7 @@ map:RechtsbronArtikelArtikelRelatieOpgehevenBij
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Opgeheven bij
+		rr:predicate codex:opgehevenBij; #Opgeheven bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -2070,7 +2070,7 @@ map:RechtsbronArtikelArtikelRelatieIngetrokkenBij
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Ingetrokken bij
+		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -2098,7 +2098,7 @@ map:RechtsbronArtikelArtikelRelatieBekrachtigdBij
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij
+		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -2182,7 +2182,7 @@ map:RechtsbronArtikelArtikelRelatieVervangt
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Vervangt
+		rr:predicate codex:vervangt; #Vervangt
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -2238,7 +2238,7 @@ map:RechtsbronArtikelArtikelRelatieHeftOp
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Heft op
+		rr:predicate codex:heft_op; #Heft op
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -2294,7 +2294,7 @@ map:RechtsbronArtikelArtikelRelatieTrektIn
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Trekt in
+		rr:predicate codex:trektIn; #Trekt in
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -2353,7 +2353,7 @@ map:RechtsbronArtikelArtikelRelatieVervangenBijReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Vervangt (reverse van Vervangen bij)
+		rr:predicate codex:vervangt; #Vervangt (reverse van Vervangen bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -2409,7 +2409,7 @@ map:RechtsbronArtikelArtikelRelatieOpgehevenBijReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Heft op (reverse van Opgeheven bij)
+		rr:predicate codex:heft_op; #Heft op (reverse van Opgeheven bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -2437,7 +2437,7 @@ map:RechtsbronArtikelArtikelRelatieIngetrokkenBijReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Trekt in (reverse van Ingetrokken bij)
+		rr:predicate codex:trektIn; #Trekt in (reverse van Ingetrokken bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -2549,7 +2549,7 @@ map:RechtsbronArtikelArtikelRelatieVervangtReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Vervangen bij (reverse van Vervangt)
+		rr:predicate codex:vervangenBij; #Vervangen bij (reverse van Vervangt)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -2605,7 +2605,7 @@ map:RechtsbronArtikelArtikelRelatieHeftOpReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Opgeheven bij (reverse van Heft op)
+		rr:predicate codex:opgehevenBij; #Opgeheven bij (reverse van Heft op)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -2633,7 +2633,7 @@ map:RechtsbronArtikelArtikelRelatieBekrachtigtReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij (reverse van Bekrachtigt)
+		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij (reverse van Bekrachtigt)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -2661,7 +2661,7 @@ map:RechtsbronArtikelArtikelRelatieTrektInReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Ingetrokken bij (reverse van Trekt in)
+		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij (reverse van Trekt in)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -2720,7 +2720,7 @@ map:RechtsbronArtikelBijlageRelatieVervangenBij
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Vervangen bij
+		rr:predicate codex:vervangenBij; #Vervangen bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
@@ -2776,7 +2776,7 @@ map:RechtsbronArtikelBijlageRelatieOpgehevenBij
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Opgeheven bij
+		rr:predicate codex:opgehevenBij; #Opgeheven bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
@@ -2804,7 +2804,7 @@ map:RechtsbronArtikelBijlageRelatieIngetrokkenBij
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Ingetrokken bij
+		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
@@ -2832,7 +2832,7 @@ map:RechtsbronArtikelBijlageRelatieBekrachtigdBij
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij
+		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
@@ -2916,7 +2916,7 @@ map:RechtsbronArtikelBijlageRelatieVervangt
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Vervangt
+		rr:predicate codex:vervangt; #Vervangt
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
@@ -2972,7 +2972,7 @@ map:RechtsbronArtikelBijlageRelatieHeftOp
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Heft op
+		rr:predicate codex:heft_op; #Heft op
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
@@ -3028,7 +3028,7 @@ map:RechtsbronArtikelBijlageRelatieTrektIn
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Trekt in
+		rr:predicate codex:trektIn; #Trekt in
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronBijlage; 
 			rr:joinCondition [
@@ -3087,7 +3087,7 @@ map:RechtsbronArtikelBijlageRelatieVervangenBijReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Vervangt (reverse van Vervangen bij)
+		rr:predicate codex:vervangt; #Vervangt (reverse van Vervangen bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -3143,7 +3143,7 @@ map:RechtsbronArtikelBijlageRelatieOpgehevenBijReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Heft op (reverse van Opgeheven bij)
+		rr:predicate codex:heft_op; #Heft op (reverse van Opgeheven bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -3171,7 +3171,7 @@ map:RechtsbronArtikelBijlageRelatieIngetrokkenBijReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Trekt in (reverse van Ingetrokken bij)
+		rr:predicate codex:trektIn; #Trekt in (reverse van Ingetrokken bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -3283,7 +3283,7 @@ map:RechtsbronArtikelBijlageRelatieVervangtReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Vervangen bij (reverse van Vervangt)
+		rr:predicate codex:vervangenBij; #Vervangen bij (reverse van Vervangt)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -3339,7 +3339,7 @@ map:RechtsbronArtikelBijlageRelatieHeftOpReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Opgeheven bij (reverse van Heft op)
+		rr:predicate codex:opgehevenBij; #Opgeheven bij (reverse van Heft op)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -3367,7 +3367,7 @@ map:RechtsbronArtikelBijlageRelatieBekrachtigtReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij (reverse van Bekrachtigt)
+		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij (reverse van Bekrachtigt)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -3395,7 +3395,7 @@ map:RechtsbronArtikelBijlageRelatieTrektInReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Ingetrokken bij (reverse van Trekt in)
+		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij (reverse van Trekt in)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -3454,7 +3454,7 @@ map:RechtsbronBijlageBijlageRelatieVervangenBij
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Vervangen bij
+		rr:predicate codex:vervangenBij; #Vervangen bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -3510,7 +3510,7 @@ map:RechtsbronBijlageBijlageRelatieOpgehevenBij
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Opgeheven bij
+		rr:predicate codex:opgehevenBij; #Opgeheven bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -3538,7 +3538,7 @@ map:RechtsbronBijlageBijlageRelatieIngetrokkenBij
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Ingetrokken bij
+		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -3566,7 +3566,7 @@ map:RechtsbronBijlageBijlageRelatieBekrachtigdBij
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij
+		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -3650,7 +3650,7 @@ map:RechtsbronBijlageBijlageRelatieVervangt
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Vervangt
+		rr:predicate codex:vervangt; #Vervangt
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -3706,7 +3706,7 @@ map:RechtsbronBijlageBijlageRelatieHeftOp
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Heft op
+		rr:predicate codex:heft_op; #Heft op
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -3762,7 +3762,7 @@ map:RechtsbronBijlageBijlageRelatieTrektIn
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Trekt in
+		rr:predicate codex:trektIn; #Trekt in
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -3821,7 +3821,7 @@ map:RechtsbronBijlageBijlageRelatieVervangenBijReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Vervangt (reverse van Vervangen bij)
+		rr:predicate codex:vervangt; #Vervangt (reverse van Vervangen bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -3877,7 +3877,7 @@ map:RechtsbronBijlageBijlageRelatieOpgehevenBijReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Heft op (reverse van Opgeheven bij)
+		rr:predicate codex:heft_op; #Heft op (reverse van Opgeheven bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -3905,7 +3905,7 @@ map:RechtsbronBijlageBijlageRelatieIngetrokkenBijReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repeals; #Trekt in (reverse van Ingetrokken bij)
+		rr:predicate codex:trektIn; #Trekt in (reverse van Ingetrokken bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -4017,7 +4017,7 @@ map:RechtsbronBijlageBijlageRelatieVervangtReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Vervangen bij (reverse van Vervangt)
+		rr:predicate codex:vervangenBij; #Vervangen bij (reverse van Vervangt)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -4073,7 +4073,7 @@ map:RechtsbronBijlageBijlageRelatieHeftOpReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Opgeheven bij (reverse van Heft op)
+		rr:predicate codex:opgehevenBij; #Opgeheven bij (reverse van Heft op)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -4101,7 +4101,7 @@ map:RechtsbronBijlageBijlageRelatieBekrachtigtReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:bekrachtigd_bij; #Bekrachtigd bij (reverse van Bekrachtigt)
+		rr:predicate codex:bekrachtigdBij; #Bekrachtigd bij (reverse van Bekrachtigt)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
@@ -4129,7 +4129,7 @@ map:RechtsbronBijlageBijlageRelatieTrektInReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:repealed_by; #Ingetrokken bij (reverse van Trekt in)
+		rr:predicate codex:ingetrokkenBij; #Ingetrokken bij (reverse van Trekt in)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikel; 
 			rr:joinCondition [
