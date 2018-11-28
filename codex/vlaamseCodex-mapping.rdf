@@ -1225,9 +1225,9 @@ map:RechtsbronDocumentArtikelEnBijlageRelatieIngetrokkenBijReverse
 	].
 
 #-----------------------------------------
-#Onderdeel 1.9: Mappings van de Hoofdstuk -> Artikel en Artikel -> Hoofdstuk relaties van Rechtsbrononderdelen
+#Onderdeel 1.9: Mappings van de Hoofdstuk -> Artikel en Bijlage & Artikel en Bijlage -> Hoofdstuk relaties van Rechtsbrononderdelen
 
-map:RechtsbronHoofdstukArtikelRelatieHeeftOnderdeel
+map:RechtsbronHoofdstukArtikelEnBijlageRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	Hoofdstuk.ID AS HoofdstukID,
 				Artikel.ID AS ArtikelID,
@@ -1236,7 +1236,6 @@ map:RechtsbronHoofdstukArtikelRelatieHeeftOnderdeel
 		FROM WetgevingHoofdstuk AS Hoofdstuk, WetgevingArtikel AS Artikel, WetgevingArtikelVersie AS ArtikelVersie
 		WHERE Artikel.ID = ArtikelVersie.ID
 		AND	Hoofdstuk.ID = Artikel.WetgevingHoofdstukID
-		AND NOT ArtikelVersie.ArtikelType = 'BIJLAGE'
 	""" 
 	];
 	rr:subjectMap [
@@ -1248,13 +1247,13 @@ map:RechtsbronHoofdstukArtikelRelatieHeeftOnderdeel
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelVersieID'; #ArtikelVersieID is de VlacoID in RechtsbronArtikel
+				rr:child 'ArtikelVersieID'; #ArtikelVersieID is de VlacoID in RechtsbronArtikelEnBijlage
 				rr:parent 'ID';
 			]
 		]
 	].
 
-map:RechtsbronArtikelHoofdstukRelatieIsDeelVan #Reverse van RechtsbronHoofdstukArtikelRelatieHeeftOnderdeel
+map:RechtsbronArtikelEnBijlageHoofdstukRelatieIsDeelVan #Reverse van RechtsbronHoofdstukArtikelRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	Hoofdstuk.ID AS HoofdstukID,
 				Artikel.ID AS ArtikelID,
@@ -1263,68 +1262,10 @@ map:RechtsbronArtikelHoofdstukRelatieIsDeelVan #Reverse van RechtsbronHoofdstukA
 		FROM WetgevingHoofdstuk AS Hoofdstuk, WetgevingArtikel AS Artikel, WetgevingArtikelVersie AS ArtikelVersie
 		WHERE Artikel.ID = ArtikelVersie.ID
 		AND	Hoofdstuk.ID = Artikel.WetgevingHoofdstukID
-		AND NOT ArtikelVersie.ArtikelType = 'BIJLAGE'
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/artikel/{"ArtikelVersieID"}'; #ArtikelVersieID is de VlacoID in RechtsbronArtikel 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:is_part_of; #is deel van
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronHoofdstuk; 
-			rr:joinCondition [
-				rr:child 'HoofdstukID';
-				rr:parent 'ID';
-			]
-		]
-	].
-	
-#-----------------------------------------
-#Onderdeel 1.10: Mappings van de Hoofdstuk -> Bijlage en Bijlage -> Hoofdstuk relaties van Rechtsbrononderdelen
-
-map:RechtsbronHoofdstukBijlageRelatieHeeftOnderdeel
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT	Hoofdstuk.ID AS HoofdstukID,
-				Artikel.ID AS ArtikelID,
-				Artikel.WetgevingHoofdstukID AS HoofdstukArtikelID,
-				ArtikelVersie.ID AS ArtikelVersieID
-		FROM WetgevingHoofdstuk AS Hoofdstuk, WetgevingArtikel AS Artikel, WetgevingArtikelVersie AS ArtikelVersie
-		WHERE Artikel.ID = ArtikelVersie.ID
-		AND	Hoofdstuk.ID = Artikel.WetgevingHoofdstukID
-		AND ArtikelVersie.ArtikelType = 'BIJLAGE'
-	""" 
-	];
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/hoofdstuk/{"HoofdstukID"}'; 
-		rr:class eli:LegalResourceSubdivision; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:has_part; #heeft onderdeel
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelVersieID'; #ArtikelVersieID is de VlacoID in RechtsbronArtikel
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronBijlageHoofdstukRelatieIsDeelVan #Reverse van RechtsbronHoofdstukBijlageRelatieHeeftOnderdeel
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT	Hoofdstuk.ID AS HoofdstukID,
-				Artikel.ID AS ArtikelID,
-				Artikel.WetgevingHoofdstukID AS HoofdstukArtikelID,
-				ArtikelVersie.ID AS ArtikelVersieID
-		FROM WetgevingHoofdstuk AS Hoofdstuk, WetgevingArtikel AS Artikel, WetgevingArtikelVersie AS ArtikelVersie
-		WHERE Artikel.ID = ArtikelVersie.ID
-		AND	Hoofdstuk.ID = Artikel.WetgevingHoofdstukID
-		AND ArtikelVersie.ArtikelType = 'BIJLAGE'
-	""" 
-	];
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/id/Bijlage/{"ArtikelVersieID"}'; #ArtikelVersieID is de VlacoID in RechtsbronArtikel 
+		rr:template 'https://codex.vlaanderen.be/id/artikel/{"ArtikelVersieID"}'; #ArtikelVersieID is de VlacoID in RechtsbronArtikelEn Bijlage
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
