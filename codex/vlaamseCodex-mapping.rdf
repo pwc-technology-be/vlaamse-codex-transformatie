@@ -722,7 +722,7 @@ map:RechtsbronDocumentHoofdstukRelatieHeeftOnderdeel
 
 
 
-map:RechtsbronDocumentArtikelRelatieHeeftOnderdeel
+map:RechtsbronDocumentArtikelEnBijlageRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	vwRechtsbronDocument.URLpart1,
 				vwRechtsbronDocument.Identifier,
@@ -733,7 +733,6 @@ map:RechtsbronDocumentArtikelRelatieHeeftOnderdeel
 				ArtikelVersie.ID as ArtikelID
 		FROM WetgevingArtikelVersie as ArtikelVersie, vwRechtsbronDocument WITH ( NOEXPAND )
 		WHERE vwRechtsbronDocument.Identifier = ArtikelVersie.WetgevingDocumentId
-		AND NOT ArtikelVersie.ArtikelType = 'BIJLAGE'
 	""" 
 	];
 	rr:subjectMap [
@@ -746,35 +745,6 @@ map:RechtsbronDocumentArtikelRelatieHeeftOnderdeel
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelID';
-				rr:parent 'ID';
-			]
-		]
-	].
-
-map:RechtsbronDocumentBijlageRelatieHeeftOnderdeel
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT 	vwRechtsbronDocument.URLpart1,
-				vwRechtsbronDocument.Identifier,
-				vwRechtsbronDocument.datumDocumentJaar,
-				vwRechtsbronDocument.datumDocumentMaand,
-				vwRechtsbronDocument.datumDocumentDag,
-				vwRechtsbronDocument.typeDocumentURI,
-				ArtikelVersie.ID as ArtikelRelatie
-		FROM WetgevingDocument as Document, WetgevingArtikelVersie as ArtikelVersie, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE vwRechtsbronDocument.Identifier = ArtikelVersie.WetgevingDocumentId
-		AND ArtikelVersie.ArtikelType = 'BIJLAGE'
-	""" 
-	];
-	rr:subjectMap [
-		rr:template '{"URLpart1"}{"typeDocumentURI"}{"datumDocumentJaar"}{"datumDocumentMaand"}{"datumDocumentDag"}/{"Identifier"}'; 
-		rr:class eli:LegalResource; 
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:has_part; #heeft onderdeel
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
-			rr:joinCondition [
-				rr:child 'ArtikelRelatie';
 				rr:parent 'ID';
 			]
 		]
@@ -1036,7 +1006,7 @@ map:RechtsbronDocumentArtikelEnBijlageRelatieIngetrokkenBij
 	].
 
 #-----------------------------------------
-#Onderdeel 1.7.1: Mappings van de Artikel -> Document relaties van Rechtsbron(onderdeel) (Reverse mappings uit 1.7)
+#Onderdeel 1.7.1: Mappings van de Artikel en Bijlage -> Document relaties van Rechtsbron(onderdeel) (Reverse mappings uit 1.7)
 
 map:RechtsbronDocumentArtikelEnBijlageRelatieVerandertReverse 
 	rr:logicalTable [ rr:sqlQuery """
