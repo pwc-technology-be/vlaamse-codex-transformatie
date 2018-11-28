@@ -4314,7 +4314,7 @@ map:VerschijningsvormHoofdstuk
 #-----------------------------------------
 #Onderdeel 2.3: Mapping van VerschijningsvormArtikel
 
-map:VerschijningsvormArtikel
+map:VerschijningsvormArtikelEnBijlage
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT id AS VlacoID,
 				(CASE 
@@ -4326,13 +4326,14 @@ map:VerschijningsvormArtikel
 					ELSE CONVERT(date, EindDatum) 
 				END) AS buitenwerkingtreding,
 				CONCAT('Artikel ', WetgevingArtikelVersie.ArtikelNummer) AS nummer,
-				Tekst AS inhoud
-		FROM WetgevingArtikelVersie
-		WHERE NOT WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
+				Tekst AS inhoud,
+				(CASE ArtikelVersie.ArtikelType WHEN 'ART' THEN 'artikel' WHEN 'ART.' THEN 'artikel' ELSE 'bijlage' END) as ArtikelType
+		FROM WetgevingArtikelVersie as ArtikelVersie
+		WHERE NOT ArtikelVersie.ArtikelType = ''
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/doc/artikel/{"VlacoID"}';
+		rr:template 'https://codex.vlaanderen.be/doc/{"ArtikelType"}/{"VlacoID"}';
 		rr:class eli:LegalExpression; 
 	];
 	rr:predicateObjectMap [ 
@@ -4350,7 +4351,7 @@ map:VerschijningsvormArtikel
 	rr:predicateObjectMap [
 		rr:predicate eli:realizes; #realiseert
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikel; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'VlacoID';
 				rr:parent 'ID';
@@ -4364,7 +4365,7 @@ map:VerschijningsvormArtikel
 	rr:predicateObjectMap [ 
 		rr:predicate eli:id_local; 
 		rr:objectMap [
-			rr:parentTriplesMap map:VerschijningsvormArtikelLocalID; 
+			rr:parentTriplesMap map:VerschijningsvormArtikelEnBijlageLocalID; 
 			rr:joinCondition [
 				rr:child 'VlacoID';
 				rr:parent 'id';
@@ -4372,13 +4373,14 @@ map:VerschijningsvormArtikel
 		]
 	].
 
-map:VerschijningsvormArtikelLocalID
+map:VerschijningsvormArtikelEnBijlageLocalID
 	rr:logicalTable [rr:sqlQuery """
-		SELECT	id AS id
+		SELECT	id AS id,
+				(CASE ArtikelType WHEN 'ART' THEN 'Artikel' WHEN 'ART.' THEN 'Artikel' ELSE 'Bijlage' END) as ArtikelType
 		FROM WetgevingArtikelVersie
 	"""];
 	rr:subjectMap [
-		rr:template 'Artikel{"id"}';
+		rr:template '{"ArtikelType"}{"id"}';
 		rr:class adms:Identifier; 
 	];
 	rr:predicateObjectMap [ 
@@ -4394,55 +4396,4 @@ map:VerschijningsvormArtikelLocalID
 			rr:template 'https://data.vlaanderen.be/id/organisatie/OVO003155';
 			rr:termType rr:IRI; 
 		];
-	].
-
-#-----------------------------------------
-#Onderdeel 2.4: Mapping van VerschijningsvormBijlage
-
-map:VerschijningsvormBijlage
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT id AS VlacoID,
-				(CASE 
-					WHEN CONVERT(date, StartDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2900'), CONVERT(date, '01/01/3000')) THEN  null
-					ELSE CONVERT(date, StartDatum) 
-				END) AS inwerkingtreding,
-				(CASE 
-					WHEN CONVERT(date, EindDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2900'), CONVERT(date, '01/01/3000')) THEN  null
-					ELSE CONVERT(date, EindDatum) 
-				END) AS buitenwerkingtreding,
-				CONCAT('Bijlage ', WetgevingArtikelVersie.ArtikelNummer) AS nummer,
-				Tekst AS inhoud
-		FROM WetgevingArtikelVersie
-		WHERE WetgevingArtikelVersie.ArtikelType = 'BIJLAGE'
-	""" 
-	];
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/doc/bijlage/{"VlacoID"}';
-		rr:class eli:LegalExpression; 
-	];
-	rr:predicateObjectMap [ 
-		rr:predicate eli:number; 
-		rr:objectMap [rr:column '"nummer"'];
-	];
-	rr:predicateObjectMap [
-		rr:predicate eli:realizes; #realiseert
-		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronBijlage; 
-			rr:joinCondition [
-				rr:child 'VlacoID';
-				rr:parent 'ID';
-				]
-		]
-	];
-	rr:predicateObjectMap [ 
-		rr:predicate prov:value; 
-		rr:objectMap [rr:column '"inhoud"'];
-	];
-	rr:predicateObjectMap [ 
-		rr:predicate eli:first_date_entry_in_force; 
-		rr:objectMap [rr:column '"inwerkingtreding"'];
-	];
-	rr:predicateObjectMap [ 
-		rr:predicate eli:date_no_longer_in_force; 
-		rr:objectMap [rr:column '"buitenwerkingtreding"'];
 	].
