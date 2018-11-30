@@ -228,7 +228,7 @@ map:RechtsbronDocumentDocumentRelatieHeftOp
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:heft_op; #Heft op
+		rr:predicate codex:heftOp; #Heft op
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -623,7 +623,7 @@ map:RechtsbronDocumentDocumentRelatieOpgehevenBijReverse
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:heft_op; #Heft op (reverse van opgeheven bij)
+		rr:predicate codex:heftOp; #Heft op (reverse van opgeheven bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -799,7 +799,7 @@ map:RechtsbronDocumentArtikelEnBijlageRelatieHeftOp
 		rr:class eli:LegalResource; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:heft_op; #Heft op
+		rr:predicate codex:heftOp; #Heft op
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
@@ -1166,7 +1166,7 @@ map:RechtsbronDocumentArtikelEnBijlageRelatieOpgehevenBijReverse
 		rr:class eli:LegalResourceSubdivision;
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:heft_op; #Heft op (reverse van opgeheven bij)
+		rr:predicate codex:heftOp; #Heft op (reverse van opgeheven bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
@@ -1301,7 +1301,7 @@ map:RechtsbronArtikelEnBijlageRelatieGewijzigdBij
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -1325,7 +1325,7 @@ map:RechtsbronArtikelEnBijlageRelatieVervangenBij
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -1344,12 +1344,12 @@ map:RechtsbronArtikelEnBijlageRelatieIngevoegdBij
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:amended_by; #Ingevoegd bij
+		rr:predicate codex:ingevoegdBij; #Ingevoegd bij
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -1373,7 +1373,7 @@ map:RechtsbronArtikelEnBijlageRelatieOpgehevenBij
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -1397,7 +1397,7 @@ map:RechtsbronArtikelEnBijlageRelatieIngetrokkenBij
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -1421,7 +1421,7 @@ map:RechtsbronArtikelEnBijlageRelatieBekrachtigdBij
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -1445,7 +1445,7 @@ map:RechtsbronArtikelEnBijlageRelatieZieOok
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -1469,7 +1469,7 @@ map:RechtsbronArtikelEnBijlageRelatieWijzigt
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -1493,7 +1493,7 @@ map:RechtsbronArtikelEnBijlageRelatieVervangt
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -1512,12 +1512,12 @@ map:RechtsbronArtikelEnBijlageRelatieVoegtIn
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:amends; #Voegt in
+		rr:predicate codex:voegtIn; #Voegt in
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -1536,12 +1536,12 @@ map:RechtsbronArtikelEnBijlageRelatieHeftOp
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:heft_op; #Heft op
+		rr:predicate codex:heftOp; #Heft op
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -1565,7 +1565,7 @@ map:RechtsbronArtikelEnBijlageRelatieBekrachtigt
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -1589,7 +1589,7 @@ map:RechtsbronArtikelEnBijlageRelatieTrektIn
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'ID';
 			]
 		]
 	].
@@ -1659,7 +1659,7 @@ map:RechtsbronBijlageBijlageRelatieIngevoegdBijReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:amends; #Voegt in (reverse van Ingevoegd bij)
+		rr:predicate codex:voegtIn; #Voegt in (reverse van Ingevoegd bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
@@ -1683,7 +1683,7 @@ map:RechtsbronArtikelEnBijlageRelatieOpgehevenBijReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate codex:heft_op; #Heft op (reverse van Opgeheven bij)
+		rr:predicate codex:heftOp; #Heft op (reverse van Opgeheven bij)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
@@ -1827,7 +1827,7 @@ map:RechtsbronArtikelEnBijlageRelatieVoegtInReverse
 		rr:class eli:LegalResourceSubdivision; 
 	];
 	rr:predicateObjectMap [
-		rr:predicate eli:amended_by; #Ingevoegd bij (reverse van Voegt in)
+		rr:predicate codex:ingevoegdBij; #Ingevoegd bij (reverse van Voegt in)
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
