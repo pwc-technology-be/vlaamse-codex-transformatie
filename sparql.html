@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <title>Vlaamse Codex SPARQL endpoint</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://dij151upo6vad.cloudfront.net/2.latest/css/vlaanderen-ui.css" />
+  <link rel="stylesheet" href="https://dij151upo6vad.cloudfront.net/2.latest/css/vlaanderen-ui-corporate.css" />
+
+  <link rel="icon" sizes="192x192" href="https://dij151upo6vad.cloudfront.net/2.latest/icons/app-icon/icon-highres-precomposed.png">
+  <link rel="apple-touch-icon" href="https://dij151upo6vad.cloudfront.net/2.latest/icons/app-icon/touch-icon-iphone-precomposed.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://dij151upo6vad.cloudfront.net/2.latest/icons/app-icon/touch-icon-ipad-precomposed.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="https://dij151upo6vad.cloudfront.net/2.latest/icons/app-icon/touch-icon-iphone-retina-precomposed.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="https://dij151upo6vad.cloudfront.net/2.latest/icons/app-icon/touch-icon-ipad-retina-precomposed.png">
+
+  <meta name="msapplication-square70x70logo" content="https://dij151upo6vad.cloudfront.net/2.latest/icons/app-icon/tile-small.png" />
+  <meta name="msapplication-square150x150logo" content="https://dij151upo6vad.cloudfront.net/2.latest/icons/app-icon/tile-medium.png" />
+  <meta name="msapplication-wide310x150logo" content="https://dij151upo6vad.cloudfront.net/2.latest/icons/app-icon/tile-wide.png" />
+  <meta name="msapplication-square310x310logo" content="https://dij151upo6vad.cloudfront.net/2.latest/icons/app-icon/tile-large.png" />
+  <meta name="msapplication-TileColor" content="#FFE615" />
+
+  <link href='https://cdn.jsdelivr.net/npm/yasgui@2.7.29/dist/yasgui.min.css' rel='stylesheet' type='text/css'/>
+  <link href='https://cdn.jsdelivr.net/npm/yasgui-yasqe@2.11.22/dist/yasqe.min.css' rel='stylesheet' type='text/css'/>
+  <style>#queries .yasqe_queryButton { display:none; }</style>
+  <script src='https://cdn.jsdelivr.net/npm/yasgui@2.7.29/dist/yasgui.min.js'></script>
+  <script src='https://code.jquery.com/jquery-3.2.1.min.js'></script>
+</head>
+
+<body>
+  <div id="sparqltop" style="min-height:44px;;" id="vlaanderen-header">
+    <!-- insert your global header here -->
+    <script type="text/javascript" src="//widgets.vlaanderen.be/widget/live/5ecf33a0a922428cb9d944c55362ed15"></script>
+    <!-- end global header-->
+  </div>
+
+  <!-- Start page content -->
+  <div class="page">
+    <div class="layout layout--wide">
+      <div class="skiplink">
+        <a rel="nofollow" rel="noreferrer" href="#main">Overslaan en naar de algemene inhoud gaan</a>
+      </div>
+    </div>
+
+    <div id="main" itemprop="mainContentOfPage" role="main" tabindex="-1" class="main-content">
+      <div class="u-spacer"></div>
+
+      <div class="region">
+        <div class="layout layout--wide">
+          <div class="introduction typography u-spacer">
+            Via dit <a href="http://www.w3.org/TR/sparql11-query/" target="_blank">SPARQL</a> Endpoint wordt de Vlaamse Codex als Linked Open Data ontsloten. Documentatie met betrekking tot het achterliggend informatiemodel en de RDF termen die gebruikt kunnen worden om semantische queries op te bouwen is terug te vinden in het <a href="https://data.vlaanderen.be/doc/applicatieprofiel/vlaamse-codex/" target="_blank">Vlaamse Codex Applicatieprofiel</a> op data.vlaanderen.be</a>. 
+          </div>
+          <ul class="grid grid--is-stacked js-equal-height-container sparqlLinks">
+            <li class="col--4-12 col--6-12--m col--12-12--xs"><a class="button" href="#" data-anchor="metadata" data-query='
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX eli: <http://data.europa.eu/eli/ontology#> 
+SELECT * WHERE {
+  <https://codex.vlaanderen.be/doc/document/1003978> ?p ?o
+}
+'>Metadata voor een document</a></li>
+            <li class="col--4-12 col--6-12--m col--12-12--xs"><a class="button" href="#" data-anchor="aantal" data-query='
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX eli: <http://data.europa.eu/eli/ontology#>
+SELECT count(*)  WHERE {
+  ?document a eli:LegalResource
+}
+ '>Aantal documenten</a></li>
+            <li class="col--4-12 col--6-12--m col--12-12--xs"><a class="button" href="#" data-anchor="aantal-wijzigingen" data-query='
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX eli: <http://data.europa.eu/eli/ontology#> 
+SELECT 
+  DISTINCT ?verschijningsvorm, ?trefwoord, ?change as ?wijzigende_document 
+WHERE { 
+  ?verschijningsvorm a eli:LegalExpression .
+  ?verschijningsvorm eli:realizes ?document .
+  ?document eli:amended_by ?change .
+  ?change eli:date_document ?datum .
+
+FILTER (?datum > "2018-01-01"^^xsd:date)
+}
+'>Wijzigingen sinds 01/01/2018</a></li>
+          </ul>
+
+          <script>
+            $('ul a').click(function() {
+              var tabId = $(this).attr("data-anchor");
+              console.log(this);
+              var query = $(this).attr("data-query");
+              var alltabs = yasgui.tabs;
+              var exist = tabNameTaken(tabId);
+              if (exist) {
+                console.log("Tab " + tabId + " found")
+                yasgui.selectTab(tabId);
+              } else {
+                try {
+                  yasgui.closeTab(tabId);
+                } catch (err) {
+                  console.log("tab for sure not found:" + err)
+                }
+                var tab = '';
+                tab = yasgui.addTab(tabId);
+                yasgui.selectTab(tabId);
+                tab.yasqe.setValue(query);
+                yasgui.selectTab(tabId);
+              };
+            });
+          </script>
+          <script>
+            function tabNameTaken(name) {
+              for (var tId in yasgui.tabs) {
+                console.log("check " + yasgui.tabs[tId].persistentOptions.name);
+                console.log("check input " + name);
+                if (yasgui.tabs[tId].persistentOptions.name == name) {
+                  return true;
+                }
+              }
+              return false;
+            };
+          </script>
+
+          <div class="u-spacer--small"></div>
+          <div id="showcase" class="u-spacer--large"></div>
+
+
+
+          <div id="faq" class="u-spacer--large">
+            <h2 class="h2">Veelgestelde vragen</h2>
+              <div class="js-accordion">
+                <!-- toggle -->
+                <a class="toggle toggle--arrow-down js-accordion__toggle"><i class="toggle__icon" aria-hidden="true"></i>Hoe up-to-date is de informatie in dit SPARQL endpoint?</a>
+                <div class="accordion__content">
+                  <div class="u-bg-block">
+                    Het SPARQL Endpoint wordt dagelijks bijgewerkt, samen met de <a href="https://codex.vlaanderen.be/" target="_blank">consultatiewebsite</a> en <a href="http://codex.opendata.api.vlaanderen.be/docs/" target="_blank">REST API</a>.
+                  </div>
+                </div>
+              </div>
+              <div class="js-accordion">
+                <!-- toggle -->
+                <a class="toggle toggle--arrow-down js-accordion__toggle"><i class="toggle__icon" aria-hidden="true"></i>Waar kan ik terecht met vragen of opmerkingen?</a>
+                <div class="accordion__content">
+                  <div class="u-bg-block">
+                    Vragen en feedback kan u medelen via mail naar <a href="mailto:codex@vlaanderen.be">codex@vlaanderen.be</a> of door een issue aan te maken op <a href="https://github.com/Informatievlaanderen/OSLO-Discussion/issues" target="_blank">GitHub</a>.
+                  </div>
+                </div>
+              </div>
+              <div class="js-accordion">
+                <!-- toggle -->
+                <a class="toggle toggle--arrow-down js-accordion__toggle"><i class="toggle__icon" aria-hidden="true"></i>Waarom krijg ik een <i>404 - File or directory not found</i> pagina te zien als ik op sommige links klik in een query resultaat?</a>
+                <div class="accordion__content">
+                  <div class="u-bg-block">
+                    De getoonde weblinks die in een query resultaat getoond worden stellen URI’s (Uniform Resource Identifier) voor (bijvoorbeeld.: <a href="https://codex.vlaanderen.be/doc/document/1003978">https://codex.vlaanderen.be/doc/document/1003978</a>). Het zijn persistente identificatoren voor (Linked) data elementen. Hoewel ze dus lijken op een URL (Uniform Resource Locator) en adressen voor websites (zoals <a href="https://codex.vlaanderen.be" target="_blank">https://codex.vlaanderen.be</a>) zijn URI’s niet altijd ‘dereferentieerbaar’, ze leiden niet altijd naar een plaats met mensleesbare informatie. Er wordt voor de Vlaamse Codex waar mogelijk wel doorverwezen naar het overeenkomende document op de website van het Belgisch Staatsblad of de documenten in de <a href="https://codex.vlaanderen.be/" target="_blank">consultatiewebsite</a>.
+                  </div>
+                </div>
+              </div>
+          </div>
+
+
+          <div id="queries">
+            <h2 class="h2">Meer SPARQL queries</h2>
+            <h3 class="h3">Voorbeeld 1</h3>
+            <p>Geef een overzicht van alle artikels met een of meerdere trefwoorden waarin "onderwijs" voorkomt.</p>
+            <textarea id="voorbeeld-1" class="u-spacer">
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX eli: <http://data.europa.eu/eli/ontology#> 
+
+SELECT *
+WHERE { 
+  ?artikel <http://purl.org/dc/terms/subject> ?trefwoord.
+
+FILTER (CONTAINS(LCASE(?trefwoord), "onderwijs"))
+}              
+            </textarea>
+            <div class="u-spacer"></div>
+
+            <h3 class="h3">Voorbeeld 2</h3>
+            <p>Geef een overzicht van alle documenten die gewijzigd zijn sinds 1 januari 2016, een of meerdere trefwoorden bevatten waarin “werk” voorkomt en het document dat zorgt voor de wijziging.</p>
+            <textarea id="voorbeeld-2" class="u-spacer">
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX eli: <http://data.europa.eu/eli/ontology#> 
+
+
+SELECT 
+  DISTINCT ?verschijningsvorm, ?trefwoord, ?change as ?wijzigende_document 
+WHERE { 
+  ?verschijningsvorm a eli:LegalExpression .
+  ?verschijningsvorm <http://purl.org/dc/terms/subject> ?trefwoord . 
+  ?verschijningsvorm eli:realizes ?document .
+  ?document eli:amended_by ?change .
+  ?change eli:date_document ?datum .
+
+FILTER (CONTAINS(LCASE(?trefwoord), "werk"))
+FILTER (?datum > "2016-01-01"^^xsd:date)
+}              
+            </textarea>
+            <div class="u-spacer"></div>
+
+            <h3 class="h3">Voorbeeld 3</h3>
+            <p>Geef een vergelijking van de tekst van documenten tegenover de tekst van het document dat zorgde voor de vervanging.</p>
+            <textarea id="voorbeeld-3" class="u-spacer">
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+PREFIX eli: <http://data.europa.eu/eli/ontology#> 
+PREFIX codex: <https://data.vlaanderen.be/ns/wetgeving#>
+PREFIX w3: <http://www.w3.org/ns/prov#>
+
+
+SELECT 
+  DISTINCT ?oude_verschijningsvorm, ?originele_tekst, ?verschijningsvorm, ?nieuwe_tekst
+WHERE { 
+  ?verschijningsvorm a eli:LegalExpression .
+  ?verschijningsvorm eli:realizes ?nieuwe_document .
+  ?nieuwe_document eli:repeals ?originele_document .
+  ?verschijningsvorm w3:value ?nieuwe_tekst .
+  ?originele_document eli:is_realized_by ?oude_verschijningsvorm .
+  ?oude_verschijningsvorm w3:value ?originele_tekst .
+
+} LIMIT 100             
+            </textarea>
+            <div class="u-spacer"></div>
+
+            <h3 class="h3">Voorbeeld 4</h3>
+            <p>Geef een overzicht van alle beschikbare trefwoorden.</p>
+            <textarea id="voorbeeld-4" class="u-spacer">
+SELECT DISTINCT ?trefwoord
+WHERE { 
+  ?verschijningsvorm <http://purl.org/dc/terms/subject> ?trefwoord . 
+}
+order by asc(UCASE(str(?trefwoord )))           
+            </textarea>
+          </div>
+
+          <script type="text/javascript">
+            var config = {
+              "catalogueEndpoints": [
+                {
+                  "endpoint": "http://staging.opendata.codex.vandenbroele.be:8888/sparql",
+                  "title": "Vlaamse Codex endpoint"
+                },
+                {
+                  "endpoint": "https://data.vlaanderen.be/sparql",
+                  "title": "data.vlaanderen.be endpoint"
+                }
+              ],
+              "endpoint": "http://staging.opendata.codex.vandenbroele.be:8888/sparql"
+            };
+            YASGUI.YASQE.defaults.sparql.endpoint = "http://staging.opendata.codex.vandenbroele.be:8888/sparql";
+            YASGUI.defaults.catalogueEndpoints = [{
+              endpoint: 'http://staging.opendata.codex.vandenbroele.be:8888/sparql',
+              title: 'Vlaamse Codex endpoint'
+            }];
+            YASGUI.defaults.endpoint = "http://staging.opendata.codex.vandenbroele.be:8888/sparql";
+            YASGUI.defaults.yasqe.sparql.endpoint = "http://staging.opendata.codex.vandenbroele.be:8888/sparql";
+            var cfg1 = YASGUI.YASQE.defaults;
+            YASGUI.YASQE.defaults = cfg1;
+            YASGUI.YASQE.defaults.value =
+              "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n PREFIX eli: <http://data.europa.eu/eli/ontology#> \n SELECT * WHERE {\n <https://codex.vlaanderen.be/doc/document/1003978> ?predicate ?object . \n } \n LIMIT 10";
+            YASGUI.YASQE.defaults.sparql.getQueryForAjax = function(yasqe) {
+              var b = yasqe.getValue();
+              var a = "define input:default-graph-exclude <http://www.openlinksw.com/schemas/virtrdf#>, <http://localhost:8890/DAV/>, <http://www.w3.org/2002/07/owl#>, <http://localhost:8890/sparql>, <http://www.w3.org/ns/ldp#> " + yasqe.getValue();
+              return a;
+            };
+            var yasgui = YASGUI(document.getElementById("showcase"), config);
+            var vb1 = YASGUI.YASQE.fromTextArea(document.getElementById('voorbeeld-1'));
+            var vb2 = YASGUI.YASQE.fromTextArea(document.getElementById('voorbeeld-2'));
+            var vb3 = YASGUI.YASQE.fromTextArea(document.getElementById('voorbeeld-3'));
+            var vb4 = YASGUI.YASQE.fromTextArea(document.getElementById('voorbeeld-4'));
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End page content -->
+
+  <div id="vlaanderen-footer">
+    <!-- insert your Vlaanderen-footer-code here -->
+    <script type="text/javascript" src="//widgets.vlaanderen.be/widget/live/d6d44414e7c242f396ab6da8f8da5198"></script>
+    <!-- End global footer-->
+  </div>
+
+  <script src="https://dij151upo6vad.cloudfront.net/2.latest/js/vlaanderen-ui.js"></script>
+</body>
+
+</html>
