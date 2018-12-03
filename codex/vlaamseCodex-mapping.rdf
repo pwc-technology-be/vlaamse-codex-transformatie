@@ -745,7 +745,7 @@ map:RechtsbronDocumentArtikelEnBijlageRelatieHeeftOnderdeel
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelID';
-				rr:parent 'ID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -776,7 +776,7 @@ map:RechtsbronDocumentArtikelEnBijlageRelatieVerandert
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -804,7 +804,7 @@ map:RechtsbronDocumentArtikelEnBijlageRelatieHeftOp
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -832,7 +832,7 @@ map:RechtsbronDocumentArtikelEnBijlageRelatieBekrachtigt
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -860,7 +860,7 @@ map:RechtsbronDocumentArtikelEnBijlageRelatieTrektIn
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -888,7 +888,7 @@ map:RechtsbronDocumentArtikelEnBijlageRelatieZieOok
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -916,7 +916,7 @@ map:RechtsbronDocumentArtikelEnBijlageRelatieVeranderdDoor
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -944,7 +944,7 @@ map:RechtsbronDocumentArtikelEnBijlageRelatieOpgehevenBij
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -972,7 +972,7 @@ map:RechtsbronDocumentArtikelEnBijlageRelatieBekrachtigdBij
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1000,7 +1000,7 @@ map:RechtsbronDocumentArtikelEnBijlageRelatieIngetrokkenBij
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelRelatie';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1248,7 +1248,7 @@ map:RechtsbronHoofdstukArtikelEnBijlageRelatieHeeftOnderdeel
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'ArtikelVersieID'; #ArtikelVersieID is de VlacoID in RechtsbronArtikelEnBijlage
-				rr:parent 'ID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1301,7 +1301,7 @@ map:RechtsbronArtikelEnBijlageRelatieGewijzigdBij
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1325,7 +1325,7 @@ map:RechtsbronArtikelEnBijlageRelatieVervangenBij
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1349,7 +1349,7 @@ map:RechtsbronArtikelEnBijlageRelatieIngevoegdBij
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1373,7 +1373,7 @@ map:RechtsbronArtikelEnBijlageRelatieOpgehevenBij
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1397,7 +1397,7 @@ map:RechtsbronArtikelEnBijlageRelatieIngetrokkenBij
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1421,7 +1421,7 @@ map:RechtsbronArtikelEnBijlageRelatieBekrachtigdBij
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1445,7 +1445,7 @@ map:RechtsbronArtikelEnBijlageRelatieZieOok
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1469,7 +1469,7 @@ map:RechtsbronArtikelEnBijlageRelatieWijzigt
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1493,7 +1493,7 @@ map:RechtsbronArtikelEnBijlageRelatieVervangt
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1517,7 +1517,7 @@ map:RechtsbronArtikelEnBijlageRelatieVoegtIn
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1541,7 +1541,7 @@ map:RechtsbronArtikelEnBijlageRelatieHeftOp
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1565,7 +1565,7 @@ map:RechtsbronArtikelEnBijlageRelatieBekrachtigt
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1589,7 +1589,7 @@ map:RechtsbronArtikelEnBijlageRelatieTrektIn
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel2ID';
-				rr:parent 'ID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1616,7 +1616,7 @@ map:RechtsbronArtikelEnBijlageRelatieGewijzigdBijReverse
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel1ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1640,7 +1640,7 @@ map:RechtsbronArtikelEnBijlageRelatieVervangenBijReverse
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel1ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1664,7 +1664,7 @@ map:RechtsbronBijlageBijlageRelatieIngevoegdBijReverse
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel1ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1688,7 +1688,7 @@ map:RechtsbronArtikelEnBijlageRelatieOpgehevenBijReverse
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel1ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1712,7 +1712,7 @@ map:RechtsbronArtikelEnBijlageRelatieIngetrokkenBijReverse
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel1ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1736,7 +1736,7 @@ map:RechtsbronArtikelEnBijlageRelatieBekrachtigdBijReverse
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel1ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1760,7 +1760,7 @@ map:RechtsbronArtikelEnBijlageRelatiZieOokReverse
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel1ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1784,7 +1784,7 @@ map:RechtsbronArtikelEnBijlageRelatieWijzigtReverse
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel1ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1808,7 +1808,7 @@ map:RechtsbronArtikelEnBijlageRelatieVervangtReverse
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel1ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1832,7 +1832,7 @@ map:RechtsbronArtikelEnBijlageRelatieVoegtInReverse
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel1ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1856,7 +1856,7 @@ map:RechtsbronArtikelEnBijlageRelatieHeftOpReverse
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel1ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1880,7 +1880,7 @@ map:RechtsbronArtikelEnBijlageRelatieBekrachtigdReverse
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel1ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
@@ -1904,7 +1904,7 @@ map:RechtsbronArtikelEnBijlageRelatieTrektInReverse
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
 				rr:child 'Artikel1ID';
-				rr:parent 'ArtikelID';
+				rr:parent 'WetgevingArtikelId';
 			]
 		]
 	].
