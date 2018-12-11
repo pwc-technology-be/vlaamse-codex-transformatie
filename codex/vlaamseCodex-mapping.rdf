@@ -1958,7 +1958,7 @@ map:VerschijningsvormDocument
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate eli:id_local; 
-		rr:objectMap [rr:template 'Document{"id"}'];
+		rr:objectMap [rr:column '"id"'];
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate eli:title; 
@@ -2091,5 +2091,5 @@ map:VerschijningsvormArtikelEnBijlage
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate eli:id_local; 
-		rr:objectMap [rr:template '{"ArtikelType2"} {"VlacoID"}'];
+		rr:objectMap [rr:column '"VlacoID"'];
 	].
