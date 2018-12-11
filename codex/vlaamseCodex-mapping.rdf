@@ -2095,7 +2095,7 @@ map:VerschijningsvormArtikelEnBijlage
 					WHEN CONVERT(date, EindDatum) in (CONVERT(date, '01/01/2100'), CONVERT(date, '01/01/2900'), CONVERT(date, '01/01/3000')) THEN  null
 					ELSE CONVERT(date, EindDatum) 
 				END) AS buitenwerkingtreding,
-				CONCAT('Artikel ', ArtikelVersie.ArtikelNummer) AS nummer,
+				ArtikelVersie.ArtikelNummer AS nummer,
 				Tekst AS inhoud,
 				(CASE ArtikelVersie.ArtikelType WHEN 'ART' THEN 'artikel' WHEN 'ART.' THEN 'artikel' ELSE 'bijlage' END) as ArtikelType,
 				(CASE ArtikelVersie.ArtikelType WHEN 'ART' THEN 'Artikel' WHEN 'ART.' THEN 'Artikel' ELSE 'Bijlage' END) as ArtikelType2
