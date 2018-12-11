@@ -1954,13 +1954,7 @@ map:VerschijningsvormDocument
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate eli:id_local; 
-		rr:objectMap [
-			rr:parentTriplesMap map:VerschijningsvormDocumentLocalID; 
-			rr:joinCondition [
-				rr:child 'VlacoID';
-				rr:parent 'id';
-			]
-		]
+		rr:objectMap [rr:template 'Document{"id"}'];
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate eli:title; 
@@ -1979,30 +1973,6 @@ map:VerschijningsvormDocument
 				rr:parent 'Identifier';
 			]
 		]
-	].
-
-map:VerschijningsvormDocumentLocalID
-	rr:logicalTable [rr:sqlQuery """
-		SELECT	id AS id
-		FROM WetgevingDocument
-	"""];
-	rr:subjectMap [
-		rr:template 'Document{"id"}';
-		rr:class adms:Identifier; 
-	];
-	rr:predicateObjectMap [ 
-		rr:predicate skos:notation; 
-		rr:objectMap [
-			rr:column '"id"';
-			rr:termType rr:Literal; 
-		];
-	];
-	rr:predicateObjectMap [ 
-		rr:predicate dcterms:creator; 
-		rr:objectMap [
-			rr:template 'https://data.vlaanderen.be/id/organisatie/OVO003155';
-			rr:termType rr:IRI; 
-		];
 	].
 
 map:VerschijningsvormDocumentTrefwoord
@@ -2135,36 +2105,5 @@ map:VerschijningsvormArtikelEnBijlage
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate eli:id_local; 
-		rr:objectMap [
-			rr:parentTriplesMap map:VerschijningsvormArtikelEnBijlageLocalID; 
-			rr:joinCondition [
-				rr:child 'VlacoID';
-				rr:parent 'id';
-			]
-		]
-	].
-
-map:VerschijningsvormArtikelEnBijlageLocalID
-	rr:logicalTable [rr:sqlQuery """
-		SELECT	id AS id,
-				(CASE ArtikelType WHEN 'ART' THEN 'Artikel' WHEN 'ART.' THEN 'Artikel' ELSE 'Bijlage' END) as ArtikelType
-		FROM WetgevingArtikelVersie
-	"""];
-	rr:subjectMap [
-		rr:template '{"ArtikelType"}{"id"}';
-		rr:class adms:Identifier; 
-	];
-	rr:predicateObjectMap [ 
-		rr:predicate skos:notation; 
-		rr:objectMap [
-			rr:column '"id"';
-			rr:termType rr:Literal; 
-		];
-	];
-	rr:predicateObjectMap [ 
-		rr:predicate dcterms:creator; 
-		rr:objectMap [
-			rr:template 'https://data.vlaanderen.be/id/organisatie/OVO003155';
-			rr:termType rr:IRI; 
-		];
+		rr:objectMap [rr:template '{"ArtikelType2"} {"VlacoID"}'];
 	].
