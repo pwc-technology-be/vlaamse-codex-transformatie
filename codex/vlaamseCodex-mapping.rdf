@@ -113,6 +113,7 @@ map:RechtsbronHoofdstuk
 		SELECT	Hoofdstuk.ID AS HoofdstukID,
 				Hoofdstuk.WetgevingDocumentId AS VerbondenDocument
 		FROM WetgevingHoofdstuk as Hoofdstuk
+		WHERE Hoofdstuk.WetgevingHoofdstukId != -1
 	""" 
 	];
 	rr:subjectMap [
@@ -703,6 +704,7 @@ map:RechtsbronDocumentHoofdstukRelatieHeeftOnderdeel
 				Hoofdstuk.ID as HoofdstukID
 		FROM WetgevingHoofdstuk as Hoofdstuk, vwRechtsbronDocument WITH ( NOEXPAND )
 		WHERE vwRechtsbronDocument.Identifier = Hoofdstuk.WetgevingDocumentId
+		AND Hoofdstuk.WetgevingHoofdstukId != -1
 	""" 
 	];
 	rr:subjectMap [
@@ -1236,6 +1238,7 @@ map:RechtsbronHoofdstukArtikelEnBijlageRelatieHeeftOnderdeel
 		FROM WetgevingHoofdstuk AS Hoofdstuk, WetgevingArtikel AS Artikel, WetgevingArtikelVersie AS ArtikelVersie
 		WHERE Artikel.ID = ArtikelVersie.ID
 		AND	Hoofdstuk.ID = Artikel.WetgevingHoofdstukID
+		AND Hoofdstuk.WetgevingHoofdstukId != -1
 	""" 
 	];
 	rr:subjectMap [
@@ -1262,6 +1265,7 @@ map:RechtsbronArtikelEnBijlageHoofdstukRelatieIsDeelVan #Reverse van RechtsbronH
 		FROM WetgevingHoofdstuk AS Hoofdstuk, WetgevingArtikel AS Artikel, WetgevingArtikelVersie AS ArtikelVersie
 		WHERE Artikel.ID = ArtikelVersie.ID
 		AND	Hoofdstuk.ID = Artikel.WetgevingHoofdstukID
+		AND Hoofdstuk.WetgevingHoofdstukId != -1
 	""" 
 	];
 	rr:subjectMap [
@@ -2034,6 +2038,7 @@ map:VerschijningsvormHoofdstuk
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT	Hoofdstuk.ID AS HoofdstukID
 		FROM WetgevingHoofdstuk as Hoofdstuk
+		WHERE Hoofdstuk.WetgevingHoofdstukId != -1
 	""" 
 	];
 	rr:subjectMap [
