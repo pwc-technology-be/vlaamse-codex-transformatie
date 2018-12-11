@@ -156,6 +156,15 @@ FILTER (?datum > "2018-01-01"^^xsd:date)
                   </div>
                 </div>
               </div>
+              <div class="js-accordion">
+                <!-- toggle -->
+                <a class="toggle toggle--arrow-down js-accordion__toggle"><i class="toggle__icon" aria-hidden="true"></i>Waarom krijg ik een <i>'Transaction timed out'</i> error te zien bij het uitvoeren van sommige queries?</a>
+                <div class="accordion__content">
+                  <div class="u-bg-block">
+                    Om te vermijden dat extreem complexe of lange queries zorgen voor onbeschikbaarheid van het SPARQL Endpoint wordt voor queries die meer dan 60 seconden in beslag nemen om uit te voeren een dergelijke error getoond. Probeer je query op te splitsen in meerdere kleine queries om de gewenste gegevens te bekomen.
+                  </div>
+                </div>
+              </div>
           </div>
 
 
@@ -173,8 +182,7 @@ WHERE {
   ?artikel <http://purl.org/dc/terms/subject> ?trefwoord.
 
 FILTER (CONTAINS(LCASE(?trefwoord), "onderwijs"))
-}              
-            </textarea>
+}</textarea>
             <div class="u-spacer"></div>
 
             <h3 class="h3">Voorbeeld 2</h3>
@@ -185,8 +193,9 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX eli: <http://data.europa.eu/eli/ontology#> 
 
 
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 SELECT 
-  DISTINCT ?verschijningsvorm, ?trefwoord, ?change as ?wijzigende_document 
+DISTINCT ?verschijningsvorm ?trefwoord (?change as ?wijzigende_document)
 WHERE { 
   ?verschijningsvorm a eli:LegalExpression .
   ?verschijningsvorm <http://purl.org/dc/terms/subject> ?trefwoord . 
@@ -196,12 +205,11 @@ WHERE {
 
 FILTER (CONTAINS(LCASE(?trefwoord), "werk"))
 FILTER (?datum > "2016-01-01"^^xsd:date)
-}              
-            </textarea>
+}</textarea>
             <div class="u-spacer"></div>
 
             <h3 class="h3">Voorbeeld 3</h3>
-            <p>Geef een vergelijking van de tekst van documenten tegenover de tekst van het document dat zorgde voor de vervanging.</p>
+            <p>Geef een vergelijking van de tekst van documenten tegenover de tekst van het document dat zorgde voor de verandering.</p>
             <textarea id="voorbeeld-3" class="u-spacer">
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
@@ -211,27 +219,25 @@ PREFIX w3: <http://www.w3.org/ns/prov#>
 
 
 SELECT 
-  DISTINCT ?oude_verschijningsvorm, ?originele_tekst, ?verschijningsvorm, ?nieuwe_tekst
+DISTINCT ?rechtsbron_wijziging ?tekst_wijziging ?tekst_gewijzigd ?rechtsbron_gewijzigd
 WHERE { 
-  ?verschijningsvorm a eli:LegalExpression .
-  ?verschijningsvorm eli:realizes ?nieuwe_document .
-  ?nieuwe_document eli:repeals ?originele_document .
-  ?verschijningsvorm w3:value ?nieuwe_tekst .
-  ?originele_document eli:is_realized_by ?oude_verschijningsvorm .
-  ?oude_verschijningsvorm w3:value ?originele_tekst .
-
-} LIMIT 100             
-            </textarea>
+  ?rechtsbron_wijziging eli:amends ?rechtsbron_gewijzigd .
+  ?rechtsbron_wijziging eli:is_realized_by ?wijziging .
+  ?rechtsbron_gewijzigd eli:is_realized_by ?gewijzigd .
+  ?wijziging w3:value ?tekst_wijziging .
+  ?gewijzigd w3:value ?tekst_gewijzigd .
+} LIMIT 1000</textarea>
             <div class="u-spacer"></div>
 
             <h3 class="h3">Voorbeeld 4</h3>
-            <p>Geef een overzicht van alle beschikbare trefwoorden.</p>
+            <p>Geef een overzicht van alle beschikbare trefwoorden en het aantal documenten per trefwoord.</p>
             <textarea id="voorbeeld-4" class="u-spacer">
-SELECT DISTINCT ?trefwoord
+SELECT DISTINCT ?trefwoord (count(?verschijningsvorm) AS ?aantalDocumenten)
 WHERE { 
   ?verschijningsvorm <http://purl.org/dc/terms/subject> ?trefwoord . 
 }
-order by asc(UCASE(str(?trefwoord )))           
+group by ?trefwoord
+order by asc(UCASE(str(?trefwoord )))      
             </textarea>
           </div>
 
