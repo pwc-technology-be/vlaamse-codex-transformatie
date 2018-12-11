@@ -10,12 +10,11 @@ AS
 				(CASE ISNULL(Numac,0) WHEN 0 THEN '' ELSE CONCAT ('/',MONTH(CONVERT(date, Datum))) END) AS datumDocumentMaand,
 				(CASE ISNULL(Numac,0) WHEN 0 THEN '' ELSE CONCAT ('/',DAY(CONVERT(date, Datum))) END) AS datumDocumentDag,
 				(CASE ISNULL(Numac,0) WHEN 0 THEN '' ELSE (CASE  
-					WHEN WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN '/besluit'
 					WHEN WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN '/wet'
 					WHEN WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN '/decreet'
 					WHEN WetgevingDocumentTypeId in (1000017, 1000031) THEN '/grondwet'
 					WHEN WetgevingDocumentTypeId in (1000042) THEN '/ordonnantie'
-					ELSE '/aftestemmen'
+					ELSE '/besluit'
 				END)END) AS typeDocumentURI,
 				ID as RGDID,
 				CONVERT(date, Datum) AS datumDocumentdatum,
@@ -49,12 +48,11 @@ AS
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN '' ELSE CONCAT ('/',MONTH(CONVERT(date, Document.Datum))) END) AS datumDocumentMaand,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN '' ELSE CONCAT ('/',DAY(CONVERT(date, Document.Datum))) END) AS datumDocumentDag,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN '' ELSE (CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN '/besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN '/wet'
 					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN '/decreet'
 					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN '/grondwet'
 					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN '/ordonnantie'
-					ELSE '/aftestemmen'
+					ELSE '/besluit'
 				END)END) AS typeDocumentURI,
 				Document2.ID AS DocumentRelatie,
 				DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId AS RelatieTypeId
@@ -88,12 +86,11 @@ AS
 				(CASE ISNULL(Document2.Numac,0) WHEN 0 THEN '' ELSE CONCAT ('/',FORMAT(CONVERT(date, Document2.Datum), 'MM')) END) AS datumDocumentMaand,
 				(CASE ISNULL(Document2.Numac,0) WHEN 0 THEN '' ELSE CONCAT ('/',FORMAT(CONVERT(date, Document2.Datum), 'dd')) END) AS datumDocumentDag,
 				(CASE ISNULL(Document2.Numac,0) WHEN 0 THEN '' ELSE (CASE  
-					WHEN Document2.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN '/besluit'
 					WHEN Document2.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN '/wet'
 					WHEN Document2.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN '/decreet'
 					WHEN Document2.WetgevingDocumentTypeId in (1000017, 1000031) THEN '/grondwet'
 					WHEN Document2.WetgevingDocumentTypeId in (1000042) THEN '/ordonnantie'
-					ELSE '/aftestemmen'
+					ELSE '/besluit'
 				END)END) AS typeDocumentURI,
 				Document.ID AS DocumentRelatie,
 				DocumentDocumentRelatie.WetgevingDocumentDocumentRelatieTypeId AS RelatieTypeId
@@ -119,12 +116,11 @@ AS
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN '' ELSE CONCAT ('/',MONTH(CONVERT(date, Document.Datum))) END) AS datumDocumentMaand,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN '' ELSE CONCAT ('/',DAY(CONVERT(date, Document.Datum))) END) AS datumDocumentDag,
 				(CASE ISNULL(Document.Numac,0) WHEN 0 THEN '' ELSE (CASE  
-					WHEN Document.WetgevingDocumentTypeId in (1000002, 1000003, 1000004, 1000007, 1000009, 1000010, 1000012, 1000018, 1000021, 1000029, 1000030, 1000032, 1000035, 1000038, 1000040, 1000041, 1000043, 1000047, 1000048) THEN '/besluit'
 					WHEN Document.WetgevingDocumentTypeId in (1000005, 1000011, 1000015, 1000016, 1000020) THEN '/wet'
 					WHEN Document.WetgevingDocumentTypeId in (1000001, 1000008, 1000013, 1000026) THEN '/decreet'
 					WHEN Document.WetgevingDocumentTypeId in (1000017, 1000031) THEN '/grondwet'
 					WHEN Document.WetgevingDocumentTypeId in (1000042) THEN '/ordonnantie'
-					ELSE '/aftestemmen'
+					ELSE '/besluit'
 				END)END) AS typeDocumentURI,
 				WetgevingArtikelVersie.ID AS ArtikelRelatie,
 				DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId AS RelatieTypeId,
