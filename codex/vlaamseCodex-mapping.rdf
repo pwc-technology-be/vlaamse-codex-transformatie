@@ -2012,25 +2012,6 @@ map:VerschijningsvormDocumentTrefwoord
 		rr:objectMap [rr:column '"TrefwoordNaam"'];
 	].
 
-map:VerschijningsvormDocumentThema
-	rr:logicalTable [ rr:sqlQuery """
-		SELECT	Document.id AS VlacoID,
-				Thema.Omschrijving AS thema
-		FROM WetgevingDocument AS Document, WetgevingDocument_Thema AS DocumentThema, Thema
-		WHERE Document.Id = DocumentThema.WetgevingDocumentId 
-		AND DocumentThema.ThemaId = Thema.Id
-	""" 
-	];
-	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/doc/document/{"VlacoID"}';
-		rr:class eli:LegalExpression; 
-	];
-	rr:predicateObjectMap [ 
-		rr:predicate eli:is_about; 
-		rr:objectMap [rr:column '"thema"'];
-	].
-
-
 #-----------------------------------------
 #Onderdeel 2.2: Mapping van VerschijningsvormHoofdstuk
 
