@@ -129,12 +129,12 @@ AS
 				WetgevingArtikelVersie.ID AS ArtikelRelatie,
 				DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId AS RelatieTypeId,
                 Document.WetgevingDocumentTypeId,
-                (CASE WetgevingArtikelVersie.ArtikelType WHEN 'ART' THEN 'artikel' WHEN 'ART.' THEN 'artikel' ELSE 'bijlage' END ) as ArtikelType
+                (CASE WetgevingArtikelVersie.ArtikelType WHEN 'ART' THEN 'artikel' WHEN 'ART.' THEN 'artikel' WHEN 'aanhef' THEN 'artikel' ELSE 'bijlage' END ) as ArtikelType
 		FROM dbo.WetgevingDocument as Document, dbo.WetgevingDocumentArtikelVersieRelatie AS DocumentArtikelRelatie, dbo.WetgevingDocumentArtikelVersieRelatieType as DocumentArtikelRelatieType, dbo.WetgevingArtikelVersie
 		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
 		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
-        AND NOT WetgevingArtikelVersie.ArtikelType = ''
+		AND (WetgevingArtikelVersie.ArtikelType LIKE '%BIJLAGE%' OR WetgevingArtikelVersie.ArtikelType LIKE '%ART%' OR WetgevingArtikelVersie.ArtikelType LIKE '%Aanhef%')
 	);
     
 /*******************************************************
@@ -147,14 +147,14 @@ AS
 	(
 		SELECT 	ArtikelVersie2.WetgevingArtikelId AS Artikel2ID,
 				ArtikelVersie1.WetgevingArtikelId AS Artikel1ID,
-                (CASE ArtikelVersie2.ArtikelType WHEN 'ART' THEN 'artikel' WHEN 'ART.' THEN 'artikel' ELSE 'bijlage' END) as Artikel2Type,
-                (CASE ArtikelVersie1.ArtikelType WHEN 'ART' THEN 'artikel' WHEN 'ART.' THEN 'artikel' ELSE 'bijlage' END) as Artikel1Type,
+                (CASE ArtikelVersie2.ArtikelType WHEN 'ART' THEN 'artikel' WHEN 'ART.' THEN 'artikel' WHEN 'aanhef' THEN 'artikel' ELSE 'bijlage' END) as Artikel2Type,
+                (CASE ArtikelVersie1.ArtikelType WHEN 'ART' THEN 'artikel' WHEN 'ART.' THEN 'artikel' WHEN 'aanhef' THEN 'artikel' ELSE 'bijlage' END) as Artikel1Type,
                 ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId AS RelatieTypeID
 		FROM dbo.WetgevingArtikelVersieArtikelVersieRelatie AS ArtikelArtikelRelatie, dbo.WetgevingArtikelVersieArtikelVersieRelatieType as ArtikelArtikelRelatieType, dbo.WetgevingArtikelVersie as ArtikelVersie1, dbo.WetgevingArtikelVersie as ArtikelVersie2
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
 		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-		AND NOT ArtikelVersie1.ArtikelType = ''
-		AND NOT ArtikelVersie2.ArtikelType = ''
+        AND (ArtikelVersie1.ArtikelType LIKE '%BIJLAGE%' OR ArtikelVersie1.ArtikelType LIKE '%ART%' OR ArtikelVersie1.ArtikelType LIKE '%Aanhef%')
+		AND (ArtikelVersie2.ArtikelType LIKE '%BIJLAGE%' OR ArtikelVersie2.ArtikelType LIKE '%ART%' OR ArtikelVersie2.ArtikelType LIKE '%Aanhef%')
 	);
     
