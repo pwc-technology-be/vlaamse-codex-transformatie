@@ -157,7 +157,7 @@ map:RechtsbronArtikelEnBijlage
                 	WHEN ArtikelVersie.ArtikelType = 'Aanhef' THEN 'Aanhef' 
                 	WHEN ArtikelVersie.ArtikelNummer = 'Aanhef' THEN 'Aanhef' 
                 	ELSE 'Bijlage' 
-                END) as ArtikelType1,
+                END) as ArtikelType2
 		FROM WetgevingArtikelVersie as ArtikelVersie
 		WHERE (ArtikelType LIKE '%BIJLAGE%' OR ArtikelType = 'ART' OR ArtikelType = 'ART.' OR ArtikelType = 'Aanhef')
 	""" 
@@ -2078,13 +2078,13 @@ map:VerschijningsvormArtikelEnBijlage
                 	WHEN ArtikelVersie.ArtikelType = 'Aanhef' THEN 'Aanhef' 
                 	WHEN ArtikelVersie.ArtikelNummer = 'Aanhef' THEN 'Aanhef' 
                 	ELSE 'Bijlage' 
-                END) as ArtikelType1,
+                END) as ArtikelType2
 		FROM WetgevingArtikelVersie as ArtikelVersie
 		WHERE (ArtikelType LIKE '%BIJLAGE%' OR ArtikelType = 'ART' OR ArtikelType = 'ART.' OR ArtikelType = 'Aanhef')
 	""" 
 	];
 	rr:subjectMap [
-		rr:template 'https://codex.vlaanderen.be/doc/{"ArtikelType"}/{"VlacoID"}';
+		rr:template 'https://codex.vlaanderen.be/doc/{"ArtikelType1"}/{"VlacoID"}';
 		rr:class eli:LegalExpression; 
 	];
 	rr:predicateObjectMap [ 

@@ -155,7 +155,7 @@ AS
                 	WHEN ArtikelVersie2.ArtikelType = 'Aanhef' THEN 'artikel' 
                 	WHEN ArtikelVersie2.ArtikelNummer = 'Aanhef' THEN 'artikel' 
                 	ELSE 'bijlage' 
-                END) as Artikel2Type,²
+                END) as Artikel2Type,
                 (CASE 
                 	WHEN ArtikelVersie1.ArtikelType = 'ART' THEN 'artikel' 
                 	WHEN ArtikelVersie1.ArtikelType ='ART.' THEN 'artikel' 
