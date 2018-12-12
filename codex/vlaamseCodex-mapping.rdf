@@ -1958,7 +1958,7 @@ map:VerschijningsvormDocument
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate eli:id_local; 
-		rr:objectMap [rr:column '"id"'];
+		rr:objectMap [rr:column '"VlacoID"'];
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate eli:title; 
