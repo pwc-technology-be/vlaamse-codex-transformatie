@@ -101,7 +101,7 @@ map:RechtsbronDocumentType
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate eli:type_document; 
-		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/AardWetgeving/{"typeDocument"}';
+		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/concept/AardWetgeving/{"typeDocument"}';
 						rr:termType rr:IRI ];
 	].
 
@@ -122,7 +122,7 @@ map:RechtsbronHoofdstuk
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate dcterms:type; 
-		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRechtsbrononderdeel/Hoofdstuk';
+		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/concept/TypeRechtsbrononderdeel/Hoofdstuk';
 						rr:termType rr:IRI ];
 	];
 	rr:predicateObjectMap [
@@ -168,7 +168,7 @@ map:RechtsbronArtikelEnBijlage
 	];
 	rr:predicateObjectMap [ 
 		rr:predicate dcterms:type; 
-		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/conceptscheme/TypeRechtsbrononderdeel/{"ArtikelType2"}';
+		rr:objectMap [	rr:template 'https://data.vlaanderen.be/id/concept/TypeRechtsbrononderdeel/{"ArtikelType2"}';
 						rr:termType rr:IRI ];
 	];
 	rr:predicateObjectMap [
