@@ -744,7 +744,7 @@ map:RechtsbronDocumentArtikelEnBijlageRelatieHeeftOnderdeel
 				vwRechtsbronDocument.datumDocumentMaand,
 				vwRechtsbronDocument.datumDocumentDag,
 				vwRechtsbronDocument.typeDocumentURI,
-				ArtikelVersie.ID as ArtikelID
+				ArtikelVersie.WetgevingArtikelId as ArtikelID
 		FROM WetgevingArtikelVersie as ArtikelVersie, vwRechtsbronDocument WITH ( NOEXPAND )
 		WHERE vwRechtsbronDocument.Identifier = ArtikelVersie.WetgevingDocumentId
 	""" 
@@ -756,7 +756,7 @@ map:RechtsbronDocumentArtikelEnBijlageRelatieHeeftOnderdeel
 	rr:predicateObjectMap [
 		rr:predicate eli:has_part; #heeft onderdeel
 		rr:objectMap [
-			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
+			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage;
 			rr:joinCondition [
 				rr:child 'ArtikelID';
 				rr:parent 'WetgevingArtikelId';
@@ -1246,9 +1246,9 @@ map:RechtsbronHoofdstukArtikelEnBijlageRelatieHeeftOnderdeel
 		SELECT	Hoofdstuk.ID AS HoofdstukID,
 				Artikel.ID AS ArtikelID,
 				Artikel.WetgevingHoofdstukID AS HoofdstukArtikelID,
-				ArtikelVersie.ID AS ArtikelVersieID
+				ArtikelVersie.WetgevingArtikelId AS ArtikelID
 		FROM WetgevingHoofdstuk AS Hoofdstuk, WetgevingArtikel AS Artikel, WetgevingArtikelVersie AS ArtikelVersie
-		WHERE Artikel.ID = ArtikelVersie.ID
+		WHERE Artikel.ID = ArtikelVersie.WetgevingArtikelId
 		AND	Hoofdstuk.ID = Artikel.WetgevingHoofdstukID
 		AND Hoofdstuk.WetgevingHoofdstukId != -1
 	""" 
@@ -1262,7 +1262,7 @@ map:RechtsbronHoofdstukArtikelEnBijlageRelatieHeeftOnderdeel
 		rr:objectMap [
 			rr:parentTriplesMap map:RechtsbronArtikelEnBijlage; 
 			rr:joinCondition [
-				rr:child 'ArtikelVersieID'; #ArtikelVersieID is de VlacoID in RechtsbronArtikelEnBijlage
+				rr:child 'ArtikelID'; #ArtikelVersieID is de VlacoID in RechtsbronArtikelEnBijlage
 				rr:parent 'WetgevingArtikelId';
 			]
 		]
