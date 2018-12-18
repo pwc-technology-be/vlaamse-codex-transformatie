@@ -145,21 +145,19 @@ map:RechtsbronArtikelEnBijlage
 				ArtikelVersie.ID AS VlacoID,
 				ArtikelVersie.WetgevingDocumentId AS VerbondenDocument,
 				 (CASE 
-                	WHEN ArtikelVersie.ArtikelType = 'ART' THEN 'artikel' 
-                	WHEN ArtikelVersie.ArtikelType ='ART.' THEN 'artikel' 
+                	WHEN ArtikelVersie.ArtikelType LIKE '%ART%' THEN 'artikel' 
                 	WHEN ArtikelVersie.ArtikelType = 'Aanhef' THEN 'artikel' 
                 	WHEN ArtikelVersie.ArtikelNummer = 'Aanhef' THEN 'artikel' 
                 	ELSE 'bijlage' 
                 END) as ArtikelType1,
                  (CASE 
-                	WHEN ArtikelVersie.ArtikelType = 'ART' THEN 'Artikel' 
-                	WHEN ArtikelVersie.ArtikelType ='ART.' THEN 'Artikel' 
+                	WHEN ArtikelVersie.ArtikelType LIKE '%ART%' THEN 'Artikel' 
                 	WHEN ArtikelVersie.ArtikelType = 'Aanhef' THEN 'Aanhef' 
                 	WHEN ArtikelVersie.ArtikelNummer = 'Aanhef' THEN 'Aanhef' 
                 	ELSE 'Bijlage' 
                 END) as ArtikelType2
 		FROM WetgevingArtikelVersie as ArtikelVersie
-		WHERE (ArtikelType LIKE '%BIJLAGE%' OR ArtikelType = 'ART' OR ArtikelType = 'ART.' OR ArtikelType = 'Aanhef')
+		WHERE (ArtikelType LIKE '%BIJLAGE%' OR ArtikelType LIKE '%ART%' OR ArtikelType = 'Aanhef')
 	""" 
 	];
 	rr:subjectMap [
@@ -2065,22 +2063,20 @@ map:VerschijningsvormArtikelEnBijlage
 				END) AS buitenwerkingtreding,
 				ArtikelVersie.ArtikelNummer AS nummer,
 				Tekst AS inhoud,
-				(CASE 
-                	WHEN ArtikelVersie.ArtikelType = 'ART' THEN 'artikel' 
-                	WHEN ArtikelVersie.ArtikelType ='ART.' THEN 'artikel' 
+				(CASE  
+                	WHEN ArtikelVersie.ArtikelType LIKE '%ART%' THEN 'artikel' 
                 	WHEN ArtikelVersie.ArtikelType = 'Aanhef' THEN 'artikel' 
                 	WHEN ArtikelVersie.ArtikelNummer = 'Aanhef' THEN 'artikel' 
                 	ELSE 'bijlage' 
                 END) as ArtikelType1,
                  (CASE 
-                	WHEN ArtikelVersie.ArtikelType = 'ART' THEN 'Artikel' 
-                	WHEN ArtikelVersie.ArtikelType ='ART.' THEN 'Artikel' 
+                	WHEN ArtikelVersie.ArtikelType LIKE '%ART%' THEN 'Artikel'
                 	WHEN ArtikelVersie.ArtikelType = 'Aanhef' THEN 'Aanhef' 
                 	WHEN ArtikelVersie.ArtikelNummer = 'Aanhef' THEN 'Aanhef' 
                 	ELSE 'Bijlage' 
                 END) as ArtikelType2
 		FROM WetgevingArtikelVersie as ArtikelVersie
-		WHERE (ArtikelType LIKE '%BIJLAGE%' OR ArtikelType = 'ART' OR ArtikelType = 'ART.' OR ArtikelType = 'Aanhef')
+		WHERE (ArtikelType LIKE '%BIJLAGE%' OR ArtikelType LIKE '%ART%' OR ArtikelType = 'Aanhef')
 	""" 
 	];
 	rr:subjectMap [

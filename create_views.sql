@@ -126,8 +126,7 @@ AS
 				DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId AS RelatieTypeId,
                 Document.WetgevingDocumentTypeId,
                 (CASE 
-                	WHEN WetgevingArtikelVersie.ArtikelType = 'ART' THEN 'artikel' 
-                	WHEN WetgevingArtikelVersie.ArtikelType ='ART.' THEN 'artikel' 
+                	WHEN WetgevingArtikelVersie.ArtikelType LIKE '%ART%' THEN 'artikel' 
                 	WHEN WetgevingArtikelVersie.ArtikelType = 'Aanhef' THEN 'artikel' 
                 	WHEN WetgevingArtikelVersie.ArtikelNummer = 'Aanhef' THEN 'artikel' 
                 	ELSE 'bijlage' 
@@ -136,7 +135,7 @@ AS
 		WHERE DocumentArtikelRelatieType.Id = DocumentArtikelRelatie.WetgevingDocumentArtikelVersieRelatieTypeId
 		AND WetgevingArtikelVersie.id = DocumentArtikelRelatie.WetgevingArtikelVersieId
 		AND Document.ID = DocumentArtikelRelatie.WetgevingDocumentId
-		AND (WetgevingArtikelVersie.ArtikelType LIKE '%BIJLAGE%' OR WetgevingArtikelVersie.ArtikelType = 'ART' OR WetgevingArtikelVersie.ArtikelType = 'ART.' OR WetgevingArtikelVersie.ArtikelType = 'Aanhef' OR WetgevingArtikelVersie.ArtikelNummer = 'Aanhef')
+		AND (WetgevingArtikelVersie.ArtikelType LIKE '%BIJLAGE%' OR WetgevingArtikelVersie.ArtikelType LIKE '%ART%' OR WetgevingArtikelVersie.ArtikelType = 'Aanhef' OR WetgevingArtikelVersie.ArtikelNummer = 'Aanhef')
 	);
     
 /*******************************************************
@@ -150,15 +149,13 @@ AS
 		SELECT 	ArtikelVersie2.WetgevingArtikelId AS Artikel2ID,
 				ArtikelVersie1.WetgevingArtikelId AS Artikel1ID,
                 (CASE 
-                	WHEN ArtikelVersie2.ArtikelType = 'ART' THEN 'artikel' 
-                	WHEN ArtikelVersie2.ArtikelType ='ART.' THEN 'artikel' 
+                	WHEN ArtikelVersie2.ArtikelType LIKE '%ART%' THEN 'artikel' 
                 	WHEN ArtikelVersie2.ArtikelType = 'Aanhef' THEN 'artikel' 
                 	WHEN ArtikelVersie2.ArtikelNummer = 'Aanhef' THEN 'artikel' 
                 	ELSE 'bijlage' 
                 END) as Artikel2Type,
                 (CASE 
-                	WHEN ArtikelVersie1.ArtikelType = 'ART' THEN 'artikel' 
-                	WHEN ArtikelVersie1.ArtikelType ='ART.' THEN 'artikel' 
+                	WHEN ArtikelVersie1.ArtikelType LIKE '%ART%' THEN 'artikel' 
                 	WHEN ArtikelVersie1.ArtikelType = 'Aanhef' THEN 'artikel' 
                 	WHEN ArtikelVersie1.ArtikelNummer = 'Aanhef' THEN 'artikel' 
                 	ELSE 'bijlage' 
@@ -168,7 +165,7 @@ AS
 		WHERE ArtikelArtikelRelatieType.Id = ArtikelArtikelRelatie.WetgevingArtikelVersieArtikelVersieRelatieTypeId
 		AND ArtikelVersie1.id = ArtikelArtikelRelatie.WetgevingArtikelVersieActiefId
 		AND ArtikelVersie2.id = ArtikelArtikelRelatie.WetgevingArtikelVersiePassiefId
-        AND (ArtikelVersie1.ArtikelType LIKE '%BIJLAGE%' OR ArtikelVersie1.ArtikelType = 'ART' OR ArtikelVersie1.ArtikelType = 'ART.' OR ArtikelVersie1.ArtikelType = 'Aanhef' OR ArtikelVersie1.ArtikelNummer = 'Aanhef')
-		AND (ArtikelVersie2.ArtikelType LIKE '%BIJLAGE%' OR ArtikelVersie2.ArtikelType = 'ART' OR ArtikelVersie1.ArtikelType = 'ART.' OR ArtikelVersie2.ArtikelType = 'Aanhef' OR ArtikelVersie2.ArtikelNummer = 'Aanhef')
+        AND (ArtikelVersie1.ArtikelType LIKE '%BIJLAGE%' OR ArtikelVersie1.ArtikelType LIKE '%ART%' OR ArtikelVersie1.ArtikelType = 'Aanhef' OR ArtikelVersie1.ArtikelNummer = 'Aanhef')
+		AND (ArtikelVersie2.ArtikelType LIKE '%BIJLAGE%' OR ArtikelVersie2.ArtikelType LIKE '%ART%' OR ArtikelVersie2.ArtikelType = 'Aanhef' OR ArtikelVersie2.ArtikelNummer = 'Aanhef')
 	);
     
