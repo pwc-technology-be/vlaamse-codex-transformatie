@@ -73,7 +73,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 PREFIX eli: <http://data.europa.eu/eli/ontology#> 
 SELECT 
-  DISTINCT ?verschijningsvorm, ?trefwoord, ?change as ?wijzigende_document 
+  DISTINCT ?verschijningsvorm ?trefwoord ?change as ?wijzigende_document 
 WHERE { 
   ?verschijningsvorm a eli:LegalExpression .
   ?verschijningsvorm eli:realizes ?document .
