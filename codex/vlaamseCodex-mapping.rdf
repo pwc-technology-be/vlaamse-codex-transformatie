@@ -2027,7 +2027,8 @@ map:VerschijningsvormDocumentTrefwoord
 
 map:VerschijningsvormHoofdstuk
 	rr:logicalTable [ rr:sqlQuery """
-		SELECT	Hoofdstuk.ID AS HoofdstukID
+		SELECT	Hoofdstuk.ID AS HoofdstukID,
+		'nl' as taal
 		FROM WetgevingHoofdstuk as Hoofdstuk
 		WHERE Hoofdstuk.WetgevingHoofdstukId != -1
 	""" 
@@ -2036,6 +2037,10 @@ map:VerschijningsvormHoofdstuk
 		rr:template 'https://codex.vlaanderen.be/doc/hoofdstuk/{"HoofdstukID"}'; 
 		rr:class eli:LegalExpression;
 	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:language; 
+		rr:objectMap [rr:column '"taal"'];
+	];	
 	rr:predicateObjectMap [
 		rr:predicate eli:realizes; #realiseert
 		rr:objectMap [
@@ -2074,7 +2079,8 @@ map:VerschijningsvormArtikelEnBijlage
                 	WHEN ArtikelVersie.ArtikelType = 'Aanhef' THEN 'Aanhef' 
                 	WHEN ArtikelVersie.ArtikelNummer = 'Aanhef' THEN 'Aanhef' 
                 	ELSE 'Bijlage' 
-                END) as ArtikelType2
+                END) as ArtikelType2,
+                'nl' as taal
 		FROM WetgevingArtikelVersie as ArtikelVersie
 		WHERE (ArtikelType LIKE '%BIJLAGE%' OR ArtikelType LIKE '%ART%' OR ArtikelType = 'Aanhef')
 	""" 
@@ -2083,6 +2089,10 @@ map:VerschijningsvormArtikelEnBijlage
 		rr:template 'https://codex.vlaanderen.be/doc/{"ArtikelType1"}/{"VlacoID"}';
 		rr:class eli:LegalExpression; 
 	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:language; 
+		rr:objectMap [rr:column '"taal"'];
+	];	
 	rr:predicateObjectMap [ 
 		rr:predicate eli:number; 
 		rr:objectMap [rr:template '{"ArtikelType2"} {"nummer"}'];
