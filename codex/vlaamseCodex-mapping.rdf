@@ -134,6 +134,13 @@ map:RechtsbronHoofdstuk
 				rr:parent 'RGDID';
 			]
 		]
+	rr:predicateObjectMap [
+		rr:predicate eli:is_realized_by; #is gerealiseerd door
+		rr:objectMap [
+			rr:parentTriplesMap map:VerschijningsvormHoofdstuk;
+			rr:joinCondition [
+				rr:child 'HoofdstukID';
+				rr:parent 'ID';
 	].
 
 #-----------------------------------------
@@ -711,9 +718,10 @@ map:RechtsbronDocumentHoofdstukRelatieHeeftOnderdeel
 				vwRechtsbronDocument.datumDocumentMaand,
 				vwRechtsbronDocument.datumDocumentDag,
 				vwRechtsbronDocument.typeDocumentURI,
+				vwRechtsbronDocument.RGDID,
 				Hoofdstuk.ID as HoofdstukID
 		FROM WetgevingHoofdstuk as Hoofdstuk, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE vwRechtsbronDocument.Identifier = Hoofdstuk.WetgevingDocumentId
+		WHERE vwRechtsbronDocument.RGDID = Hoofdstuk.WetgevingDocumentId
 		AND Hoofdstuk.WetgevingHoofdstukId != -1
 	""" 
 	];
@@ -732,8 +740,6 @@ map:RechtsbronDocumentHoofdstukRelatieHeeftOnderdeel
 		]
 	].
 
-
-
 map:RechtsbronDocumentArtikelEnBijlageRelatieHeeftOnderdeel
 	rr:logicalTable [ rr:sqlQuery """
 		SELECT 	vwRechtsbronDocument.URLpart1,
@@ -742,9 +748,10 @@ map:RechtsbronDocumentArtikelEnBijlageRelatieHeeftOnderdeel
 				vwRechtsbronDocument.datumDocumentMaand,
 				vwRechtsbronDocument.datumDocumentDag,
 				vwRechtsbronDocument.typeDocumentURI,
+				vwRechtsbronDocument.RGDID,
 				ArtikelVersie.WetgevingArtikelId as ArtikelID
 		FROM WetgevingArtikelVersie as ArtikelVersie, vwRechtsbronDocument WITH ( NOEXPAND )
-		WHERE vwRechtsbronDocument.Identifier = ArtikelVersie.WetgevingDocumentId
+		WHERE vwRechtsbronDocument.RGDID = ArtikelVersie.WetgevingDocumentId
 	""" 
 	];
 	rr:subjectMap [
@@ -1984,7 +1991,7 @@ map:VerschijningsvormDocument
 			rr:parentTriplesMap map:RechtsbronDocument; 
 			rr:joinCondition [
 				rr:child 'VlacoID';
-				rr:parent 'Identifier';
+				rr:parent 'RGDID';
 			]
 		]
 	].
