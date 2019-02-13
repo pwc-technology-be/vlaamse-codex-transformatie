@@ -134,6 +134,7 @@ map:RechtsbronHoofdstuk
 				rr:parent 'RGDID';
 			]
 		]
+	];
 	rr:predicateObjectMap [
 		rr:predicate eli:is_realized_by; #is gerealiseerd door
 		rr:objectMap [
@@ -141,6 +142,8 @@ map:RechtsbronHoofdstuk
 			rr:joinCondition [
 				rr:child 'HoofdstukID';
 				rr:parent 'ID';
+			]
+		]
 	].
 
 #-----------------------------------------
@@ -1930,8 +1933,6 @@ map:RechtsbronArtikelEnBijlageRelatieTrektInReverse
 		]
 	].
 
-
-
 #-----------------------------------------
 #Onderdeel 2: Mapping van Verschijningsvorm
 #Onderdeel 2.1: Mappings van VerschijningsvormDocument met attributen
@@ -2027,6 +2028,21 @@ map:VerschijningsvormDocumentTrefwoord
 	rr:predicateObjectMap [ 
 		rr:predicate dcterms:subject; 
 		rr:objectMap [rr:column '"TrefwoordNaam"'];
+	].
+
+map:VerschijningsvormDocumentErrata
+	rr:logicalTable [rr:sqlQuery """
+		SELECT	WetgevingDocumentId AS VlacoID,
+				(CONCAT('Erratum gepubliceerd in het Belgisch Staatsblad van ',CONVERT(varchar,BSDatum,103), (CASE ISNULL(convert(varchar,BsPagina),'') WHEN '' THEN '' ELSE CONCAT (' en meer specifiek op pagina ',BsPagina) END))) AS errata 
+		FROM WetgevingDocumentErrata
+	"""];
+	rr:subjectMap [
+		rr:template 'https://codex.vlaanderen.be/doc/document/{"VlacoID"}';
+		rr:class eli:LegalExpression; 
+	];
+	rr:predicateObjectMap [ 
+		rr:predicate eli:corrected_by; 
+		rr:objectMap [rr:column '"errata"'];
 	].
 
 #-----------------------------------------
